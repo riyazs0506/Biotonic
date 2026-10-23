@@ -10,6 +10,7 @@ import { mkdir, readdir, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import type { PageMeta } from '../src/lib/seo';
+import { contentSecurityPolicy, securityHeaderEntries } from '../server/security';
 
 type ServerEntry = typeof import('../src/entry-server');
 
@@ -118,6 +119,26 @@ async function main() {
     '',
   ].join('\n');
   await writeFile(path.join(clientDir, 'sitemap.xml'), sitemap);
+
+  // Cloudflare Workers Static Assets: headers for static pages (the Node server sets the same
+  // headers itself and never serves this file). Sites on Cloudflare are always HTTPS.
+  // HSTS on; CSP without upgrade-insecure-requests so local `wrangler dev` (HTTP) still works.
+  const staticHeaders = {
+    ...securityHeaderEntries({ forceHttps: true }),
+    'Content-Security-Policy': contentSecurityPolicy({ forceHttps: false }),
+  };
+  const headerLines = Object.entries(staticHeaders)
+    .map(([name, value]) => `  ${name}: ${value}`)
+    .join('\n');
+  const headersFile = [
+    '/*',
+    headerLines,
+    ...(release ? [] : ['  X-Robots-Tag: noindex, nofollow']),
+    '/assets/*',
+    '  Cache-Control: public, max-age=31536000, immutable',
+    '',
+  ].join('\n');
+  await writeFile(path.join(clientDir, '_headers'), headersFile);
 
   const robots = release
     ? `User-agent: *\nAllow: /\nDisallow: /api/\n\nSitemap: ${SITE_URL}/sitemap.xml\n`

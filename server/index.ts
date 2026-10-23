@@ -3,7 +3,7 @@ import { fileURLToPath } from 'node:url';
 import { serve } from '@hono/node-server';
 import { createApp } from './app';
 import { loadConfig } from './config';
-import { createMailer } from './mailer';
+import { createMailer } from './smtp';
 
 /** Production entry: serves the prerendered site and the enquiry API. */
 const config = loadConfig();

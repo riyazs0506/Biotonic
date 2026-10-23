@@ -6,7 +6,7 @@ import type { ServerConfig } from './config';
  * JSON-LD blocks are data (type="application/ld+json") and are not executed, so no
  * 'unsafe-inline' is required.
  */
-export function contentSecurityPolicy(config: ServerConfig): string {
+export function contentSecurityPolicy(config: Pick<ServerConfig, 'forceHttps'>): string {
   const directives = [
     "default-src 'self'",
     "script-src 'self'",
@@ -24,25 +24,34 @@ export function contentSecurityPolicy(config: ServerConfig): string {
   return directives.join('; ');
 }
 
+/**
+ * Security headers for every response. Shared by the Hono middleware (Node server, Worker API)
+ * and by the prerender step, which writes them to Cloudflare's `_headers` file for static pages.
+ */
+export function securityHeaderEntries(
+  config: Pick<ServerConfig, 'forceHttps'>,
+): Record<string, string> {
+  return {
+    'Content-Security-Policy': contentSecurityPolicy(config),
+    'X-Content-Type-Options': 'nosniff',
+    'X-Frame-Options': 'DENY',
+    'Referrer-Policy': 'strict-origin-when-cross-origin',
+    'Permissions-Policy':
+      'camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()',
+    'Cross-Origin-Opener-Policy': 'same-origin',
+    'Cross-Origin-Resource-Policy': 'same-origin',
+    ...(config.forceHttps
+      ? { 'Strict-Transport-Security': 'max-age=63072000; includeSubDomains' }
+      : {}),
+  };
+}
+
 export function securityHeaders(config: ServerConfig): MiddlewareHandler {
-  const csp = contentSecurityPolicy(config);
+  const entries = Object.entries(securityHeaderEntries(config));
   return async (c, next) => {
     await next();
-    const h = c.res.headers;
-    h.set('Content-Security-Policy', csp);
-    h.set('X-Content-Type-Options', 'nosniff');
-    h.set('X-Frame-Options', 'DENY');
-    h.set('Referrer-Policy', 'strict-origin-when-cross-origin');
-    h.set(
-      'Permissions-Policy',
-      'camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()',
-    );
-    h.set('Cross-Origin-Opener-Policy', 'same-origin');
-    h.set('Cross-Origin-Resource-Policy', 'same-origin');
-    h.delete('X-Powered-By');
-    if (config.forceHttps) {
-      h.set('Strict-Transport-Security', 'max-age=63072000; includeSubDomains');
-    }
+    for (const [name, value] of entries) c.res.headers.set(name, value);
+    c.res.headers.delete('X-Powered-By');
   };
 }
 

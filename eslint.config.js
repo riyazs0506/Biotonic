@@ -6,7 +6,7 @@ import reactRefresh from 'eslint-plugin-react-refresh';
 import jsxA11y from 'eslint-plugin-jsx-a11y';
 
 export default tseslint.config(
-  { ignores: ['dist', 'playwright-report', 'test-results', 'brand-source'] },
+  { ignores: ['dist', 'playwright-report', 'test-results', 'brand-source', '.wrangler'] },
   js.configs.recommended,
   ...tseslint.configs.strict,
   {
@@ -22,6 +22,10 @@ export default tseslint.config(
   {
     files: ['server/**/*.ts', 'scripts/**/*.{ts,mjs}', 'tests/**/*.ts', '*.config.{js,ts}'],
     languageOptions: { globals: globals.node },
+  },
+  {
+    files: ['worker/**/*.ts'],
+    languageOptions: { globals: globals.serviceworker },
   },
   {
     // Build entry, not a hot-reloaded component module.

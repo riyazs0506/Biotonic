@@ -4,3 +4,4 @@ playwright-report
 test-results
 brand-source
 package-lock.json
+.wrangler

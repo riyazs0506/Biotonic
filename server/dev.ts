@@ -1,7 +1,7 @@
 import { serve } from '@hono/node-server';
 import { createApp } from './app';
 import { loadConfig } from './config';
-import { createMailer } from './mailer';
+import { createMailer } from './smtp';
 
 /**
  * Development API server used behind the Vite dev proxy (`npm run dev` + `npm run dev:server`).

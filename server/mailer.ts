@@ -1,4 +1,3 @@
-import nodemailer from 'nodemailer';
 import type { Enquiry } from '../src/shared/enquiry';
 import type { ServerConfig } from './config';
 
@@ -53,28 +52,39 @@ export function composeEnquiryMail(
   };
 }
 
-export function createSmtpMailer(
-  config: Extract<ServerConfig['mail'], { transport: 'smtp' }>,
+/**
+ * Resend (https://resend.com) HTTP API transport. Uses only `fetch`, so it works on the Node
+ * server and on Cloudflare Workers. The API key is a server-side secret.
+ */
+export function createResendMailer(
+  config: Extract<ServerConfig['mail'], { transport: 'resend' }>,
+  fetchImpl: typeof fetch = fetch,
 ): Mailer {
-  const transporter = nodemailer.createTransport({
-    host: config.host,
-    port: config.port,
-    secure: config.secure,
-    requireTLS: !config.secure,
-    auth: config.user ? { user: config.user, pass: config.pass } : undefined,
-    connectionTimeout: 10_000,
-    greetingTimeout: 10_000,
-    socketTimeout: 15_000,
-  });
   return {
-    name: 'smtp',
+    name: 'resend',
     async send(mail) {
-      const info = await transporter.sendMail({
-        ...mail,
-        disableFileAccess: true,
-        disableUrlAccess: true,
+      // Name is already CR/LF-free (normalised); strip quotes so it stays one display name.
+      const replyName = mail.replyTo.name.replace(/["\\<>]/g, '');
+      const response = await fetchImpl('https://api.resend.com/emails', {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${config.apiKey}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          from: mail.from,
+          to: [mail.to],
+          reply_to: `"${replyName}" <${mail.replyTo.address}>`,
+          subject: mail.subject,
+          text: mail.text,
+        }),
+        signal: AbortSignal.timeout(10_000),
       });
-      if (!info.accepted?.length) throw new Error('SMTP server did not accept the recipient');
+      if (!response.ok) {
+        const error = new Error(`Resend responded ${response.status}`);
+        error.name = `ResendHttp${response.status}`;
+        throw error;
+      }
     },
   };
 }
@@ -89,15 +99,4 @@ export function createCaptureMailer(): Mailer & { outbox: OutgoingMail[] } {
       outbox.push(mail);
     },
   };
-}
-
-export function createMailer(config: ServerConfig['mail']): Mailer | null {
-  switch (config.transport) {
-    case 'smtp':
-      return createSmtpMailer(config);
-    case 'capture':
-      return createCaptureMailer();
-    case 'disabled':
-      return null;
-  }
 }

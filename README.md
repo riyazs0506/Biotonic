@@ -30,6 +30,8 @@ npm run start:local    # http://localhost:8787 (capture mail transport)
 | --------------------------------------------- | ----------------------------------------------------------------------------- |
 | `npm run build`                               | Draft build (placeholders visible, `noindex`).                                |
 | `npm run build:release`                       | Public build. Fails while launch-blocking content is unresolved.              |
+| `npm run deploy`                              | Build and deploy to Cloudflare Workers (`wrangler deploy`).                   |
+| `npm run dev:worker`                          | Build and run locally in the Cloudflare Workers runtime.                      |
 | `npm start`                                   | Run the production server (`dist/server/index.js`).                           |
 | `npm run content:check`                       | Validate the catalogue and list every `[CLIENT TO CONFIRM]` item.             |
 | `npm run typecheck` / `lint` / `format:check` | Strict TypeScript, ESLint (incl. jsx-a11y strict), Prettier.                  |
@@ -54,7 +56,8 @@ src/
   lib/              ← catalogue logic, SEO metadata, publication rules, env
   shared/enquiry.ts ← validation schema shared by browser and server
   styles/           ← design tokens + global base
-server/             ← Hono app: enquiry API, security headers, static serving, real 404s
+server/             ← enquiry API (api.ts, portable), Node static server (app.ts), mail, security
+worker/             ← Cloudflare Workers entry (API only; static files via Workers Static Assets)
 scripts/            ← prerender, content validation, link check, secret scan, OG image
 tests/e2e/          ← Playwright journeys + accessibility
 docs/               ← handover, security/threat model, deployment, content, SEO, QA

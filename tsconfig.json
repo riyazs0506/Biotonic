@@ -19,5 +19,6 @@
     "noEmit": true,
     "types": ["node", "vite/client", "@testing-library/jest-dom/vitest"]
   },
-  "include": ["src", "server", "scripts", "tests", "vite.config.ts", "playwright.config.ts"]
+  "include": ["src", "server", "scripts", "tests", "vite.config.ts", "playwright.config.ts"],
+  "exclude": ["worker"]
 }

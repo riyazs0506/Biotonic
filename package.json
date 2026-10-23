@@ -1,7 +1,7 @@
 {
   "name": "biotonic-website",
   "version": "1.0.0",
-  "description": "Biotonic corporate website — React + Vite + TypeScript with a Node enquiry service",
+  "description": "Biotonic corporate website \u2014 React + Vite + TypeScript with a Node enquiry service",
   "scripts": {
     "dev": "vite",
     "dev:server": "tsx watch server/dev.ts",
@@ -13,7 +13,7 @@
     "build:server": "esbuild server/index.ts --bundle --platform=node --format=esm --target=node22 --packages=external --outfile=dist/server/index.js",
     "start": "node dist/server/index.js",
     "content:check": "tsx scripts/validate-content.ts",
-    "typecheck": "tsc --noEmit",
+    "typecheck": "tsc --noEmit && tsc --noEmit -p worker",
     "lint": "eslint .",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
@@ -25,7 +25,9 @@
     "check:links": "tsx scripts/check-links.ts",
     "verify": "npm run typecheck && npm run lint && npm run format:check && npm test && npm run build && npm run check:links && npm run scan:secrets && npm run test:e2e",
     "start:local": "NODE_ENV=development MAIL_TRANSPORT=capture SITE_URL=http://localhost:8787 node dist/server/index.js",
-    "check:release-render": "VITE_CONTENT_MODE=release VITE_SITE_URL=https://release-check.example npm run build:client && VITE_CONTENT_MODE=release VITE_SITE_URL=https://release-check.example npm run build:ssr && VITE_CONTENT_MODE=release npm run prerender"
+    "check:release-render": "VITE_CONTENT_MODE=release VITE_SITE_URL=https://release-check.example npm run build:client && VITE_CONTENT_MODE=release VITE_SITE_URL=https://release-check.example npm run build:ssr && VITE_CONTENT_MODE=release npm run prerender",
+    "deploy": "npm run build && wrangler deploy",
+    "dev:worker": "npm run build && wrangler dev"
   },
   "type": "module",
   "dependencies": {
@@ -41,6 +43,7 @@
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.14.0",
+    "@cloudflare/workers-types": "^5.20261023.1",
     "@eslint/js": "^9.39.5",
     "@playwright/test": "^1.64.1",
     "@testing-library/jest-dom": "^7.0.1",
@@ -63,7 +66,8 @@
     "typescript": "^6.0.3",
     "typescript-eslint": "^8.72.0",
     "vite": "^8.3.5",
-    "vitest": "^5.0.5"
+    "vitest": "^5.0.5",
+    "wrangler": "^4.152.0"
   },
   "private": true,
   "engines": {

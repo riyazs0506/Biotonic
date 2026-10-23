@@ -260,6 +260,12 @@ describe('security headers and static serving', () => {
     expect(page.headers.get('Cache-Control')).toBe('no-cache');
   });
 
+  it('never serves platform files such as Cloudflare _headers', async () => {
+    await writeFile(path.join(root, '_headers'), '/*\n  X-Test: 1');
+    const res = await staticApp().request('/_headers', { headers: https });
+    expect(res.status).toBe(404);
+  });
+
   it('blocks path traversal', async () => {
     const res = await staticApp().request('/..%2f..%2fetc/passwd', { headers: https });
     expect(res.status).toBe(404);

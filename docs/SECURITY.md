@@ -57,9 +57,16 @@ If analytics or a third-party widget is added later, the CSP must be extended de
   `npm outdated` → upgrade on a branch → `npm run verify` → deploy. Add GitHub Dependabot and
   gitleaks (or GitHub secret scanning) to the repository's CI.
 
+## Cloudflare specifics
+
+- Static pages get their headers from `dist/client/_headers` (generated from `server/security.ts`).
+- The Worker trusts `CF-Connecting-IP` for rate limiting; HTTPS is enforced at the edge.
+- `RESEND_API_KEY` is a Worker **secret**; `wrangler.jsonc` holds only non-secret vars.
+- Workers isolates are short-lived, so add a WAF rate-limiting rule for `POST /api/enquiry`.
+
 ## Outstanding risks
 
-1. Email provider not yet chosen — form returns 503 in production until `MAIL_TRANSPORT=smtp` is configured.
+1. Email not yet configured — the form returns 503 until Resend (Cloudflare) or SMTP (Node) is set up.
 2. No CAPTCHA. Honeypot + timing + rate limits stop common bots; add Cloudflare Turnstile if spam appears (requires CSP update).
 3. In-memory rate limit resets on restart and is per-instance.
 4. Privacy Policy and Terms are drafts requiring legal review (release build is blocked until approved).

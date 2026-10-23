@@ -22,7 +22,9 @@ const envSchema = z.object({
   /** Redirect HTTP to HTTPS (based on X-Forwarded-Proto) and send HSTS. */
   FORCE_HTTPS: bool,
 
-  MAIL_TRANSPORT: z.enum(['smtp', 'disabled', 'capture']).default('disabled'),
+  MAIL_TRANSPORT: z.enum(['smtp', 'resend', 'disabled', 'capture']).default('disabled'),
+  /** API key for MAIL_TRANSPORT=resend (secret). */
+  RESEND_API_KEY: z.string().optional(),
   SMTP_HOST: z.string().optional(),
   SMTP_PORT: z.coerce.number().int().optional(),
   SMTP_SECURE: bool,
@@ -50,6 +52,7 @@ export interface ServerConfig {
   mail:
     | { transport: 'disabled' }
     | { transport: 'capture'; to: string; from: string }
+    | { transport: 'resend'; apiKey: string; from: string; to: string }
     | {
         transport: 'smtp';
         host: string;
@@ -95,6 +98,15 @@ export function loadConfig(source: Record<string, string | undefined> = process.
       from,
       to,
     };
+  } else if (env.MAIL_TRANSPORT === 'resend') {
+    const { RESEND_API_KEY: apiKey, MAIL_FROM: from, ENQUIRY_TO: to } = env;
+    if (!apiKey || !from || !to) {
+      const missing = Object.entries({ RESEND_API_KEY: apiKey, MAIL_FROM: from, ENQUIRY_TO: to })
+        .filter(([, v]) => !v)
+        .map(([k]) => k);
+      throw new Error(`MAIL_TRANSPORT=resend requires: ${missing.join(', ')}`);
+    }
+    mail = { transport: 'resend', apiKey, from, to };
   } else if (env.MAIL_TRANSPORT === 'capture') {
     if (env.NODE_ENV === 'production') {
       throw new Error('MAIL_TRANSPORT=capture is for development and tests only');

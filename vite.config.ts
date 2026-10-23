@@ -9,8 +9,8 @@ import type { Plugin } from 'vite';
  * an empty stand-in so its text never reaches the client or SSR bundle.
  */
 function stripDemoContent(): Plugin {
-  const demoIndex = path.resolve(__dirname, 'src/content/demo/index.ts');
-  const empty = path.resolve(__dirname, 'src/content/demo/empty.ts');
+  const demoIndex = path.resolve(import.meta.dirname, 'src/content/demo/index.ts');
+  const empty = path.resolve(import.meta.dirname, 'src/content/demo/empty.ts');
   return {
     name: 'biotonic:strip-demo-content',
     enforce: 'pre',

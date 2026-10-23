@@ -14,6 +14,7 @@ const SKIP_DIRS = new Set([
   'playwright-report',
   'test-results',
   'brand-source',
+  '.wrangler',
 ]);
 const SKIP_EXT = new Set(['.png', '.webp', '.jpg', '.woff', '.woff2', '.pdf', '.ico', '.zip']);
 
