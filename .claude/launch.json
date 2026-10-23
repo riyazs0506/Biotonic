@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "biotonic-local",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "start:local"],
+      "port": 8787
+    }
+  ]
+}

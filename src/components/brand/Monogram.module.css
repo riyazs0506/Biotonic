@@ -1,0 +1,27 @@
+.monogram {
+  display: inline-grid;
+  flex: none;
+  place-items: center;
+  border: 1px solid rgb(16 146 85 / 0.35);
+  border-radius: 50%;
+  background:
+    radial-gradient(70% 70% at 30% 25%, rgb(33 191 117 / 0.18), transparent 70%),
+    var(--surface-raised);
+  color: var(--accent-ink);
+  font-family: var(--font-display);
+  font-weight: var(--fw-medium);
+  letter-spacing: 0.04em;
+  box-shadow: var(--shadow-sm);
+}
+
+.md {
+  width: 88px;
+  height: 88px;
+  font-size: 2rem;
+}
+
+.lg {
+  width: min(260px, 60%);
+  aspect-ratio: 1;
+  font-size: clamp(3.5rem, 2rem + 4vw, 6rem);
+}

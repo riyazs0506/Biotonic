@@ -1,0 +1,130 @@
+/*
+ * Biotonic design tokens.
+ * Brand palette comes from "Biotonic – Logo Presentation" (Oct 2026).
+ * Derived tones exist only to meet WCAG 2.2 AA contrast for text on light surfaces.
+ */
+:root {
+  /* Brand palette (source of truth) */
+  --brand-carbon: #0e1016;
+  --brand-green: #109255;
+  --brand-reaction: #21bf75;
+  --brand-lab-white: #fbfaf7;
+
+  /* Surfaces — warm ivory scale */
+  --surface-page: #fbfaf7;
+  --surface-raised: #fffefb;
+  --surface-sunken: #f4f2ec;
+  --surface-tint: #eef5f0;
+  --surface-ink: #0e1016;
+
+  /* Text */
+  --text-strong: #0e1016;
+  --text-body: #33363e;
+  --text-muted: #5b5f68; /* 6.2:1 on page */
+  --text-inverse: #fbfaf7;
+  --text-inverse-muted: #b9bcc4;
+
+  /* Emerald accents */
+  --accent: #109255; /* decorative fills, large text, focus */
+  --accent-ink: #0b7443; /* small text on ivory: 5.6:1 */
+  --accent-strong: #0d7a47; /* text-bearing fills: 5:1 with white */
+  --accent-bright: #21bf75; /* liquid, bubbles, highlights */
+  --accent-wash: rgb(16 146 85 / 0.08);
+
+  /* Lines */
+  --line-subtle: #e9e6de;
+  --line: #dcd8cd;
+  --line-strong: #b8b3a6;
+  --line-inverse: rgb(251 250 247 / 0.14);
+
+  /* Status */
+  --status-error: #b42318;
+  --status-error-wash: #fdf1ef;
+  --status-success: #0b7443;
+  --status-success-wash: #edf7f1;
+  --status-info-wash: #f1f3f6;
+  --status-draft: #8a5a00;
+  --status-draft-wash: #fff6dd;
+
+  /* Typography */
+  --font-sans:
+    'Inter Variable', 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto,
+    sans-serif;
+  --font-display: 'Cormorant Garamond', 'Iowan Old Style', 'Palatino Linotype', Georgia, serif;
+
+  --fs-xs: 0.75rem;
+  --fs-sm: 0.875rem;
+  --fs-base: 1rem;
+  --fs-md: 1.125rem;
+  --fs-lg: clamp(1.25rem, 1.1rem + 0.5vw, 1.5rem);
+  --fs-xl: clamp(1.75rem, 1.4rem + 1.2vw, 2.5rem);
+  --fs-2xl: clamp(2.25rem, 1.6rem + 2.4vw, 3.75rem);
+  --fs-display: clamp(3rem, 1.9rem + 4.6vw, 6.25rem);
+
+  --lh-tight: 1.04;
+  --lh-snug: 1.2;
+  --lh-body: 1.65;
+
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+
+  --tracking-eyebrow: 0.22em;
+  --tracking-display: -0.015em;
+
+  /* Spacing (4px base) */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4rem;
+  --space-9: 6rem;
+  --space-10: 8rem;
+  --section-y: clamp(4.5rem, 3rem + 6vw, 9rem);
+
+  /* Layout */
+  --container-max: 1240px;
+  --container-narrow: 760px;
+  --gutter: clamp(1rem, 0.5rem + 2.5vw, 2.5rem);
+  --header-h: 76px;
+
+  /* Shape */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 14px;
+  --radius-pill: 999px;
+
+  /* Elevation — soft, warm, restrained */
+  --shadow-xs: 0 1px 2px rgb(14 16 22 / 0.04);
+  --shadow-sm: 0 1px 2px rgb(14 16 22 / 0.04), 0 4px 14px -6px rgb(14 16 22 / 0.08);
+  --shadow-md: 0 2px 4px rgb(14 16 22 / 0.03), 0 18px 40px -18px rgb(14 16 22 / 0.18);
+  --shadow-glow: 0 30px 80px -30px rgb(16 146 85 / 0.35);
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast: 160ms;
+  --dur-base: 280ms;
+  --dur-slow: 600ms;
+
+  /* Focus */
+  --focus-ring: 0 0 0 2px var(--surface-page), 0 0 0 4px var(--accent-ink);
+
+  /* Layering */
+  --z-base: 1;
+  --z-header: 50;
+  --z-drawer: 80;
+  --z-skip: 100;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --dur-fast: 0ms;
+    --dur-base: 0ms;
+    --dur-slow: 0ms;
+  }
+}

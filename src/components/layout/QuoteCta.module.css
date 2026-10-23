@@ -1,0 +1,84 @@
+.cta {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  background: var(--surface-ink);
+  color: var(--text-inverse-muted);
+}
+
+.glow {
+  position: absolute;
+  inset: -30% -10% auto auto;
+  width: 70%;
+  height: 160%;
+  z-index: -1;
+  background: radial-gradient(closest-side, rgb(33 191 117 / 0.28), transparent);
+}
+
+.art {
+  position: absolute;
+  right: max(var(--gutter), calc((100vw - var(--container-max)) / 2 + 40px));
+  top: 50%;
+  display: none;
+  width: 130px;
+  transform: translateY(-50%);
+  fill: none;
+  stroke: rgb(251 250 247 / 0.5);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+}
+
+.art circle {
+  fill: var(--accent-bright);
+  stroke: none;
+}
+
+.art .liquid {
+  fill: var(--accent-bright);
+  stroke: none;
+  opacity: 0.9;
+}
+
+@media (min-width: 900px) {
+  .art {
+    display: block;
+  }
+}
+
+.inner {
+  max-width: calc(var(--container-max) + 2 * var(--gutter));
+  margin-inline: auto;
+  padding: var(--section-y) var(--gutter);
+}
+
+.eyebrow {
+  margin-bottom: var(--space-4);
+  color: var(--accent-bright);
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+}
+
+.title {
+  max-width: 14ch;
+  color: var(--text-inverse);
+  font-size: clamp(2.5rem, 1.6rem + 3.6vw, 4.75rem);
+}
+
+.title em {
+  color: var(--accent-bright);
+}
+
+.lead {
+  max-width: 52ch;
+  margin-top: var(--space-5);
+  font-size: var(--fs-md);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-top: var(--space-7);
+}

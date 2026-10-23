@@ -1,0 +1,115 @@
+.filters {
+  display: grid;
+  gap: var(--space-5);
+  margin-bottom: var(--space-7);
+}
+
+.search {
+  position: relative;
+  max-width: 640px;
+}
+
+.searchIcon {
+  position: absolute;
+  top: 50%;
+  left: var(--space-5);
+  color: var(--text-muted);
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.searchInput {
+  width: 100%;
+  min-height: 56px;
+  padding: 0 var(--space-8) 0 calc(var(--space-5) + 32px);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-pill);
+  background: var(--surface-raised);
+  font-size: var(--fs-base);
+  box-shadow: var(--shadow-xs);
+}
+
+.searchInput::-webkit-search-cancel-button {
+  display: none;
+}
+
+.searchInput:focus-visible {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgb(16 146 85 / 0.18);
+  border-radius: var(--radius-pill);
+}
+
+.clear {
+  position: absolute;
+  top: 50%;
+  right: var(--space-3);
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border: 0;
+  border-radius: 50%;
+  background: var(--surface-sunken);
+  color: var(--text-body);
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.categories {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 42px;
+  padding: 0 var(--space-4);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-pill);
+  background: transparent;
+  color: var(--text-body);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-medium);
+  cursor: pointer;
+  transition:
+    background-color var(--dur-fast) var(--ease-out),
+    border-color var(--dur-fast) var(--ease-out),
+    color var(--dur-fast) var(--ease-out);
+}
+
+.chip:hover {
+  border-color: var(--line-strong);
+}
+
+.chip:focus-within {
+  box-shadow: var(--focus-ring);
+}
+
+.chipActive {
+  border-color: var(--brand-carbon);
+  background: var(--brand-carbon);
+  color: var(--text-inverse);
+}
+
+.chipActive:hover {
+  border-color: var(--brand-carbon);
+}
+
+.count {
+  min-width: 22px;
+  padding: 0 6px;
+  border-radius: var(--radius-pill);
+  background: rgb(14 16 22 / 0.06);
+  font-size: var(--fs-xs);
+  text-align: center;
+}
+
+.chipActive .count {
+  background: rgb(251 250 247 / 0.16);
+}

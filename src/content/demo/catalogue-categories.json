@@ -1,0 +1,20 @@
+[
+  {
+    "slug": "alkalis",
+    "name": "Alkalis & Bases",
+    "description": "Caustic soda, soda ash and other alkalis for neutralisation, cleaning and manufacturing processes.",
+    "sample": true
+  },
+  {
+    "slug": "acids",
+    "name": "Industrial Acids",
+    "description": "Mineral acids for pickling, pH control, cleaning and chemical processing.",
+    "sample": true
+  },
+  {
+    "slug": "solvents",
+    "name": "Solvents",
+    "description": "High-purity solvents for cleaning, extraction, coatings and formulation.",
+    "sample": true
+  }
+]

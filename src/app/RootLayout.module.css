@@ -1,0 +1,28 @@
+.skip {
+  position: fixed;
+  top: var(--space-3);
+  left: var(--space-3);
+  z-index: var(--z-skip);
+  padding: var(--space-3) var(--space-5);
+  border-radius: var(--radius-pill);
+  background: var(--brand-carbon);
+  color: var(--text-inverse);
+  font-weight: var(--fw-semibold);
+  text-decoration: none;
+  transform: translateY(-200%);
+}
+
+.skip:focus {
+  transform: none;
+  color: var(--text-inverse);
+}
+
+.main {
+  display: block;
+  min-height: 60vh;
+}
+
+.main:focus {
+  outline: none;
+  box-shadow: none;
+}

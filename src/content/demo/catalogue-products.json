@@ -1,0 +1,220 @@
+[
+  {
+    "slug": "caustic-soda-flakes",
+    "name": "Caustic Soda Flakes",
+    "category": "alkalis",
+    "summary": "Sodium hydroxide in flake form for neutralisation, cleaning and soap and detergent manufacturing.",
+    "description": [
+      "Caustic soda flakes are a strong alkali supplied in free-flowing flake form, easy to dose and dissolve on site.",
+      "Widely used for pH correction, saponification, industrial cleaning and as a raw material in textile and chemical processing."
+    ],
+    "applications": [
+      "Water treatment",
+      "Soap and detergent manufacturing",
+      "Textile processing",
+      "Industrial cleaning"
+    ],
+    "specifications": [
+      {
+        "label": "Chemical formula",
+        "value": "NaOH"
+      },
+      {
+        "label": "CAS number",
+        "value": "1310-73-2"
+      },
+      {
+        "label": "Purity",
+        "value": "≥ 98%"
+      },
+      {
+        "label": "Appearance",
+        "value": "White flakes"
+      }
+    ],
+    "packaging": ["25 kg HDPE bags", "50 kg bags", "Bulk on request"],
+    "documents": [],
+    "featured": true,
+    "sample": true
+  },
+  {
+    "slug": "soda-ash-light",
+    "name": "Soda Ash Light",
+    "category": "alkalis",
+    "summary": "Sodium carbonate (light grade) for glass, detergents, textiles and water treatment.",
+    "description": [
+      "Soda ash light is a fine, free-flowing grade of sodium carbonate with low bulk density.",
+      "It is used as a pH regulator and alkali source across glass, detergent and textile applications."
+    ],
+    "applications": [
+      "Detergent manufacturing",
+      "Glass production",
+      "Textile dyeing",
+      "Water treatment"
+    ],
+    "specifications": [
+      {
+        "label": "Chemical formula",
+        "value": "Na₂CO₃"
+      },
+      {
+        "label": "CAS number",
+        "value": "497-19-8"
+      },
+      {
+        "label": "Purity",
+        "value": "≥ 99%"
+      },
+      {
+        "label": "Appearance",
+        "value": "White powder"
+      }
+    ],
+    "packaging": ["50 kg HDPE bags", "1 tonne jumbo bags"],
+    "documents": [],
+    "featured": false,
+    "sample": true
+  },
+  {
+    "slug": "hydrochloric-acid",
+    "name": "Hydrochloric Acid 33%",
+    "category": "acids",
+    "summary": "Commercial-grade hydrochloric acid for pickling, pH control and chemical processing.",
+    "description": [
+      "Hydrochloric acid is a strong mineral acid supplied as an aqueous solution.",
+      "Common uses include steel pickling, regeneration of ion-exchange resins, pH control and the manufacture of chlorides."
+    ],
+    "applications": ["Metal pickling", "Water treatment", "pH control", "Chemical processing"],
+    "specifications": [
+      {
+        "label": "Chemical formula",
+        "value": "HCl"
+      },
+      {
+        "label": "CAS number",
+        "value": "7647-01-0"
+      },
+      {
+        "label": "Concentration",
+        "value": "30–33%"
+      },
+      {
+        "label": "Appearance",
+        "value": "Clear to light yellow liquid"
+      }
+    ],
+    "packaging": ["35 kg carboys", "250 kg drums", "Tanker loads on request"],
+    "documents": [],
+    "featured": true,
+    "sample": true
+  },
+  {
+    "slug": "sulphuric-acid",
+    "name": "Sulphuric Acid 98%",
+    "category": "acids",
+    "summary": "Concentrated sulphuric acid for fertiliser, metal treatment and chemical manufacturing.",
+    "description": [
+      "Sulphuric acid is one of the most widely used industrial chemicals, supplied here in concentrated form.",
+      "It serves as a raw material and process chemical across fertiliser, metal processing and chemical industries."
+    ],
+    "applications": [
+      "Metal processing",
+      "Fertiliser manufacturing",
+      "Battery acid preparation",
+      "Chemical synthesis"
+    ],
+    "specifications": [
+      {
+        "label": "Chemical formula",
+        "value": "H₂SO₄"
+      },
+      {
+        "label": "CAS number",
+        "value": "7664-93-9"
+      },
+      {
+        "label": "Concentration",
+        "value": "≥ 98%"
+      },
+      {
+        "label": "Appearance",
+        "value": "Clear, oily liquid"
+      }
+    ],
+    "packaging": ["50 kg carboys", "Tanker loads on request"],
+    "documents": [],
+    "featured": false,
+    "sample": true
+  },
+  {
+    "slug": "isopropyl-alcohol",
+    "name": "Isopropyl Alcohol",
+    "category": "solvents",
+    "summary": "High-purity isopropanol for cleaning, disinfection, extraction and formulation.",
+    "description": [
+      "Isopropyl alcohol is a fast-evaporating solvent with excellent cleaning properties.",
+      "It is used in pharmaceutical, electronics and coatings applications and as an extraction and formulation solvent."
+    ],
+    "applications": [
+      "Pharmaceutical manufacturing",
+      "Electronics cleaning",
+      "Paints and coatings",
+      "Disinfectant formulation"
+    ],
+    "specifications": [
+      {
+        "label": "Chemical formula",
+        "value": "C₃H₈O"
+      },
+      {
+        "label": "CAS number",
+        "value": "67-63-0"
+      },
+      {
+        "label": "Purity",
+        "value": "≥ 99.8%"
+      },
+      {
+        "label": "Appearance",
+        "value": "Clear, colourless liquid"
+      }
+    ],
+    "packaging": ["35 L cans", "160 kg drums"],
+    "documents": [],
+    "featured": true,
+    "sample": true
+  },
+  {
+    "slug": "acetone",
+    "name": "Acetone",
+    "category": "solvents",
+    "summary": "Versatile, fast-drying solvent for coatings, adhesives, cleaning and extraction.",
+    "description": [
+      "Acetone is a highly effective solvent that mixes freely with water and many organic solvents.",
+      "It is used for cleaning, degreasing, thinning coatings and as a process solvent in pharmaceutical manufacturing."
+    ],
+    "applications": ["Paints and coatings", "Adhesives", "Pharmaceutical processing", "Degreasing"],
+    "specifications": [
+      {
+        "label": "Chemical formula",
+        "value": "C₃H₆O"
+      },
+      {
+        "label": "CAS number",
+        "value": "67-64-1"
+      },
+      {
+        "label": "Purity",
+        "value": "≥ 99.5%"
+      },
+      {
+        "label": "Appearance",
+        "value": "Clear, colourless liquid"
+      }
+    ],
+    "packaging": ["160 kg drums", "Bulk on request"],
+    "documents": [],
+    "featured": false,
+    "sample": true
+  }
+]

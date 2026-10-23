@@ -1,0 +1,115 @@
+.field {
+  display: grid;
+  gap: var(--space-2);
+  align-content: start;
+}
+
+.label {
+  color: var(--text-strong);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-medium);
+}
+
+.required {
+  color: var(--status-error);
+}
+
+.optional {
+  color: var(--text-muted);
+  font-weight: var(--fw-regular);
+}
+
+.control {
+  width: 100%;
+  min-height: 50px;
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  background: var(--surface-raised);
+  color: var(--text-strong);
+  font-size: var(--fs-base);
+  line-height: 1.4;
+  transition:
+    border-color var(--dur-fast) var(--ease-out),
+    box-shadow var(--dur-fast) var(--ease-out);
+}
+
+.control::placeholder {
+  color: #8a8d94;
+}
+
+.control:hover {
+  border-color: var(--line-strong);
+}
+
+.control:focus-visible {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgb(16 146 85 / 0.18);
+  border-radius: var(--radius-md);
+}
+
+.textarea {
+  min-height: 160px;
+  resize: vertical;
+}
+
+.selectWrap {
+  position: relative;
+}
+
+.selectWrap::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: var(--space-4);
+  width: 7px;
+  height: 7px;
+  border-right: 1.5px solid var(--text-muted);
+  border-bottom: 1.5px solid var(--text-muted);
+  transform: translateY(-70%) rotate(45deg);
+  pointer-events: none;
+}
+
+.select {
+  appearance: none;
+  padding-right: var(--space-7);
+}
+
+.hint {
+  color: var(--text-muted);
+  font-size: var(--fs-xs);
+}
+
+.error {
+  color: var(--status-error);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-medium);
+}
+
+.invalid .control {
+  border-color: var(--status-error);
+}
+
+.checkField {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.checkRow {
+  display: flex;
+  gap: var(--space-3);
+  align-items: flex-start;
+}
+
+.checkbox {
+  flex: none;
+  width: 20px;
+  height: 20px;
+  margin: 2px 0 0;
+  accent-color: var(--accent-strong);
+}
+
+.checkLabel {
+  color: var(--text-body);
+  font-size: var(--fs-sm);
+}

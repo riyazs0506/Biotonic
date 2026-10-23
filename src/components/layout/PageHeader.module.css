@@ -1,0 +1,62 @@
+.header {
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid var(--line-subtle);
+  background:
+    radial-gradient(50% 90% at 92% 10%, rgb(33 191 117 / 0.09), transparent 70%),
+    linear-gradient(180deg, #fdfcf8, var(--surface-page));
+}
+
+.inner {
+  position: relative;
+  max-width: calc(var(--container-max) + 2 * var(--gutter));
+  margin-inline: auto;
+  padding: var(--space-8) var(--gutter) var(--space-9);
+}
+
+.title {
+  max-width: 16ch;
+  font-size: var(--fs-2xl);
+}
+
+@media (min-width: 900px) {
+  .title {
+    font-size: clamp(3rem, 2rem + 3vw, 5rem);
+  }
+}
+
+.lead {
+  max-width: 60ch;
+  margin-top: var(--space-5);
+  color: var(--text-muted);
+  font-size: var(--fs-md);
+}
+
+.art {
+  position: absolute;
+  right: max(var(--gutter), calc((100vw - var(--container-max)) / 2));
+  bottom: -30px;
+  display: none;
+  width: 120px;
+  opacity: 0.9;
+}
+
+.art svg {
+  width: 100%;
+  fill: none;
+  stroke: var(--brand-carbon);
+  stroke-opacity: 0.16;
+  stroke-width: 2;
+}
+
+.art circle {
+  fill: var(--accent-bright);
+  fill-opacity: 0.5;
+  stroke: none;
+}
+
+@media (min-width: 900px) {
+  .art {
+    display: block;
+  }
+}

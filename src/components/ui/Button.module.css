@@ -1,0 +1,110 @@
+.button {
+  --btn-bg: var(--accent-strong);
+  --btn-fg: #fff;
+  --btn-border: transparent;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  min-height: 48px;
+  padding: 0 var(--space-5);
+  border: 1px solid var(--btn-border);
+  border-radius: var(--radius-pill);
+  background: var(--btn-bg);
+  color: var(--btn-fg);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-semibold);
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    background-color var(--dur-base) var(--ease-out),
+    border-color var(--dur-base) var(--ease-out),
+    color var(--dur-base) var(--ease-out),
+    box-shadow var(--dur-base) var(--ease-out),
+    transform var(--dur-base) var(--ease-out);
+}
+
+.lg {
+  min-height: 54px;
+  padding: 0 var(--space-6);
+  font-size: var(--fs-base);
+}
+
+.icon {
+  transition: transform var(--dur-base) var(--ease-out);
+}
+
+.button:hover .icon {
+  transform: translateX(3px);
+}
+
+.button:disabled,
+.button[aria-disabled='true'] {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.primary:hover:not(:disabled) {
+  --btn-bg: #0a6b3d;
+  color: #fff;
+  box-shadow: 0 10px 30px -12px rgb(16 146 85 / 0.6);
+}
+
+.secondary {
+  --btn-bg: transparent;
+  --btn-fg: var(--text-strong);
+  --btn-border: var(--line-strong);
+}
+
+.secondary:hover:not(:disabled) {
+  --btn-border: var(--text-strong);
+  --btn-bg: var(--surface-raised);
+  color: var(--text-strong);
+}
+
+.ghost {
+  --btn-bg: transparent;
+  --btn-fg: var(--accent-ink);
+  min-height: 40px;
+  padding: 0 var(--space-2);
+}
+
+.ghost:hover:not(:disabled) {
+  color: var(--text-strong);
+}
+
+.inverse {
+  --btn-bg: var(--brand-lab-white);
+  --btn-fg: var(--brand-carbon);
+}
+
+.inverse:hover:not(:disabled) {
+  --btn-bg: #fff;
+  color: var(--brand-carbon);
+  box-shadow: 0 10px 30px -12px rgb(33 191 117 / 0.55);
+}
+
+.inverse-outline {
+  --btn-bg: transparent;
+  --btn-fg: var(--text-inverse);
+  --btn-border: rgb(251 250 247 / 0.35);
+}
+
+.inverse-outline:hover:not(:disabled) {
+  --btn-border: var(--text-inverse);
+  color: var(--text-inverse);
+}
+
+.inverse:focus-visible,
+.inverse-outline:focus-visible {
+  box-shadow:
+    0 0 0 2px var(--brand-carbon),
+    0 0 0 4px var(--accent-bright);
+}
+
+.label {
+  display: inline-block;
+}
