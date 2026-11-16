@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Outlet, ScrollRestoration, useLocation } from 'react-router';
 import { Footer } from '../components/layout/Footer';
 import { Header } from '../components/layout/Header';
+import { WhatsAppButton } from '../components/layout/WhatsAppButton';
 import { applyMeta } from '../lib/applyMeta';
 import { getPageMeta } from '../lib/seo';
 import styles from './RootLayout.module.css';
@@ -37,6 +38,7 @@ export function RootLayout() {
         <Outlet />
       </main>
       <Footer />
+      <WhatsAppButton />
       <p className="visually-hidden" aria-live="polite" aria-atomic="true">
         {announcement}
       </p>

@@ -25,7 +25,7 @@ export function ResourcesPage() {
             Documents and <em>data sheets.</em>
           </>
         }
-        lead="Technical documentation for Biotonic products."
+        lead="Biotonic was founded to spread real awareness about chemicals. Request technical documents and product information for the products you use."
         breadcrumbs={meta.breadcrumbs}
       />
 

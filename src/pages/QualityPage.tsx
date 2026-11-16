@@ -1,6 +1,7 @@
 import { Link } from 'react-router';
 import { PageHeader } from '../components/layout/PageHeader';
 import { QuoteCta } from '../components/layout/QuoteCta';
+import { PrincipalStrip } from '../components/sections/StrategyBlocks';
 import { Container } from '../components/ui/Layout';
 import { show } from '../content/pending';
 import { quality } from '../content/quality';
@@ -16,7 +17,6 @@ export function QualityPage() {
   if (!meta.found) return <NotFoundPage />;
 
   // `show` returns confirmed content, or demo content in draft builds; nothing otherwise.
-  const process = show(quality.process);
   const certifications = show(quality.certifications);
   const documentation = show(quality.documentation);
   const applications = Array.from(new Set(catalogue.products.flatMap((p) => p.applications)));
@@ -27,31 +27,56 @@ export function QualityPage() {
         eyebrow="Quality & applications"
         title={
           <>
-            Quality, made <em>clear.</em>
+            Knowledge first. <em>Genuine always.</em>
           </>
         }
-        lead={show(quality.overview)}
+        lead={quality.overview}
         breadcrumbs={meta.breadcrumbs}
       />
 
       <div className={styles.body}>
         <Container>
-          {process && (
-            <section className={`${styles.block} ${styles.split}`} aria-labelledby="process">
+          <section className={styles.block} aria-labelledby="process">
+            <div className={styles.split}>
               <h2 id="process" className={`display ${styles.splitTitle}`}>
-                Our quality process
+                How we get it right
               </h2>
-              <ol className={styles.cards}>
-                {process.map((step, i) => (
-                  <li key={step.title} className={styles.card}>
-                    <span className={styles.cardIndex}>{String(i + 1).padStart(2, '0')}</span>
-                    <h3>{step.title}</h3>
-                    <p>{step.body}</p>
-                  </li>
-                ))}
-              </ol>
-            </section>
-          )}
+              <p className={styles.prose}>
+                We explain the chemistry — selection, dosage and application — before we quote.
+              </p>
+            </div>
+            <ol className={`${styles.cards} ${styles.cardsSpaced}`}>
+              {quality.process.map((step, i) => (
+                <li key={step.title} className={styles.card}>
+                  <span className={styles.cardIndex}>{String(i + 1).padStart(2, '0')}</span>
+                  <h3>{step.title}</h3>
+                  <p>{step.body}</p>
+                </li>
+              ))}
+            </ol>
+          </section>
+
+          <section className={`${styles.block} ${styles.split}`} aria-labelledby="genuine">
+            <h2 id="genuine" className={`display ${styles.splitTitle}`}>
+              Genuine, traceable brands
+            </h2>
+            <div className={styles.prose}>
+              <p>
+                Genuine, traceable products from principals we have worked with for more than 20
+                years, through the TMR and Co legacy.
+              </p>
+              <PrincipalStrip label="Principal brands" />
+            </div>
+          </section>
+
+          <section className={`${styles.block} ${styles.split}`} aria-labelledby="compliance">
+            <h2 id="compliance" className={`display ${styles.splitTitle}`}>
+              Advice for a compliance era
+            </h2>
+            <div className={styles.prose}>
+              <p>{quality.compliance}</p>
+            </div>
+          </section>
 
           {certifications && (
             <section className={`${styles.block} ${styles.split}`} aria-labelledby="certifications">

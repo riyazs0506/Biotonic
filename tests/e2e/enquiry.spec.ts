@@ -20,7 +20,9 @@ test.describe('enquiry and quotation forms', () => {
     await page.getByRole('textbox', { name: /^Full name/ }).fill('Asha Rao');
     await page.getByRole('textbox', { name: /^Company/ }).fill('Acme Coatings');
     await page.getByRole('textbox', { name: /^Business email/ }).fill('asha@acme.example');
-    await page.getByLabel(/Product of interest/).selectOption({ label: 'Caustic Soda Flakes' });
+    await page
+      .getByLabel(/Product of interest/)
+      .selectOption({ label: 'Monoethylene Glycol (MEG)' });
     await page.getByLabel(/Quantity/).fill('500');
     await page.getByLabel(/^Unit/).selectOption('kg');
     await page

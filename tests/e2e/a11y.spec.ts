@@ -11,7 +11,7 @@ const describe = (
 const paths = [
   '/',
   '/products',
-  '/products/caustic-soda-flakes',
+  '/products/waterproofing-coating',
   '/industries',
   '/resources',
   '/about',

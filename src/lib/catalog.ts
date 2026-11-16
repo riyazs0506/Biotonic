@@ -68,6 +68,7 @@ export function filterProducts(products: Product[], query: ProductQuery): Produc
     const haystack = normalise(
       [
         product.name,
+        product.principal ?? '',
         product.summary,
         ...product.applications,
         ...product.specifications.map((s) => `${s.label} ${s.value}`),

@@ -1,7 +1,7 @@
 // @vitest-environment node
 import { describe, expect, it, vi } from 'vitest';
 import { loadConfig } from './config';
-import { createResendMailer, type OutgoingMail } from './mailer';
+import { composeEnquiryMail, createResendMailer, type OutgoingMail } from './mailer';
 
 const mail: OutgoingMail = {
   from: 'Biotonic Website <website@biotonic.test>',
@@ -39,5 +39,25 @@ describe('Resend transport', () => {
     expect(() =>
       loadConfig({ NODE_ENV: 'production', SITE_URL: 'https://x.test', MAIL_TRANSPORT: 'resend' }),
     ).toThrow(/RESEND_API_KEY, MAIL_FROM, ENQUIRY_TO/);
+  });
+});
+
+describe('enquiry email', () => {
+  it('states who is enquiring when the role is given', () => {
+    const composed = composeEnquiryMail(
+      {
+        kind: 'contact',
+        name: 'Asha Rao',
+        company: 'Acme',
+        email: 'asha@acme.example',
+        role: 'dealer',
+        message: 'We would like to become a dealer.',
+        consent: true,
+        startedAt: 1,
+      },
+      'BT-0000000002',
+      { from: 'a@b.test', to: 'c@d.test' },
+    );
+    expect(composed.text).toContain('Enquirer: Distributor or dealer');
   });
 });

@@ -15,13 +15,11 @@ export type OptionalPage = 'leadership' | 'quality' | 'industries' | 'resources'
 export function hasConfirmedContent(page: OptionalPage): boolean {
   switch (page) {
     case 'leadership':
-      return (
-        isConfirmed(founder.name) && isConfirmed(founder.title) && isConfirmed(founder.biography)
-      );
+      return founder.biography.length > 0;
     case 'quality':
-      return isConfirmed(quality.overview);
+      return quality.process.length > 0;
     case 'industries':
-      return isConfirmed(industries) && industries.length > 0;
+      return industries.length > 0;
     case 'resources':
       return isConfirmed(resources) && resources.length > 0;
   }

@@ -4,13 +4,16 @@ import { PageHeader } from '../components/layout/PageHeader';
 import { Icon } from '../components/ui/Icon';
 import { Container } from '../components/ui/Layout';
 import { Confirm } from '../components/ui/Pending';
+import { geography } from '../content/industries';
 import { site } from '../content/site';
+import { whatsappHref } from '../lib/whatsapp';
 import { paths } from '../lib/routes';
 import { getPageMeta } from '../lib/seo';
 import { useHydrated } from '../lib/useHydrated';
 import styles from './ContentPage.module.css';
 
 function ContactDetails() {
+  const whatsapp = whatsappHref();
   return (
     <div className={styles.sideBlock}>
       <h2 className={styles.sideTitle}>Contact details</h2>
@@ -30,20 +33,12 @@ function ContactDetails() {
           </a>
         )}
       />
-      <Confirm
-        value={site.whatsapp}
-        render={(number) => (
-          <a
-            className={styles.contactLine}
-            href={`https://wa.me/${number.replace(/\D/g, '')}`}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Icon name="chat" /> WhatsApp
-            <span className="visually-hidden"> (opens in a new tab)</span>
-          </a>
-        )}
-      />
+      {whatsapp && (
+        <a className={styles.contactLine} href={whatsapp} target="_blank" rel="noopener noreferrer">
+          <Icon name="chat" /> WhatsApp — quick quotes
+          <span className="visually-hidden"> (opens in a new tab)</span>
+        </a>
+      )}
       <Confirm
         value={site.address}
         render={(lines) => (
@@ -93,8 +88,27 @@ function NextSteps() {
   );
 }
 
+/** "A decision-maker who picks up the phone" — from the brand's value proposition. */
+function DecisionMaker() {
+  return (
+    <div className={styles.sideBlock}>
+      <h2 className={styles.sideTitle}>Talk to a decision-maker</h2>
+      <p className={styles.meta}>
+        Quotes come from the people who can approve them. Dealers and principals get a direct line
+        to our founder, Keerthi Vasan.
+      </p>
+      <p className={styles.meta}>
+        Serving the {geography.current}; expanding across {geography.next}.
+      </p>
+    </div>
+  );
+}
+
 export function ContactPage() {
   const meta = getPageMeta(paths.contact);
+  const hydrated = useHydrated();
+  const [params] = useSearchParams();
+  const role = hydrated ? (params.get('role') ?? undefined) : undefined;
   return (
     <>
       <PageHeader
@@ -104,7 +118,7 @@ export function ContactPage() {
             Let’s talk <em>chemistry.</em>
           </>
         }
-        lead="Questions about a product, availability or supply? Send us a message and the Biotonic team will reply by email."
+        lead="A product question, a quote, or a dealer or principal partnership? Send us a message or WhatsApp us — a decision-maker will reply."
         breadcrumbs={meta.breadcrumbs}
       />
       <div className={styles.body}>
@@ -117,10 +131,12 @@ export function ContactPage() {
               >
                 Send an enquiry
               </h2>
-              <EnquiryForm kind="contact" />
+              {/* Re-mount after hydration so a ?role= preselection matches the prerendered HTML first. */}
+              <EnquiryForm key={hydrated ? 'client' : 'server'} kind="contact" defaultRole={role} />
             </section>
             <aside className={styles.sidebar} aria-label="Other ways to reach us">
               <ContactDetails />
+              <DecisionMaker />
               <NextSteps />
             </aside>
           </div>

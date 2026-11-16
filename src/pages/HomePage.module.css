@@ -161,38 +161,14 @@
   color: var(--text-body);
 }
 
-.principles {
-  display: grid;
-  gap: var(--space-6);
+.glance {
   margin-top: var(--space-8);
-  list-style: none;
 }
 
-@media (min-width: 640px) {
-  .principles {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
-@media (min-width: 1024px) {
-  .principles {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: var(--space-5);
-  }
-}
-
-.principle {
-  display: grid;
-  gap: var(--space-3);
-  align-content: start;
-  padding-top: var(--space-5);
-  border-top: 2px solid var(--brand-carbon);
-  color: var(--text-muted);
-  font-size: var(--fs-sm);
-}
-
-.principle:nth-child(3) {
-  border-top-color: var(--accent);
+.principalRow {
+  margin-top: var(--space-7);
+  padding-top: var(--space-6);
+  border-top: 1px solid var(--line);
 }
 
 .principleIndex {
@@ -202,55 +178,120 @@
   letter-spacing: 0.12em;
 }
 
-.principleTitle {
-  font-size: var(--fs-lg);
-}
-
-.capabilities {
+/* ---------- Why Biotonic ---------- */
+.usps,
+.markets {
   display: grid;
-  gap: var(--space-5);
+  gap: var(--space-4);
   list-style: none;
 }
 
+@media (min-width: 640px) {
+  .usps {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .usps {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
 @media (min-width: 900px) {
-  .capabilities {
+  .markets {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 
-.capabilities li {
+.usps li,
+.markets li {
   display: grid;
   align-content: start;
-  gap: var(--space-2);
+  gap: var(--space-3);
   padding: var(--space-6);
-  border: 1px solid var(--line-subtle);
-  border-radius: var(--radius-lg);
+  border-top: 2px solid var(--brand-carbon);
   background: var(--surface-raised);
+  color: var(--text-muted);
+  font-size: var(--fs-sm);
 }
 
-.capabilities h3 {
-  font-size: var(--fs-md);
+.usps li:nth-child(2),
+.markets li:nth-child(2) {
+  border-top-color: var(--accent);
 }
 
-.founder {
+.usps h3,
+.markets h3 {
+  font-family: var(--font-display);
+  font-size: var(--fs-xl);
+  font-weight: var(--fw-medium);
+  line-height: 1.1;
+}
+
+.marketBuyers {
+  color: var(--text-strong);
+  font-weight: var(--fw-medium);
+}
+
+.priceNote {
+  margin-top: var(--space-6);
+  padding: var(--space-5) var(--space-6);
+  border-left: 2px solid var(--accent);
+  background: var(--surface-tint);
+  color: var(--text-body);
+}
+
+.priceNote strong {
+  color: var(--text-strong);
+}
+
+/* ---------- Founder band ---------- */
+.founderBand {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(50% 80% at 85% 20%, rgb(33 191 117 / 0.18), transparent 70%), var(--surface-ink);
+  color: var(--text-inverse-muted);
+}
+
+.founderInner {
   display: grid;
-  gap: var(--space-6);
+  gap: var(--space-8);
+  max-width: calc(var(--container-max) + 2 * var(--gutter));
+  margin-inline: auto;
+  padding: var(--section-y) var(--gutter);
 }
 
-@media (min-width: 900px) {
-  .founder {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+@media (min-width: 1024px) {
+  .founderInner {
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+    gap: var(--space-9);
+    align-items: center;
+  }
+
+  .founderProof ul {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
-.founderName {
-  color: var(--text-strong);
-  font-family: var(--font-display);
-  font-size: var(--fs-xl);
+.founderLead {
+  display: grid;
+  gap: var(--space-5);
+  justify-items: start;
 }
 
-.founderRole {
-  color: var(--text-muted);
+.founderEyebrow {
+  color: var(--accent-bright);
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+}
+
+.founderProof {
+  display: grid;
+  gap: var(--space-5);
 }
 
 .founderCard {
@@ -259,9 +300,28 @@
   gap: var(--space-5);
 }
 
+.founderName {
+  color: var(--text-inverse);
+  font-size: var(--fs-2xl);
+}
+
+.founderRole {
+  color: var(--accent-bright);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-medium);
+}
+
 .founderQuote {
-  color: var(--text-strong);
-  font-family: var(--font-display);
+  margin: 0;
+  color: var(--text-inverse);
   font-size: var(--fs-xl);
   line-height: 1.3;
+}
+
+.founderStory {
+  max-width: 54ch;
+}
+
+.founderCta {
+  margin-top: var(--space-2);
 }

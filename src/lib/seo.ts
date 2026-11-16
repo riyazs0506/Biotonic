@@ -1,4 +1,6 @@
 import { isConfirmed } from '../content/pending';
+import { company } from '../content/company';
+import { founder } from '../content/leadership';
 import { site } from '../content/site';
 import { getCategory, getProduct } from './catalog';
 import { IS_RELEASE, SITE_URL } from './env';
@@ -39,54 +41,57 @@ interface StaticEntry {
 
 const staticPages: Record<string, StaticEntry> = {
   [paths.home]: {
-    title: `${BRAND} — Chemistry You Can Trust | B2B Chemical Products`,
+    title: `${BRAND} | Chemical Distributor in Tiruppur, Tamil Nadu`,
     description:
-      'Biotonic supplies chemical products to businesses. Explore the product catalogue and request a quotation for your requirements.',
+      'Genuine Zydex, Pidilite and India Glycols products with expert advice for textile, construction and industrial businesses across Tiruppur, Erode and Coimbatore.',
     label: 'Home',
   },
   [paths.products]: {
     title: `Chemical Product Catalogue | ${BRAND}`,
     description:
-      'Browse Biotonic’s chemical products by category, view specifications and request a quotation for your business.',
+      'Textile, construction and industrial chemicals from genuine principal brands. Browse by category, view specifications and request a quote from Biotonic.',
     label: 'Products',
   },
   [paths.about]: {
-    title: `About ${BRAND} | B2B Chemical Supplier`,
+    title: `About ${BRAND} | A Chemical Partner Built on a Legacy`,
     description:
-      'Learn about Biotonic, a supplier of chemical products to businesses, and the principles behind how we work.',
+      'Founded in 2024 by Keerthi Vasan on the 20+ year legacy of TMR and Co, Biotonic brings genuine chemical brands and expert know-how together.',
     label: 'About',
   },
   [paths.leadership]: {
-    title: `Leadership | ${BRAND}`,
-    description: 'Meet the founder and leadership behind Biotonic.',
+    title: `Keerthi Vasan, Founder of ${BRAND} | Leadership`,
+    description:
+      'Keerthi Vasan rose from the godown floor of TMR and Co to found Biotonic: the industrial expert and deal maker behind a knowledge-led chemical partner.',
     label: 'Leadership',
   },
   [paths.quality]: {
     title: `Quality & Applications | ${BRAND}`,
     description:
-      'How Biotonic approaches quality, documentation and the applications of its chemical products.',
+      'Genuine, traceable chemical products from India’s leading principals, with selection, dosage and application advice before and after the sale.',
     label: 'Quality',
   },
   [paths.industries]: {
-    title: `Industries & Solutions | ${BRAND}`,
-    description: 'The industries Biotonic supplies and the chemical products relevant to each.',
+    title: `Textile, Construction & Industrial Chemicals | ${BRAND}`,
+    description:
+      'Chemical supply and application know-how for textile processors, construction contractors and manufacturers across Tiruppur, Erode and Coimbatore.',
     label: 'Industries',
   },
   [paths.resources]: {
     title: `Technical Resources | ${BRAND}`,
-    description: 'Download technical documents and product information from Biotonic.',
+    description:
+      'Technical documents and product information from Biotonic, part of our mission to spread real awareness about chemicals.',
     label: 'Resources',
   },
   [paths.contact]: {
-    title: `Contact ${BRAND}`,
+    title: `Contact ${BRAND} | WhatsApp, Quotes & Dealer Enquiries`,
     description:
-      'Contact Biotonic about chemical products, availability and supply. Send an enquiry and our team will respond.',
+      'Talk to Biotonic about chemical products, dealer partnerships or principal partnerships. Send an enquiry or WhatsApp us for a quick quote.',
     label: 'Contact',
   },
   [paths.quote]: {
     title: `Request a Quote | ${BRAND}`,
     description:
-      'Request a quotation from Biotonic. Share the product, quantity and delivery details your business needs.',
+      'Request a quotation from Biotonic. Share the product, quantity and delivery details your business needs, and a decision-maker will respond.',
     label: 'Request a quote',
   },
   [paths.privacy]: {
@@ -109,6 +114,12 @@ const optionalByPath: Record<string, Parameters<typeof isPublished>[0]> = {
   [paths.resources]: 'resources',
 };
 
+/** Product page title, dropping the category when it would exceed ~65 characters. */
+function productTitle(name: string, category?: string): string {
+  const full = `${name}${category ? ` — ${category}` : ''} | ${BRAND}`;
+  return full.length <= 65 ? full : `${name} | ${BRAND}`;
+}
+
 export function absoluteUrl(path: string): string {
   return `${SITE_URL}${path === '/' ? '/' : path}`;
 }
@@ -118,22 +129,53 @@ export function normalisePath(pathname: string): string {
   return clean.length > 1 ? clean.replace(/\/+$/, '') : '/';
 }
 
+const ORG_ID = `${SITE_URL}/#organization`;
+const FOUNDER_ID = `${SITE_URL}/leadership#person`;
+
 function organizationLd(): Record<string, unknown> {
   const org: Record<string, unknown> = {
     '@context': 'https://schema.org',
     '@type': 'Organization',
-    '@id': `${SITE_URL}/#organization`,
+    '@id': ORG_ID,
     name: BRAND,
     url: absoluteUrl('/'),
     logo: absoluteUrl('/brand/logo-continuous.png'),
-    slogan: site.tagline,
+    slogan: company.brandIdea,
     description: site.summary,
+    foundingDate: site.established,
+    founder: { '@type': 'Person', '@id': FOUNDER_ID, name: founder.name },
+    areaServed: ['Tiruppur', 'Erode', 'Coimbatore', 'Tamil Nadu'].map((name) => ({
+      '@type': 'Place',
+      name,
+    })),
+    knowsAbout: ['Textile chemicals', 'Construction chemicals', 'Glycols', 'Industrial chemicals'],
   };
   if (isConfirmed(site.legalName)) org.legalName = site.legalName;
   if (isConfirmed(site.email)) org.email = site.email;
   if (isConfirmed(site.phone)) org.telephone = site.phone;
   if (isConfirmed(site.social) && site.social.length) org.sameAs = site.social.map((s) => s.href);
   return org;
+}
+
+function founderLd(): Record<string, unknown> {
+  const person: Record<string, unknown> = {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    '@id': FOUNDER_ID,
+    name: founder.name,
+    jobTitle: 'Founder',
+    url: absoluteUrl(paths.leadership),
+    worksFor: { '@id': ORG_ID, name: BRAND },
+    alumniOf: { '@type': 'CollegeOrUniversity', name: founder.education.college },
+    award: founder.awards
+      .filter((a) => a.title.toLowerCase().includes('award'))
+      .map((a) => `${a.title} — ${a.from}`),
+    description: founder.statement,
+  };
+  if (isConfirmed(founder.links) && founder.links.length) {
+    person.sameAs = founder.links.map((l) => l.href);
+  }
+  return person;
 }
 
 function websiteLd(): Record<string, unknown> {
@@ -143,7 +185,7 @@ function websiteLd(): Record<string, unknown> {
     '@id': `${SITE_URL}/#website`,
     name: BRAND,
     url: absoluteUrl('/'),
-    publisher: { '@id': `${SITE_URL}/#organization` },
+    publisher: { '@id': ORG_ID },
   };
 }
 
@@ -187,7 +229,11 @@ export function getPageMeta(pathname: string): PageMeta {
   if (entry) {
     const breadcrumbs = path === paths.home ? [] : [home, { label: entry.label, path }];
     const jsonLd =
-      path === paths.home ? [organizationLd(), websiteLd()] : [breadcrumbLd(breadcrumbs)];
+      path === paths.home
+        ? [organizationLd(), websiteLd()]
+        : path === paths.leadership
+          ? [breadcrumbLd(breadcrumbs), founderLd()]
+          : [breadcrumbLd(breadcrumbs)];
     return {
       title: entry.title,
       description: entry.description,
@@ -222,11 +268,12 @@ export function getPageMeta(pathname: string): PageMeta {
         description: product.summary,
         category: category?.name,
         url: absoluteUrl(path),
-        // Biotonic is a supplier: brand/manufacturer are added only when the client confirms them.
+        // Brand only when the catalogue names the principal; never prices, ratings or stock.
+        ...(product.principal ? { brand: { '@type': 'Brand', name: product.principal } } : {}),
       });
     }
     return {
-      title: `${product.name}${category ? ` — ${category.name}` : ''} | ${BRAND}`,
+      title: productTitle(product.name, category?.name),
       description: product.summary,
       path,
       canonical: absoluteUrl(path),

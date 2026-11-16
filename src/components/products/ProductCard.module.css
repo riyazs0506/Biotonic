@@ -55,6 +55,16 @@
   text-transform: uppercase;
 }
 
+.principal {
+  padding: 2px var(--space-2);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-pill);
+  color: var(--text-body);
+  font-size: 0.6875rem;
+  font-weight: var(--fw-medium);
+  white-space: nowrap;
+}
+
 .title {
   font-size: var(--fs-lg);
   font-weight: var(--fw-semibold);

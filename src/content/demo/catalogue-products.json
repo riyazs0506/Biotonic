@@ -1,218 +1,178 @@
 [
   {
-    "slug": "caustic-soda-flakes",
-    "name": "Caustic Soda Flakes",
-    "category": "alkalis",
-    "summary": "Sodium hydroxide in flake form for neutralisation, cleaning and soap and detergent manufacturing.",
+    "slug": "pigment-printing-emulsion",
+    "name": "Pigment Printing Emulsion",
+    "category": "textile-chemicals",
+    "principal": "Pidilite Industries",
+    "summary": "Pigment emulsion for bright, durable prints on cotton and blended knitwear.",
     "description": [
-      "Caustic soda flakes are a strong alkali supplied in free-flowing flake form, easy to dose and dissolve on site.",
-      "Widely used for pH correction, saponification, industrial cleaning and as a raw material in textile and chemical processing."
+      "A ready-to-use pigment emulsion for textile printing, giving even colour and good fastness when used with the right binder and curing conditions.",
+      "We help you choose shade, dosage and curing parameters for your fabric before you order."
     ],
-    "applications": [
-      "Water treatment",
-      "Soap and detergent manufacturing",
-      "Textile processing",
-      "Industrial cleaning"
-    ],
+    "applications": ["Pigment printing", "Knitwear and garments", "Cotton and blends"],
     "specifications": [
       {
-        "label": "Chemical formula",
-        "value": "NaOH"
+        "label": "Form",
+        "value": "Aqueous emulsion"
       },
       {
-        "label": "CAS number",
-        "value": "1310-73-2"
+        "label": "Application",
+        "value": "Screen and table printing"
       },
       {
-        "label": "Purity",
-        "value": "≥ 98%"
-      },
-      {
-        "label": "Appearance",
-        "value": "White flakes"
+        "label": "Dosage",
+        "value": "As advised for your recipe"
       }
     ],
-    "packaging": ["25 kg HDPE bags", "50 kg bags", "Bulk on request"],
+    "packaging": ["30 kg carboys", "50 kg drums"],
     "documents": [],
     "featured": true,
     "sample": true
   },
   {
-    "slug": "soda-ash-light",
-    "name": "Soda Ash Light",
-    "category": "alkalis",
-    "summary": "Sodium carbonate (light grade) for glass, detergents, textiles and water treatment.",
+    "slug": "textile-softener",
+    "name": "Textile Softener",
+    "category": "textile-chemicals",
+    "summary": "Finishing softener for a soft, smooth hand feel on knitted fabrics.",
     "description": [
-      "Soda ash light is a fine, free-flowing grade of sodium carbonate with low bulk density.",
-      "It is used as a pH regulator and alkali source across glass, detergent and textile applications."
+      "A finishing softener applied by padding or exhaust to give knitwear a soft, smooth hand feel.",
+      "Application advice covers bath pH, dosage and compatibility with your other finishing chemicals."
     ],
-    "applications": [
-      "Detergent manufacturing",
-      "Glass production",
-      "Textile dyeing",
-      "Water treatment"
-    ],
+    "applications": ["Fabric finishing", "Knitwear", "Garment washing"],
     "specifications": [
       {
-        "label": "Chemical formula",
-        "value": "Na₂CO₃"
+        "label": "Form",
+        "value": "Liquid / flakes"
       },
       {
-        "label": "CAS number",
-        "value": "497-19-8"
+        "label": "Application",
+        "value": "Padding or exhaust"
       },
       {
-        "label": "Purity",
-        "value": "≥ 99%"
-      },
-      {
-        "label": "Appearance",
-        "value": "White powder"
+        "label": "Dosage",
+        "value": "As advised for your process"
       }
     ],
-    "packaging": ["50 kg HDPE bags", "1 tonne jumbo bags"],
+    "packaging": ["50 kg drums", "125 kg drums"],
     "documents": [],
     "featured": false,
     "sample": true
   },
   {
-    "slug": "hydrochloric-acid",
-    "name": "Hydrochloric Acid 33%",
-    "category": "acids",
-    "summary": "Commercial-grade hydrochloric acid for pickling, pH control and chemical processing.",
+    "slug": "waterproofing-coating",
+    "name": "Waterproofing Coating",
+    "category": "construction-chemicals",
+    "principal": "Zydex Industries",
+    "summary": "Waterproofing coating for roofs, terraces and wet areas.",
     "description": [
-      "Hydrochloric acid is a strong mineral acid supplied as an aqueous solution.",
-      "Common uses include steel pickling, regeneration of ion-exchange resins, pH control and the manufacture of chlorides."
+      "A waterproofing coating for roofs, terraces, bathrooms and other wet areas.",
+      "Our team advises on surface preparation, coverage and curing, and supports applicators on site."
     ],
-    "applications": ["Metal pickling", "Water treatment", "pH control", "Chemical processing"],
+    "applications": ["Roofs and terraces", "Bathrooms and wet areas", "Water tanks"],
     "specifications": [
       {
-        "label": "Chemical formula",
-        "value": "HCl"
+        "label": "Form",
+        "value": "Liquid coating"
       },
       {
-        "label": "CAS number",
-        "value": "7647-01-0"
+        "label": "Coverage",
+        "value": "As per substrate"
       },
       {
-        "label": "Concentration",
-        "value": "30–33%"
-      },
-      {
-        "label": "Appearance",
-        "value": "Clear to light yellow liquid"
+        "label": "Application",
+        "value": "Brush or roller"
       }
     ],
-    "packaging": ["35 kg carboys", "250 kg drums", "Tanker loads on request"],
+    "packaging": ["1 L, 4 L and 20 L packs"],
     "documents": [],
     "featured": true,
     "sample": true
   },
   {
-    "slug": "sulphuric-acid",
-    "name": "Sulphuric Acid 98%",
-    "category": "acids",
-    "summary": "Concentrated sulphuric acid for fertiliser, metal treatment and chemical manufacturing.",
+    "slug": "tile-adhesive",
+    "name": "Tile Adhesive",
+    "category": "construction-chemicals",
+    "summary": "Polymer-modified tile adhesive for floors and walls.",
     "description": [
-      "Sulphuric acid is one of the most widely used industrial chemicals, supplied here in concentrated form.",
-      "It serves as a raw material and process chemical across fertiliser, metal processing and chemical industries."
+      "A cement-based, polymer-modified adhesive for fixing ceramic and vitrified tiles on floors and walls.",
+      "We help contractors choose the right grade for the tile and substrate."
     ],
-    "applications": [
-      "Metal processing",
-      "Fertiliser manufacturing",
-      "Battery acid preparation",
-      "Chemical synthesis"
-    ],
+    "applications": ["Floor tiling", "Wall tiling", "Vitrified tiles"],
     "specifications": [
       {
-        "label": "Chemical formula",
-        "value": "H₂SO₄"
+        "label": "Form",
+        "value": "Powder"
       },
       {
-        "label": "CAS number",
-        "value": "7664-93-9"
+        "label": "Mixing",
+        "value": "With water, as per pack"
       },
       {
-        "label": "Concentration",
-        "value": "≥ 98%"
-      },
-      {
-        "label": "Appearance",
-        "value": "Clear, oily liquid"
+        "label": "Use",
+        "value": "Interior and exterior"
       }
     ],
-    "packaging": ["50 kg carboys", "Tanker loads on request"],
+    "packaging": ["20 kg bags"],
     "documents": [],
     "featured": false,
     "sample": true
   },
   {
-    "slug": "isopropyl-alcohol",
-    "name": "Isopropyl Alcohol",
-    "category": "solvents",
-    "summary": "High-purity isopropanol for cleaning, disinfection, extraction and formulation.",
+    "slug": "monoethylene-glycol",
+    "name": "Monoethylene Glycol (MEG)",
+    "category": "glycols",
+    "principal": "India Glycols",
+    "summary": "Monoethylene glycol for polyester, coolants and industrial processes.",
     "description": [
-      "Isopropyl alcohol is a fast-evaporating solvent with excellent cleaning properties.",
-      "It is used in pharmaceutical, electronics and coatings applications and as an extraction and formulation solvent."
+      "Monoethylene glycol is a clear, colourless glycol used as a raw material and process chemical across industry.",
+      "Supplied as genuine principal product from stock you can plan production around."
     ],
-    "applications": [
-      "Pharmaceutical manufacturing",
-      "Electronics cleaning",
-      "Paints and coatings",
-      "Disinfectant formulation"
-    ],
+    "applications": ["Polyester and fibre", "Coolants and antifreeze", "Industrial processes"],
     "specifications": [
       {
         "label": "Chemical formula",
-        "value": "C₃H₈O"
+        "value": "C₂H₆O₂"
       },
       {
         "label": "CAS number",
-        "value": "67-63-0"
-      },
-      {
-        "label": "Purity",
-        "value": "≥ 99.8%"
+        "value": "107-21-1"
       },
       {
         "label": "Appearance",
         "value": "Clear, colourless liquid"
       }
     ],
-    "packaging": ["35 L cans", "160 kg drums"],
+    "packaging": ["230 kg drums", "Bulk on request"],
     "documents": [],
     "featured": true,
     "sample": true
   },
   {
-    "slug": "acetone",
-    "name": "Acetone",
-    "category": "solvents",
-    "summary": "Versatile, fast-drying solvent for coatings, adhesives, cleaning and extraction.",
+    "slug": "diethylene-glycol",
+    "name": "Diethylene Glycol (DEG)",
+    "category": "glycols",
+    "principal": "India Glycols",
+    "summary": "Diethylene glycol for resins, plasticisers and industrial applications.",
     "description": [
-      "Acetone is a highly effective solvent that mixes freely with water and many organic solvents.",
-      "It is used for cleaning, degreasing, thinning coatings and as a process solvent in pharmaceutical manufacturing."
+      "Diethylene glycol is used as a raw material for resins and plasticisers and as a humectant and solvent in industry.",
+      "Supplied as genuine principal product with dependable stock."
     ],
-    "applications": ["Paints and coatings", "Adhesives", "Pharmaceutical processing", "Degreasing"],
+    "applications": ["Resins", "Plasticisers", "Industrial solvents"],
     "specifications": [
       {
         "label": "Chemical formula",
-        "value": "C₃H₆O"
+        "value": "C₄H₁₀O₃"
       },
       {
         "label": "CAS number",
-        "value": "67-64-1"
-      },
-      {
-        "label": "Purity",
-        "value": "≥ 99.5%"
+        "value": "111-46-6"
       },
       {
         "label": "Appearance",
         "value": "Clear, colourless liquid"
       }
     ],
-    "packaging": ["160 kg drums", "Bulk on request"],
+    "packaging": ["230 kg drums", "Bulk on request"],
     "documents": [],
     "featured": false,
     "sample": true

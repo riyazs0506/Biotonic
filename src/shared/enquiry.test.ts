@@ -70,4 +70,13 @@ describe('enquiry validation', () => {
     expect(out).not.toHaveProperty('admin');
     expect(out.name).toBe('Asha Rao');
   });
+
+  it('accepts a known enquirer role and rejects anything else', () => {
+    const ok = parseEnquiry({ ...valid, role: 'dealer' });
+    expect(ok.success && ok.data.role).toBe('dealer');
+    expect(parseEnquiry({ ...valid, role: '' }).success).toBe(true);
+    const bad = parseEnquiry({ ...valid, role: 'admin' });
+    expect(bad.success).toBe(false);
+    if (!bad.success) expect(bad.errors.role).toBeDefined();
+  });
 });

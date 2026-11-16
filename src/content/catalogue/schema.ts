@@ -25,6 +25,8 @@ export const productSchema = z.object({
   slug,
   name: z.string().min(2).max(90),
   category: slug,
+  /** Principal brand / manufacturer, e.g. "Pidilite Industries". Optional. */
+  principal: z.string().min(2).max(60).optional(),
   summary: z.string().min(10).max(220),
   description: z.array(z.string().min(10).max(1200)).min(1),
   applications: z.array(z.string().min(2).max(120)),

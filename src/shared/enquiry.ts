@@ -18,6 +18,16 @@ export const LIMITS = {
 export const UNITS = ['kg', 'litres', 'tonnes', 'drums', 'containers', 'other'] as const;
 export const ENQUIRY_KINDS = ['contact', 'quote'] as const;
 
+/** Who is enquiring — the three audiences in the brand strategy. */
+export const ENQUIRER_ROLES = ['buyer', 'dealer', 'principal', 'other'] as const;
+export type EnquirerRole = (typeof ENQUIRER_ROLES)[number];
+export const ROLE_LABELS: Record<EnquirerRole, string> = {
+  buyer: 'Business buyer / end user',
+  dealer: 'Distributor or dealer',
+  principal: 'Supplier or principal',
+  other: 'Other',
+};
+
 /** Minimum time a human plausibly needs to complete the form. */
 export const MIN_FILL_MS = 2500;
 /** Form tokens older than this are rejected (stale tab or replay). */
@@ -60,6 +70,7 @@ const SINGLE_LINE = [
   'product',
   'quantity',
   'unit',
+  'role',
   'website',
 ] as const;
 
@@ -128,6 +139,7 @@ export const enquirySchema = z.object({
   product: optionalText(LIMITS.product),
   quantity: optionalText(LIMITS.quantity),
   unit: z.optional(z.enum(UNITS)),
+  role: z.optional(z.enum(ENQUIRER_ROLES)),
   message: z
     .string({ error: 'Please tell us about your requirements.' })
     .check(

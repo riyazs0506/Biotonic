@@ -5,7 +5,15 @@ import { site } from '../../content/site';
 import { catalogue } from '../../lib/catalog';
 import { newIdempotencyKey, submitEnquiry, type SubmitResult } from '../../lib/enquiryClient';
 import { paths } from '../../lib/routes';
-import { LIMITS, parseEnquiry, UNITS, type FieldErrors } from '../../shared/enquiry';
+import {
+  LIMITS,
+  parseEnquiry,
+  UNITS,
+  type FieldErrors,
+  ENQUIRER_ROLES,
+  ROLE_LABELS,
+  type EnquirerRole,
+} from '../../shared/enquiry';
 import { Button } from '../ui/Button';
 import { Checkbox, SelectField, TextArea, TextField } from '../ui/Field';
 import { Alert, Spinner } from '../ui/Feedback';
@@ -21,9 +29,12 @@ interface EnquiryFormProps {
   kind: 'contact' | 'quote';
   /** Product slug to preselect, e.g. from /request-a-quote?product=slug. */
   defaultProduct?: string;
+  /** Enquirer role to preselect, e.g. from /contact?role=dealer. */
+  defaultRole?: string;
 }
 
 const FIELD_ORDER = [
+  'role',
   'name',
   'company',
   'email',
@@ -35,7 +46,7 @@ const FIELD_ORDER = [
   'consent',
 ] as const;
 
-export function EnquiryForm({ kind, defaultProduct }: EnquiryFormProps) {
+export function EnquiryForm({ kind, defaultProduct, defaultRole }: EnquiryFormProps) {
   const formRef = useRef<HTMLFormElement>(null);
   const successRef = useRef<HTMLHeadingElement>(null);
   const startedAt = useRef(0);
@@ -93,6 +104,7 @@ export function EnquiryForm({ kind, defaultProduct }: EnquiryFormProps) {
       unit: data.get('unit') ?? undefined,
       message: data.get('message'),
       consent: data.get('consent') === 'on',
+      role: data.get('role') ?? undefined,
       website: data.get('website') ?? '',
       startedAt: startedAt.current || Date.now(),
     };
@@ -212,6 +224,20 @@ export function EnquiryForm({ kind, defaultProduct }: EnquiryFormProps) {
       )}
 
       <div className={styles.grid}>
+        <SelectField
+          label="I am a"
+          name="role"
+          defaultValue={ENQUIRER_ROLES.includes(defaultRole as EnquirerRole) ? defaultRole : ''}
+          error={errors.role}
+          className={styles.full}
+        >
+          <option value="">Select one</option>
+          {ENQUIRER_ROLES.map((role) => (
+            <option key={role} value={role}>
+              {ROLE_LABELS[role]}
+            </option>
+          ))}
+        </SelectField>
         <TextField
           label="Full name"
           name="name"

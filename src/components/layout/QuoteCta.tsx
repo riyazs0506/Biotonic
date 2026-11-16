@@ -1,18 +1,21 @@
 import type { ReactNode } from 'react';
 import { paths } from '../../lib/routes';
+import { whatsappHref } from '../../lib/whatsapp';
 import { ButtonLink } from '../ui/Button';
+import { Icon } from '../ui/Icon';
 import styles from './QuoteCta.module.css';
 
 /** Closing call to action shared by the homepage and content pages. */
 export function QuoteCta({
   title = (
     <>
-      Tell us what your operation <em>needs.</em>
+      The right chemistry. <em>The right deal.</em>
     </>
   ),
 }: {
   title?: ReactNode;
 }) {
+  const whatsapp = whatsappHref();
   return (
     <section className={styles.cta} aria-labelledby="quote-cta-title">
       <div className={styles.glow} aria-hidden="true" />
@@ -29,16 +32,30 @@ export function QuoteCta({
           {title}
         </h2>
         <p className={styles.lead}>
-          Share the product, grade, quantity and delivery location. The Biotonic team will review
-          your requirements and respond with a quotation.
+          Share the product, quantity and delivery location — or the problem you are solving. A
+          decision-maker will come back to you with the right chemical, the right brand and a clear
+          quote.
         </p>
         <div className={styles.actions}>
           <ButtonLink to={paths.quote} variant="inverse" size="lg" icon="arrowRight">
             Request a Quote
           </ButtonLink>
-          <ButtonLink to={paths.contact} variant="inverse-outline" size="lg">
-            Contact Biotonic
-          </ButtonLink>
+          {whatsapp ? (
+            <a
+              href={whatsapp}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.whatsapp}
+            >
+              <Icon name="chat" size={18} />
+              Quick quote on WhatsApp
+              <span className="visually-hidden"> (opens in a new tab)</span>
+            </a>
+          ) : (
+            <ButtonLink to={paths.contact} variant="inverse-outline" size="lg">
+              Contact Biotonic
+            </ButtonLink>
+          )}
         </div>
       </div>
     </section>

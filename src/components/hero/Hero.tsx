@@ -17,9 +17,9 @@ export function Hero() {
             Chemistry You Can <em>Trust.</em>
           </h1>
           <p className={styles.lead}>
-            Biotonic supplies chemical products to businesses. Tell us the product, grade and
-            quantity your operation needs — we will respond with clear product information and a
-            quotation.
+            The right chemical, the right brand and the right advice — delivered on time. Biotonic
+            brings genuine products from India’s leading principals to the businesses that build,
+            dye and make.
           </p>
           <div className={styles.ctas}>
             <ButtonLink to={paths.products} size="lg" icon="arrowRight">
@@ -31,12 +31,16 @@ export function Hero() {
           </div>
           <dl className={styles.detail}>
             <div>
-              <dt>Supply</dt>
-              <dd>Chemical products for business</dd>
+              <dt>Since 2024</dt>
+              <dd>On a 20+ year legacy</dd>
             </div>
             <div>
-              <dt>Enquiries</dt>
-              <dd>Answered by the Biotonic team</dd>
+              <dt>Principal brands</dt>
+              <dd>Zydex · Pidilite · India Glycols</dd>
+            </div>
+            <div>
+              <dt>Serving</dt>
+              <dd>Tiruppur · Erode · Coimbatore</dd>
             </div>
           </dl>
         </div>

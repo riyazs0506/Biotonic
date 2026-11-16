@@ -82,3 +82,32 @@
   gap: var(--space-3);
   margin-top: var(--space-7);
 }
+
+.whatsapp {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-height: 54px;
+  padding: 0 var(--space-6);
+  border: 1px solid rgb(251 250 247 / 0.35);
+  border-radius: var(--radius-pill);
+  color: var(--text-inverse);
+  font-weight: var(--fw-semibold);
+  text-decoration: none;
+  transition: border-color var(--dur-base) var(--ease-out);
+}
+
+.whatsapp svg {
+  color: var(--accent-bright);
+}
+
+.whatsapp:hover {
+  border-color: var(--text-inverse);
+  color: var(--text-inverse);
+}
+
+.whatsapp:focus-visible {
+  box-shadow:
+    0 0 0 2px var(--brand-carbon),
+    0 0 0 4px var(--accent-bright);
+}

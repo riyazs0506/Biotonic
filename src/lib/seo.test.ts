@@ -63,4 +63,22 @@ describe('route metadata', () => {
     expect(normalisePath('/products?q=x')).toBe('/products');
     expect(normalisePath('/')).toBe('/');
   });
+
+  it('describes the founder with Person structured data on the leadership page', () => {
+    const person = getPageMeta('/leadership').jsonLd.find((d) => d['@type'] === 'Person');
+    expect(person).toMatchObject({ name: 'Keerthi Vasan', jobTitle: 'Founder' });
+    expect(JSON.stringify(person)).toContain('Kumaraguru College of Technology');
+  });
+
+  it('links the organisation to its founder, founding year and region', () => {
+    const org = getPageMeta('/').jsonLd.find((d) => d['@type'] === 'Organization');
+    expect(org).toMatchObject({ foundingDate: '2024', founder: { name: 'Keerthi Vasan' } });
+    expect(JSON.stringify(org)).toContain('Tiruppur');
+  });
+
+  it('keeps every product title within search-result length', () => {
+    for (const product of catalogue.products) {
+      expect(getPageMeta(`/products/${product.slug}`).title.length).toBeLessThanOrEqual(65);
+    }
+  });
 });

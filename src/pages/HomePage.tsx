@@ -3,13 +3,18 @@ import { Monogram } from '../components/brand/Monogram';
 import { Hero } from '../components/hero/Hero';
 import { QuoteCta } from '../components/layout/QuoteCta';
 import { ProductCard } from '../components/products/ProductCard';
+import {
+  AudienceCards,
+  AwardList,
+  PrincipalStrip,
+  StatGrid,
+} from '../components/sections/StrategyBlocks';
 import { ButtonLink } from '../components/ui/Button';
 import { Icon } from '../components/ui/Icon';
 import { Section } from '../components/ui/Layout';
 import { company } from '../content/company';
 import { industries } from '../content/industries';
 import { founder } from '../content/leadership';
-import { show } from '../content/pending';
 import { catalogue, categoryCounts, featuredProducts } from '../lib/catalog';
 import { isPublished } from '../lib/publication';
 import { paths } from '../lib/routes';
@@ -18,12 +23,6 @@ import styles from './HomePage.module.css';
 export function HomePage() {
   const counts = categoryCounts();
   const featured = featuredProducts();
-  // `show` returns confirmed content, or demo content in draft builds; nothing otherwise.
-  const capabilities = show(company.capabilities);
-  const founderName = show(founder.name);
-  const founderTitle = show(founder.title);
-  const founderIntro = show(founder.introduction);
-  const industryList = show(industries);
 
   return (
     <>
@@ -37,7 +36,7 @@ export function HomePage() {
             Find the right <em>chemistry</em> for your operation.
           </>
         }
-        intro="Browse the catalogue by category, compare specifications and request a quotation in a few steps."
+        intro="Textile, construction and industrial chemicals from genuine principal brands — with the advice to use them well."
         action={
           <ButtonLink to={paths.products} variant="ghost" icon="arrowRight">
             View the full catalogue
@@ -97,99 +96,124 @@ export function HomePage() {
           <div>
             <p className={styles.introEyebrow}>About Biotonic</p>
             <h2 id="intro-title" className={`display ${styles.introTitle}`}>
-              Trusted at <em>first sight.</em>
+              A chemical partner built on a <em>legacy.</em>
             </h2>
           </div>
           <div className={styles.introBody}>
-            <p>{company.introduction}</p>
+            {company.history.map((p) => (
+              <p key={p}>{p}</p>
+            ))}
             <ButtonLink to={paths.about} variant="secondary" icon="arrowRight">
-              About Biotonic
+              Our story
             </ButtonLink>
           </div>
         </div>
-        <ol className={styles.principles}>
-          {company.principles.map((p, i) => (
-            <li key={p.title} className={styles.principle}>
+        <div className={styles.glance}>
+          <StatGrid stats={company.atAGlance} />
+        </div>
+        <div className={styles.principalRow}>
+          <PrincipalStrip />
+        </div>
+      </section>
+
+      <Section
+        id="why-biotonic"
+        tone="sunken"
+        eyebrow="Why Biotonic"
+        title={
+          <>
+            Genuine brands. Expert advice. A decision-maker <em>on call.</em>
+          </>
+        }
+        intro={company.valueProposition}
+      >
+        <ol className={styles.usps}>
+          {company.usps.map((usp, i) => (
+            <li key={usp.title}>
               <span className={styles.principleIndex}>{String(i + 1).padStart(2, '0')}</span>
-              <h3 className={styles.principleTitle}>{p.title}</h3>
-              <p>{p.body}</p>
+              <h3>{usp.title}</h3>
+              <p>{usp.body}</p>
             </li>
           ))}
         </ol>
-      </section>
+        <p className={styles.priceNote}>
+          <strong>{company.pricePositioning.title}.</strong> {company.pricePositioning.body}
+        </p>
+      </Section>
 
-      {capabilities && (
-        <Section
-          id="capabilities"
-          tone="sunken"
-          eyebrow="Capabilities & quality"
-          title="How we support your supply"
-          action={
-            isPublished('quality') && (
-              <ButtonLink to={paths.quality} variant="ghost" icon="arrowRight">
-                Our quality approach
-              </ButtonLink>
-            )
-          }
-        >
-          <ul className={styles.capabilities}>
-            {capabilities.map((c, i) => (
-              <li key={c.title}>
-                <span className={styles.principleIndex}>{String(i + 1).padStart(2, '0')}</span>
-                <h3>{c.title}</h3>
-                <p>{c.body}</p>
-              </li>
-            ))}
-          </ul>
-        </Section>
-      )}
+      <Section
+        id="who-we-serve"
+        eyebrow="Who we serve"
+        title={
+          <>
+            One partner for every side of the <em>deal.</em>
+          </>
+        }
+        intro="Buyers get the right chemical, dealers get genuine brands to grow with, and principals get a channel partner that sells."
+      >
+        <AudienceCards />
+      </Section>
 
-      {founderName && founderIntro && (
-        <Section id="founder" eyebrow="Leadership" title="The people behind Biotonic">
-          <div className={styles.founder}>
+      <section className={styles.founderBand} aria-labelledby="founder-title">
+        <div className={styles.founderInner}>
+          <div className={styles.founderLead}>
+            <p className={styles.founderEyebrow}>Founder</p>
             <div className={styles.founderCard}>
-              <Monogram name={founderName} />
+              <Monogram name={founder.name} />
               <div>
-                <p className={styles.founderName}>{founderName}</p>
-                {founderTitle && <p className={styles.founderRole}>{founderTitle}</p>}
+                <h2 id="founder-title" className={`display ${styles.founderName}`}>
+                  {founder.name}
+                </h2>
+                <p className={styles.founderRole}>Industrial expert &amp; deal maker</p>
               </div>
             </div>
-            <div className={styles.introBody}>
-              <p className={styles.founderQuote}>{founderIntro}</p>
-              {isPublished('leadership') && (
-                <ButtonLink to={paths.leadership} variant="secondary" icon="arrowRight">
-                  Meet our founder
-                </ButtonLink>
-              )}
-            </div>
-          </div>
-        </Section>
-      )}
-
-      {industryList && (
-        <Section
-          id="industries"
-          tone="sunken"
-          eyebrow="Industries"
-          title="Where our chemistry works"
-          action={
-            isPublished('industries') && (
-              <ButtonLink to={paths.industries} variant="ghost" icon="arrowRight">
-                All industries
+            <blockquote className={`display ${styles.founderQuote}`}>
+              <p>{founder.statement}</p>
+            </blockquote>
+            <p className={styles.founderStory}>{founder.storyAngle}</p>
+            {isPublished('leadership') && (
+              <ButtonLink
+                to={paths.leadership}
+                variant="inverse-outline"
+                icon="arrowRight"
+                className={styles.founderCta}
+              >
+                From the godown floor to founder
               </ButtonLink>
-            )
-          }
-        >
-          <ul className={styles.capabilities}>
-            {industryList.map((industry) => (
-              <li key={industry.slug}>
-                <h3>{industry.name}</h3>
-                <p>{industry.summary}</p>
-              </li>
-            ))}
-          </ul>
-        </Section>
-      )}
+            )}
+          </div>
+          <div className={styles.founderProof}>
+            <p className={styles.founderEyebrow}>Proof that he delivers</p>
+            <AwardList awards={founder.awards} tone="ink" />
+          </div>
+        </div>
+      </section>
+
+      <Section
+        id="industries"
+        tone="sunken"
+        eyebrow="Markets"
+        title="Where our chemistry works"
+        intro="Three markets across the Tiruppur, Erode and Coimbatore belt — every garment, building and factory in the region runs on chemistry."
+        action={
+          isPublished('industries') && (
+            <ButtonLink to={paths.industries} variant="ghost" icon="arrowRight">
+              Markets &amp; partners
+            </ButtonLink>
+          )
+        }
+      >
+        <ul className={styles.markets}>
+          {industries.map((industry, i) => (
+            <li key={industry.slug}>
+              <span className={styles.principleIndex}>{String(i + 1).padStart(2, '0')}</span>
+              <h3>{industry.name}</h3>
+              <p className={styles.marketBuyers}>{industry.buyers}</p>
+              <p>{industry.summary}</p>
+            </li>
+          ))}
+        </ul>
+      </Section>
 
       <QuoteCta />
     </>

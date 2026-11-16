@@ -60,6 +60,16 @@ export function ProductDetailPage() {
             </div>
 
             <aside className={styles.aside} aria-label="Specifications and documents">
+              {product.principal && (
+                <div className={styles.panel}>
+                  <h2 className={styles.panelTitle}>Principal brand</h2>
+                  <p className={styles.principal}>{product.principal}</p>
+                  <p className={styles.muted}>
+                    Genuine, traceable product supplied through Biotonic’s principal partnership.
+                  </p>
+                </div>
+              )}
+
               {product.specifications.length > 0 && (
                 <div className={styles.panel}>
                   <h2 className={styles.panelTitle}>Specifications</h2>

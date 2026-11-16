@@ -23,6 +23,7 @@ export function Footer() {
             <p className={`display ${styles.tagline}`}>
               Chemistry you can trust, <em>at first glance.</em>
             </p>
+            <p className={styles.region}>Serving Tiruppur · Erode · Coimbatore</p>
             <address className={styles.contact}>
               <Confirm
                 value={site.email}

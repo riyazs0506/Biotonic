@@ -1,20 +1,20 @@
 [
   {
-    "slug": "alkalis",
-    "name": "Alkalis & Bases",
-    "description": "Caustic soda, soda ash and other alkalis for neutralisation, cleaning and manufacturing processes.",
+    "slug": "textile-chemicals",
+    "name": "Textile Chemicals",
+    "description": "Printing, dyeing and finishing chemicals for Tiruppur’s processing units and garment exporters.",
     "sample": true
   },
   {
-    "slug": "acids",
-    "name": "Industrial Acids",
-    "description": "Mineral acids for pickling, pH control, cleaning and chemical processing.",
+    "slug": "construction-chemicals",
+    "name": "Construction Chemicals",
+    "description": "Waterproofing, adhesives and repair chemicals for contractors, applicators and builders.",
     "sample": true
   },
   {
-    "slug": "solvents",
-    "name": "Solvents",
-    "description": "High-purity solvents for cleaning, extraction, coatings and formulation.",
+    "slug": "glycols",
+    "name": "Glycols & Industrial Chemicals",
+    "description": "Glycols and performance chemicals for manufacturers, supplied as genuine principal products.",
     "sample": true
   }
 ]

@@ -1,4 +1,4 @@
-import type { Enquiry } from '../src/shared/enquiry';
+import { ROLE_LABELS, type Enquiry } from '../src/shared/enquiry';
 import type { ServerConfig } from './config';
 
 export interface OutgoingMail {
@@ -25,6 +25,7 @@ export function composeEnquiryMail(
   const rows: [string, string | undefined][] = [
     ['Reference', reference],
     ['Type', kind],
+    ['Enquirer', enquiry.role ? ROLE_LABELS[enquiry.role] : undefined],
     ['Name', enquiry.name],
     ['Company', enquiry.company],
     ['Email', enquiry.email],

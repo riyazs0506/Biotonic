@@ -34,26 +34,49 @@ capabilities, legal wording) so the client can review a complete-looking site. A
 `src/content/demo/`, is never shown as "[CLIENT TO CONFIRM]", and is **physically excluded from
 release builds** (verified: no demo text in release HTML, JS or SSR output). See CONTENT-GUIDE.md.
 
+## Confirmed by the Strategy Framework (November 2026)
+
+"Biotonic — Strategy Framework" (Visionary X) supplied these facts, now live in `src/content/`
+and published in release builds:
+
+- Founder **Keerthi Vasan**: biography, career timeline, education, awards, "industrial expert &
+  deal maker" positioning and personal brand statement (marked _draft_ in the deck).
+- Founded **2024**, on the 20+ year legacy of **TMR and Co** (Tiruppur); principal partners
+  **Zydex, Pidilite and India Glycols**.
+- Three markets (textile, construction, industrial chemicals); region (Tiruppur, Erode and
+  Coimbatore belt, then wider Tamil Nadu and South India); market figures with sources.
+- Positioning, value proposition, USPs, price positioning, audiences and "what each side gets",
+  brand idea "The right chemistry. The right deal.", tone of voice.
+
+Not published (internal strategy): SWOT, competitor analysis, KPIs, 90-day rollout, content pillars.
+
+**To confirm with the client**
+
+1. **Founding year:** slides 3, 4 and 7 say 2024; the founder timeline (slide 17) says 2023. The
+   site uses 2024 everywhere.
+2. **Principal names:** the site names Zydex, Pidilite and India Glycols in text (no logos). The
+   strategy itself plans co-branding "with their approval" — confirm principals are happy to be named.
+3. **Personal brand statement** is marked _draft_ in the deck.
+4. **Customer journey** (samples, trials, site visits, stock alerts, dealer programme) comes from
+   the strategy's planned touchpoints — confirm these services are offered today.
+
 ## Blocked on client information
 
 Run `npm run content:check` for the authoritative list. Summary:
 
-| Needed                                                               | Blocks launch?          | Effect until supplied                                             |
-| -------------------------------------------------------------------- | ----------------------- | ----------------------------------------------------------------- |
-| Production domain                                                    | **Yes**                 | Release build refuses to run                                      |
-| Registered legal company name                                        | **Yes**                 | —                                                                 |
-| Public enquiry email                                                 | **Yes**                 | —                                                                 |
-| Privacy Policy & Terms legal approval + missing clauses              | **Yes**                 | —                                                                 |
-| Email provider / SMTP credentials + recipient inbox                  | **Yes** (operationally) | Form returns "temporarily unavailable" (503) — never fake success |
-| Product catalogue (categories, specs, packaging, documents)          | No                      | Catalogue shows "being prepared" + quote CTA                      |
-| Founder name, title, portrait, biography                             | No                      | Leadership page and homepage section unpublished                  |
-| Company history, mission, vision, capabilities, customer approach    | No                      | Those sections hidden                                             |
-| Quality overview, process, certifications, documentation             | No                      | Quality page unpublished                                          |
-| Industries served                                                    | No                      | Industries page unpublished                                       |
-| Technical documents                                                  | No                      | Resources page unpublished                                        |
-| Phone, WhatsApp, address, hours, social links                        | No                      | Hidden                                                            |
-| Vector logo masters (SVG/EPS)                                        | No                      | Current PNGs are high-resolution extractions from the PDF         |
-| Approval of website copy (hero, About introduction, enquiry wording) | Recommended             | Copy avoids factual claims but should be signed off               |
+| Needed                                                  | Blocks launch?          | Effect until supplied                                             |
+| ------------------------------------------------------- | ----------------------- | ----------------------------------------------------------------- |
+| Production domain                                       | **Yes**                 | Release build refuses to run                                      |
+| Registered legal company name                           | **Yes**                 | —                                                                 |
+| Public enquiry email                                    | **Yes**                 | —                                                                 |
+| Privacy Policy & Terms legal approval + missing clauses | **Yes**                 | —                                                                 |
+| Email provider (Resend/SMTP) + recipient inbox          | **Yes** (operationally) | Form returns "temporarily unavailable" (503) — never fake success |
+| Product catalogue (products, specs, packaging, brand)   | No                      | Catalogue shows "being prepared" + quote CTA                      |
+| Founder portrait (photo shoot) and LinkedIn URL         | No                      | Monogram shown; no profile link                                   |
+| Certifications, order documentation (COA/SDS)           | No                      | Those sections hidden                                             |
+| Technical documents                                     | No                      | Resources page unpublished                                        |
+| Phone, WhatsApp, address, hours, social links           | No                      | Hidden (incl. the WhatsApp button)                                |
+| Vector logo masters (SVG/EPS)                           | No                      | Current PNGs are high-resolution extractions from the PDF         |
 
 ## Ownership transfer checklist
 

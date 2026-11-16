@@ -3,10 +3,10 @@ import { expect, hydrated, test } from './fixtures';
 const pages = [
   { path: '/', h1: /Chemistry You Can Trust/ },
   { path: '/products', h1: /Chemical products/ },
-  { path: '/products/caustic-soda-flakes', h1: /Caustic Soda Flakes/ },
-  { path: '/about', h1: /Chemistry you can trust/ },
-  { path: '/leadership', h1: /The person behind/ },
-  { path: '/quality', h1: /Quality, made clear/ },
+  { path: '/products/waterproofing-coating', h1: /Waterproofing Coating/ },
+  { path: '/about', h1: /A chemical partner built on a legacy/ },
+  { path: '/leadership', h1: /From the godown floor to founder/ },
+  { path: '/quality', h1: /Knowledge first/ },
   { path: '/industries', h1: /Chemistry for the way/ },
   { path: '/resources', h1: /Documents and/ },
   { path: '/contact', h1: /Let’s talk/ },
@@ -151,33 +151,33 @@ test.describe('product catalogue', () => {
     const total = await cards.count();
     expect(total).toBeGreaterThan(1);
 
-    await page.getByRole('searchbox', { name: 'Search products' }).fill('Acetone');
+    await page.getByRole('searchbox', { name: 'Search products' }).fill('Diethylene');
     await expect(cards).toHaveCount(1);
-    await expect(page).toHaveURL(/\?q=Acetone/);
+    await expect(page).toHaveURL(/\?q=Diethylene/);
 
     await page.getByRole('searchbox', { name: 'Search products' }).fill('zzzz');
     await expect(page.getByText('No products match your search')).toBeVisible();
     await page.getByRole('button', { name: 'Clear search and filters' }).click();
     await expect(cards).toHaveCount(total);
 
-    await page.getByText('Industrial Acids').first().click();
-    await expect(page).toHaveURL(/category=acids/);
+    await page.getByText('Construction Chemicals').first().click();
+    await expect(page).toHaveURL(/category=construction-chemicals/);
     await expect(cards).toHaveCount(2);
   });
 
   test('category links from the homepage pre-filter the catalogue', async ({ page }) => {
-    await page.goto('/products?category=solvents');
+    await page.goto('/products?category=glycols');
     await hydrated(page);
     await expect(page.getByRole('article')).toHaveCount(2);
-    await expect(page.getByRole('radio', { name: /Solvents/ })).toBeChecked();
+    await expect(page.getByRole('radio', { name: /Glycols/ })).toBeChecked();
   });
 
   test('product page links to a prefilled quotation request', async ({ page }) => {
-    await page.goto('/products/hydrochloric-acid');
+    await page.goto('/products/pigment-printing-emulsion');
     await hydrated(page);
     await page.getByRole('link', { name: 'Request a quote for this product' }).click();
-    await expect(page).toHaveURL('/request-a-quote?product=hydrochloric-acid');
-    await expect(page.getByLabel(/Product of interest/)).toHaveValue('Hydrochloric Acid 33%');
+    await expect(page).toHaveURL('/request-a-quote?product=pigment-printing-emulsion');
+    await expect(page.getByLabel(/Product of interest/)).toHaveValue('Pigment Printing Emulsion');
   });
 });
 

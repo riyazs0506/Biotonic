@@ -30,9 +30,9 @@ describe('routing', () => {
   it.each([
     ['/', /Chemistry You Can/],
     ['/products', /Chemical products/],
-    ['/about', /Chemistry you can trust/],
-    ['/leadership', /The person behind/],
-    ['/quality', /Quality, made/],
+    ['/about', /A chemical partner built on a legacy/],
+    ['/leadership', /From the godown floor/],
+    ['/quality', /Knowledge first/],
     ['/industries', /Chemistry for the way/],
     ['/resources', /Documents and/],
     ['/contact', /Let’s talk/],
@@ -86,7 +86,7 @@ describe('routing', () => {
     renderAt('/');
     expect(screen.queryByText(/CLIENT TO CONFIRM/)).not.toBeInTheDocument();
     expect(screen.queryByText(/^Sample$/)).not.toBeInTheDocument();
-    expect(screen.getByRole('heading', { name: 'How we support your supply' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: /A decision-maker on call/ })).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: 'Where our chemistry works' })).toBeInTheDocument();
   });
 });
@@ -99,7 +99,7 @@ describe('product catalogue', () => {
     expect(list).toHaveLength(catalogue.products.length);
 
     const search = screen.getByRole('searchbox', { name: 'Search products' });
-    await user.type(search, 'Acetone');
+    await user.type(search, 'Diethylene');
     expect(screen.getAllByRole('article')).toHaveLength(1);
 
     await user.clear(search);
@@ -168,6 +168,30 @@ describe('header navigation', () => {
       'aria-expanded',
       'false',
     );
-    expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(/Chemistry you can trust/);
+    expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(
+      /A chemical partner built on a legacy/,
+    );
+  });
+
+  describe('strategy-driven content', () => {
+    it('"Become a dealer" links preselect the enquirer role on the contact form', async () => {
+      renderAt('/contact?role=dealer');
+      expect(await screen.findByLabelText(/I am a/)).toHaveValue('dealer');
+    });
+
+    it('offers a WhatsApp quick-quote link', () => {
+      renderAt('/');
+      const links = screen.getAllByRole('link', { name: /WhatsApp/ });
+      expect(links[0]).toHaveAttribute(
+        'href',
+        expect.stringMatching(/^https:\/\/wa\.me\/\d+\?text=/),
+      );
+    });
+
+    it('presents the founder and the principal brands on the homepage', () => {
+      renderAt('/');
+      expect(screen.getByRole('heading', { name: 'Keerthi Vasan' })).toBeInTheDocument();
+      expect(screen.getAllByText('Pidilite Industries').length).toBeGreaterThan(0);
+    });
   });
 });

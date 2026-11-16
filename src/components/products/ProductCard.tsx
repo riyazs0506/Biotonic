@@ -18,6 +18,7 @@ export function ProductCard({
     <article className={styles.card}>
       <div className={styles.meta}>
         <span className={styles.category}>{category?.name}</span>
+        {product.principal && <span className={styles.principal}>{product.principal}</span>}
       </div>
       <Heading className={styles.title}>
         <Link to={paths.product(product.slug)} className={styles.link}>
