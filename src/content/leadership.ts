@@ -10,11 +10,10 @@ export interface ProfileLink {
 }
 
 export interface Portrait {
-  /** Path under /public, e.g. "/images/leadership/founder.webp". */
-  src: string;
-  alt: string;
-  width: number;
-  height: number;
+  src: '/images/founder/biotonic-founder.png',
+  alt: 'Biotonic Founder – Professional Portrait',
+  width: 1024,
+  height: 1536,
 }
 
 export interface TimelineStep {
