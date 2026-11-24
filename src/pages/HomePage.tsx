@@ -1,6 +1,5 @@
 import { Monogram } from '../components/brand/Monogram';
 import { Hero } from '../components/hero/Hero';
-import { ProductShowcase } from '../components/hero/ProductShowcase';
 import { QuoteCta } from '../components/layout/QuoteCta';
 import { ProductCard } from '../components/products/ProductCard';
 import {
@@ -26,36 +25,6 @@ export function HomePage() {
     <>
       <Hero />
 
-      <Section
-        id="product-finder"
-        eyebrow="Product finder"
-        title={
-          <>
-            Find the right <em>chemistry</em> for your operation.
-          </>
-        }
-        intro="Textile, construction and industrial chemicals from genuine principal brands — with the advice to use them well."
-        action={
-          <ButtonLink to={paths.products} variant="ghost" icon="arrowRight">
-            View the full catalogue
-          </ButtonLink>
-        }
-      >
-        <div className={styles.finder}>
-          <ProductShowcase />
-          <ul className={styles.finderPoints}>
-            {company.usps.slice(0, 3).map((usp, i) => (
-              <li key={usp.title}>
-                <span className={styles.principleIndex}>{String(i + 1).padStart(2, '0')}</span>
-                <span>
-                  <strong>{usp.title}</strong> {usp.body}
-                </span>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </Section>
-
       {featured.length > 0 && (
         <Section
           id="featured"
@@ -63,7 +32,7 @@ export function HomePage() {
           eyebrow="Featured products"
           title="Selected from the catalogue"
         >
-          <ul className={styles.productGrid}>
+          <ul className={`${styles.productGrid} swipe-row`}>
             {featured.map((product) => (
               <li key={product.slug}>
                 <ProductCard product={product} />

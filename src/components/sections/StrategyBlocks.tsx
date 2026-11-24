@@ -43,7 +43,7 @@ const audienceAction: Record<string, { label: string; to: string }> = {
 export function AudienceCards({ headingLevel = 3 }: { headingLevel?: 2 | 3 }) {
   const Heading = `h${headingLevel}` as const;
   return (
-    <ul className={styles.audiences}>
+    <ul className={`${styles.audiences} swipe-row`}>
       {company.audiences.map((audience) => {
         const action = audienceAction[audience.slug];
         return (

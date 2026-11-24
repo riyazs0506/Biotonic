@@ -408,3 +408,52 @@
   font-weight: var(--fw-medium);
   line-height: 1.2;
 }
+
+/* ---------- Phones: two-up stats and awards, tighter cards ---------- */
+@media (max-width: 639px) {
+  .stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-4);
+  }
+
+  .stat {
+    padding-top: var(--space-3);
+  }
+
+  .statValue {
+    font-size: 2.25rem;
+  }
+
+  .principalList li {
+    font-size: var(--fs-md);
+  }
+
+  .principalList li + li::before {
+    margin-right: var(--space-4);
+  }
+
+  .principalList {
+    gap: var(--space-1) var(--space-4);
+  }
+
+  .audience {
+    padding: var(--space-5);
+  }
+
+  .awards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-2);
+  }
+
+  .award {
+    padding: var(--space-4);
+  }
+
+  .journeyStep {
+    padding: var(--space-4) var(--space-5);
+  }
+
+  .step {
+    padding-bottom: var(--space-5);
+  }
+}

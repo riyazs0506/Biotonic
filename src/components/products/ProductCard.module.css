@@ -133,3 +133,24 @@
   font-size: var(--fs-sm);
   font-weight: var(--fw-semibold);
 }
+
+/* Phones: tighter card; the full summary is on the product page. */
+@media (max-width: 639px) {
+  .card {
+    gap: var(--space-2);
+    padding: var(--space-5);
+  }
+
+  .summary {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+  }
+
+  .specs,
+  .more {
+    padding-top: var(--space-3);
+  }
+}

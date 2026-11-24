@@ -370,3 +370,40 @@
 .spaced {
   margin-top: var(--space-9);
 }
+
+/* ---------- Phones: tighter blocks, smaller portrait ---------- */
+@media (max-width: 639px) {
+  .body {
+    padding-top: var(--space-6);
+  }
+
+  .block + .block {
+    margin-top: var(--space-7);
+    padding-top: var(--space-6);
+  }
+
+  .card {
+    padding: var(--space-5);
+  }
+
+  .statement {
+    padding: var(--space-5);
+  }
+
+  .portrait {
+    max-width: 260px;
+  }
+
+  .formPanel {
+    padding: var(--space-5);
+  }
+
+  .inkPanel {
+    margin-top: var(--space-6);
+    padding: var(--space-6) var(--space-5);
+  }
+
+  .spaced {
+    margin-top: var(--space-7);
+  }
+}

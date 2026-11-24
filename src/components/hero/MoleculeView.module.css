@@ -1,0 +1,362 @@
+.figure {
+  display: grid;
+  gap: var(--space-4);
+  width: 100%;
+  margin: 0;
+}
+
+/* ---------- The instrument: a square dial with the molecule floating in the middle ---------- */
+.instrument {
+  position: relative;
+  width: 100%;
+  max-width: 540px;
+  aspect-ratio: 1;
+  margin-inline: auto;
+}
+
+/* Glass plate with a faint crosshair. */
+.plate {
+  position: absolute;
+  inset: 6%;
+  border-radius: 50%;
+  background:
+    linear-gradient(
+      to right,
+      transparent calc(50% - 0.5px),
+      rgb(14 16 22 / 0.05) calc(50% - 0.5px),
+      rgb(14 16 22 / 0.05) calc(50% + 0.5px),
+      transparent calc(50% + 0.5px)
+    ),
+    linear-gradient(
+      to bottom,
+      transparent calc(50% - 0.5px),
+      rgb(14 16 22 / 0.05) calc(50% - 0.5px),
+      rgb(14 16 22 / 0.05) calc(50% + 0.5px),
+      transparent calc(50% + 0.5px)
+    ),
+    radial-gradient(
+      circle at 50% 42%,
+      rgb(255 255 255 / 0.95) 0%,
+      rgb(255 255 255 / 0.6) 46%,
+      rgb(255 255 255 / 0) 72%
+    );
+  box-shadow:
+    inset 0 0 0 1px rgb(16 146 85 / 0.18),
+    inset 0 -24px 48px rgb(16 146 85 / 0.05),
+    0 30px 60px -40px rgb(14 16 22 / 0.25);
+}
+
+/* Measurement ticks around the rim: fine every 5°, accented every 30°. */
+.ticks {
+  position: absolute;
+  inset: 6%;
+  border-radius: 50%;
+}
+
+.ticks::before,
+.ticks::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+}
+
+.ticks::before {
+  background: repeating-conic-gradient(rgb(14 16 22 / 0.22) 0deg 0.35deg, transparent 0.35deg 5deg);
+  mask-image: radial-gradient(farthest-side, transparent calc(100% - 7px), #000 calc(100% - 6px));
+  -webkit-mask-image: radial-gradient(
+    farthest-side,
+    transparent calc(100% - 7px),
+    #000 calc(100% - 6px)
+  );
+}
+
+.ticks::after {
+  background: repeating-conic-gradient(rgb(16 146 85 / 0.7) 0deg 0.6deg, transparent 0.6deg 30deg);
+  mask-image: radial-gradient(farthest-side, transparent calc(100% - 13px), #000 calc(100% - 12px));
+  -webkit-mask-image: radial-gradient(
+    farthest-side,
+    transparent calc(100% - 13px),
+    #000 calc(100% - 12px)
+  );
+}
+
+/* Inner orbit with a satellite point travelling around it. */
+.orbit {
+  position: absolute;
+  inset: 15%;
+  border: 1px dashed rgb(14 16 22 / 0.13);
+  border-radius: 50%;
+}
+
+.orbit::after {
+  content: '';
+  position: absolute;
+  top: -4px;
+  left: calc(50% - 4px);
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 5px rgb(33 191 117 / 0.16);
+}
+
+/* One sweep of the dial each time a new molecule forms. */
+.scan {
+  position: absolute;
+  inset: 6%;
+  border-radius: 50%;
+  background: conic-gradient(
+    from 0deg,
+    rgb(33 191 117 / 0) 0deg,
+    rgb(33 191 117 / 0) 290deg,
+    rgb(33 191 117 / 0.24) 359deg,
+    rgb(33 191 117 / 0) 360deg
+  );
+  opacity: 0;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .orbit {
+    animation: spin 48s linear infinite;
+  }
+
+  .ticks {
+    animation: spin 240s linear infinite reverse;
+  }
+
+  .scan {
+    animation: sweep 1.6s var(--ease-out) both;
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes sweep {
+  0% {
+    opacity: 1;
+    transform: rotate(0deg);
+  }
+
+  75% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    transform: rotate(360deg);
+  }
+}
+
+.canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  height: 100%;
+  cursor: grab;
+  touch-action: pan-y;
+}
+
+.canvas:active {
+  cursor: grabbing;
+}
+
+/* ---------- Readouts in the corners ---------- */
+.corner {
+  position: absolute;
+  z-index: 2;
+  display: grid;
+  gap: 2px;
+  margin: 0;
+  pointer-events: none;
+}
+
+.topLeft {
+  top: 0;
+  left: 0;
+}
+
+.topRight {
+  top: 0;
+  right: 0;
+  text-align: right;
+}
+
+.bottomLeft {
+  bottom: 0;
+  left: 0;
+}
+
+.bottomRight {
+  right: 0;
+  bottom: 0;
+  text-align: right;
+}
+
+.kicker {
+  color: var(--text-muted);
+  font-size: 0.625rem;
+  font-weight: var(--fw-semibold);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.value {
+  color: var(--text-strong);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-medium);
+  font-variant-numeric: tabular-nums;
+}
+
+.legend {
+  display: flex;
+  gap: var(--space-3);
+  padding: 0;
+  list-style: none;
+  color: var(--text-strong);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-semibold);
+}
+
+.legend li {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  box-shadow: 0 1px 2px rgb(14 16 22 / 0.2);
+}
+
+.dot[data-el='C'] {
+  background: radial-gradient(circle at 35% 30%, #7a8290, #1d2129 70%);
+}
+
+.dot[data-el='H'] {
+  background: radial-gradient(circle at 35% 30%, #fff, #cfcabe 70%);
+}
+
+.dot[data-el='O'] {
+  background: radial-gradient(circle at 35% 30%, #86f2bf, #0f8a50 70%);
+}
+
+.dot[data-el='Si'] {
+  background: radial-gradient(circle at 35% 30%, #c9d1db, #46505d 70%);
+}
+
+/* "Drag to rotate", sitting on the rim; fades once the visitor has tried it. */
+.hint {
+  position: absolute;
+  bottom: 3%;
+  left: 50%;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border: 1px solid var(--line-subtle);
+  border-radius: var(--radius-pill);
+  background: rgb(255 254 251 / 0.92);
+  box-shadow: var(--shadow-sm);
+  color: var(--text-muted);
+  font-size: 0.6875rem;
+  font-weight: var(--fw-medium);
+  white-space: nowrap;
+  pointer-events: none;
+  transform: translateX(-50%);
+  transition: opacity 600ms var(--ease-out);
+}
+
+.hintDone {
+  opacity: 0;
+}
+
+/* ---------- Caption ---------- */
+.caption {
+  display: grid;
+  gap: var(--space-1);
+  max-width: 540px;
+  width: 100%;
+  margin-inline: auto;
+  padding-left: var(--space-4);
+  border-left: 2px solid var(--accent);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .caption {
+    animation: caption-in 700ms var(--ease-out) 200ms backwards;
+  }
+}
+
+@keyframes caption-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+}
+
+.label {
+  color: var(--accent-ink);
+  font-size: 0.6875rem;
+  font-weight: var(--fw-semibold);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.name {
+  color: var(--text-strong);
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: var(--fw-medium);
+  line-height: 1.2;
+}
+
+.formula {
+  display: inline-block;
+  color: var(--accent-ink);
+  font-family: var(--font-sans);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-semibold);
+  letter-spacing: 0.02em;
+}
+
+.role {
+  color: var(--text-muted);
+  font-size: var(--fs-sm);
+  line-height: 1.45;
+}
+
+@media (max-width: 639px) {
+  .instrument {
+    max-width: 330px;
+  }
+}
+
+@media (max-width: 479px) {
+  .value,
+  .legend {
+    font-size: var(--fs-xs);
+  }
+
+  .legend {
+    gap: var(--space-2);
+  }
+
+  .hint {
+    bottom: 7%;
+  }
+
+  .name {
+    font-size: 1.3rem;
+  }
+}

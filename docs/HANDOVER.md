@@ -6,9 +6,31 @@
 - All 13 routes: Home, Products, Product detail, About, Leadership, Quality, Industries,
   Resources, Contact, Request a Quote, Privacy Policy, Terms, branded 404.
 - Design system (tokens in `src/styles/tokens.css`, reusable components in `src/components/ui`).
-- B2B hero with a **realistic animated 3D model** of the packs Biotonic supplies (steel drum,
-  HDPE jerrycan, pail, each labelled with the real logo), plus a **product finder** section below
-  it (tabs for the three markets listing catalogue products, brand, pack sizes, quote links).
+- **Hero:** the promise, two next steps ("Request a quote", "Explore products"), the trust strip
+  and the molecule viewer. The quote form still accepts pre-filled requirement links
+  (`/request-a-quote?product=…&market=…&qty=…&freq=…`, option keys only, parsed by
+  `src/lib/requirement.ts`), for use in campaigns or WhatsApp replies.
+- **Molecule viewer (hero visual):** a lab-instrument dial — measurement rings, an orbiting
+  marker and readouts (market, molar mass, elements, atom/bond count) — with a ball-and-stick
+  molecule for the chosen market: acetic acid (textile), a water-repellent silane (construction),
+  ethylene glycol (industrial). It assembles from a cloud of atoms, rotates, follows the pointer
+  and can be dragged to spin (with inertia). When the market changes, it bursts apart and
+  re-forms as the next molecule while a scan sweeps the dial, with a plain-words caption.
+  Chips below the dial (Textile · Construction · Industrial) pick the market. Until the visitor
+  picks one, the viewer tours the markets every 6.5 s (a progress bar fills the active chip). The
+  tour pauses on hover, keyboard focus or off-screen, stops for good on the first pick, and never
+  runs under reduced motion.
+  It is a light 2D canvas with no 3D engine or images, so it runs the same on phones. It pauses
+  off-screen and, under reduced motion, shows a still frame that can still be dragged. Molecules
+  are in `src/components/hero/molecules.ts`: real formulas and bond geometry, with molar mass
+  computed from IUPAC atomic weights, all checked by unit tests. They illustrate each market's
+  chemistry and are not claims about what a product contains.
+- **Phone layout (≤ 639 px):** a tighter spacing and type scale (overrides in
+  `src/styles/tokens.css`), product and audience cards as swipeable rows with the next card
+  peeking in (`.swipe-row` in `src/styles/global.css`), two-up stats and awards, and a two-column
+  footer. Pages are 16–36% shorter on phones (25% across all pages; home 12,932 → 8,224 px).
+  Tablets and laptops are unchanged: every laptop page measured the same height before and after,
+  apart from the home hero.
 - Secure enquiry/quotation service with email delivery (`server/`).
 - Prerendering, sitemap, robots, structured data, security headers, real 404s.
 - Automated tests (unit, component, API, end-to-end, accessibility) and CI-ready `npm run verify`.
@@ -31,14 +53,9 @@
   `brand-source/previous-logo-2026-10/`. Note: the supplied artwork's green (~#08A337) and black
   differ slightly from the brand-guide palette (#109255 / #0E1016) — confirm which is current, and
   request vector (SVG) masters and an official icon.
-- **Hero 3D model:** three.js / React Three Fiber, procedural geometry (no model downloads) and
-  canvas-drawn labels. It is code-split and loaded only after hydration on desktop-class devices
-  with WebGL, motion allowed, no data saver and ≥ 4 GB memory; everyone else sees the poster
-  (`public/images/hero/products-poster.webp`, a frame of the same scene, 29 KB) with a CSS float.
-  Rendering pauses off-screen. Measured: desktop Lighthouse 100 (TBT 10 ms), mobile 95 (TBT 0 ms).
-  Loading the 3D chunk on phones dropped mobile to 75, which is why phones get the poster.
-  Regenerate the poster after changing the scene: `npm run build && npm run start:local`, then
-  `npm run hero:poster`.
+- **Hero performance:** the earlier 3D product model (three.js) was removed in favour of the
+  molecule viewer; desktop page weight fell from 581 KiB to 273 KiB. Measured: desktop
+  Lighthouse 100, mobile 96 (TBT 0 ms, CLS 0).
 
 ## Demo content
 

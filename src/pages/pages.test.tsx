@@ -69,17 +69,34 @@ describe('routing', () => {
     expect(screen.getByText(/couldn’t find that product/)).toBeInTheDocument();
   });
 
-  it('hero CTAs point to the catalogue and the quote form', () => {
+  it('hero CTAs point to the quote form and the catalogue', () => {
     renderAt('/');
     const hero = screen.getByRole('region', { name: /Chemistry You Can/ });
-    expect(within(hero).getByRole('link', { name: /Explore Products/ })).toHaveAttribute(
-      'href',
-      '/products',
-    );
-    expect(within(hero).getByRole('link', { name: /Discuss Your Requirements/ })).toHaveAttribute(
+    expect(within(hero).getByRole('link', { name: 'Request a quote' })).toHaveAttribute(
       'href',
       '/request-a-quote',
     );
+    expect(within(hero).getByRole('link', { name: 'Explore products' })).toHaveAttribute(
+      'href',
+      '/products',
+    );
+    expect(within(hero).queryByRole('form')).not.toBeInTheDocument();
+  });
+
+  it('hero market chips switch the molecule viewer', async () => {
+    const user = userEvent.setup();
+    renderAt('/');
+    const chips = screen.getByRole('group', { name: /chemistry of a market/ });
+    const textile = within(chips).getByRole('button', { name: 'Textile' });
+    const construction = within(chips).getByRole('button', { name: 'Construction' });
+    expect(textile).toHaveAttribute('aria-pressed', 'true');
+    expect(screen.getByText('Acetic acid')).toBeInTheDocument();
+
+    await user.click(construction);
+    expect(construction).toHaveAttribute('aria-pressed', 'true');
+    expect(textile).toHaveAttribute('aria-pressed', 'false');
+    expect(screen.getByText('Methyltrimethoxysilane')).toBeInTheDocument();
+    expect(screen.getByText('136.22 g/mol')).toBeInTheDocument();
   });
 
   it('draft builds show demo content and never placeholder markers', () => {
@@ -188,34 +205,15 @@ describe('header navigation', () => {
       );
     });
 
-    it("hero product finder shows each market's products with quote links", async () => {
-      const user = userEvent.setup();
-      renderAt('/');
-      const tablist = screen.getByRole('tablist', { name: 'Genuine brands for your process' });
-      const tabs = within(tablist).getAllByRole('tab');
-      expect(tabs.map((t) => t.textContent)).toEqual([
-        expect.stringContaining('Textile processing'),
-        expect.stringContaining('Construction'),
-        expect.stringContaining('Industrial chemicals'),
-      ]);
-      expect(tabs[0]).toHaveAttribute('aria-selected', 'true');
-      const panel = screen.getByRole('tabpanel');
-      expect(
-        within(panel).getByRole('link', { name: 'Pigment Printing Emulsion' }),
-      ).toHaveAttribute('href', '/products/pigment-printing-emulsion');
-
-      await user.click(tabs[2]!);
-      expect(tabs[2]).toHaveAttribute('aria-selected', 'true');
-      expect(
-        within(screen.getByRole('tabpanel')).getByRole('link', {
-          name: 'Get a quote for Monoethylene Glycol (MEG)',
-        }),
-      ).toHaveAttribute('href', '/request-a-quote?product=monoethylene-glycol');
-
-      // Keyboard: arrow keys move between tabs (WAI-ARIA tabs pattern).
-      await user.keyboard('{ArrowRight}');
-      expect(tabs[0]).toHaveFocus();
-      expect(tabs[0]).toHaveAttribute('aria-selected', 'true');
+    it('quote form is pre-filled from a requirement link', async () => {
+      renderAt(
+        '/request-a-quote?product=monoethylene-glycol&market=industrial&qty=500kg-1t&freq=weekly',
+      );
+      expect(await screen.findByLabelText(/Requirements/)).toHaveValue(
+        "I'm buying for manufacturing and need Monoethylene Glycol (MEG), about 500 kg – 1 tonne every week.",
+      );
+      expect(screen.getByLabelText(/Quantity/)).toHaveValue('500 kg – 1 tonne');
+      expect(screen.getByLabelText(/Product of interest/)).toHaveValue('Monoethylene Glycol (MEG)');
     });
 
     it('presents the founder and the principal brands on the homepage', () => {

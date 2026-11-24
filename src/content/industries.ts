@@ -9,6 +9,10 @@ export interface Industry {
   name: string;
   /** Who buys, in the strategy's words. */
   buyers: string;
+  /** How a buyer describes themselves in the hero sentence: "I'm buying for …". */
+  buyerPhrase: string;
+  /** Broad product families offered in the hero sentence when the catalogue has no products. */
+  needs: string[];
   summary: string;
   /** Product slugs relevant to this market (missing products are skipped). */
   productSlugs: string[];
@@ -19,6 +23,8 @@ export const industries: Industry[] = [
     slug: 'textile',
     name: 'Textile processing',
     buyers: 'Dyeing, printing and processing units · garment exporters',
+    buyerPhrase: 'a textile processing unit',
+    needs: ['dyeing & printing chemicals', 'processing & finishing chemicals'],
     summary:
       'Tiruppur’s knitwear cluster runs on chemistry. With ZDHC and zero-liquid-discharge requirements rising, processors need the right chemical used the right way — advice, not just supply.',
     productSlugs: ['pigment-printing-emulsion', 'textile-softener'],
@@ -27,6 +33,8 @@ export const industries: Industry[] = [
     slug: 'construction',
     name: 'Construction',
     buyers: 'Contractors · applicators · builders',
+    buyerPhrase: 'construction projects',
+    needs: ['construction chemicals'],
     summary:
       'Construction chemicals from leading principal brands, with application know-how and site support so every job is done right first time.',
     productSlugs: ['waterproofing-coating', 'tile-adhesive'],
@@ -35,6 +43,8 @@ export const industries: Industry[] = [
     slug: 'industrial',
     name: 'Industrial chemicals',
     buyers: 'Manufacturers using glycols and performance chemicals',
+    buyerPhrase: 'manufacturing',
+    needs: ['glycols', 'performance chemicals'],
     summary:
       'Glycols and performance chemicals as genuine, traceable principal products, from stock you can plan production around.',
     productSlugs: ['monoethylene-glycol', 'diethylene-glycol'],

@@ -1,60 +1,76 @@
-.root {
-  position: relative;
+.frame {
   width: 100%;
-  max-width: 600px;
-  aspect-ratio: 1120 / 960;
+  max-width: 560px;
   margin-inline: auto;
 }
 
-.glow {
-  position: absolute;
-  inset: 6% 4% 12%;
-  border-radius: 50%;
-  background:
-    radial-gradient(closest-side at 50% 58%, rgb(33 191 117 / 0.2), transparent 72%),
-    radial-gradient(closest-side at 52% 40%, rgb(255 255 255 / 0.95), transparent 80%);
-  filter: blur(12px);
+/* ---------- Market chips ---------- */
+.markets {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: var(--space-2);
 }
 
-.poster,
-.canvas {
+.chip {
+  position: relative;
+  overflow: hidden;
+  min-height: 40px;
+  padding: 0 var(--space-4);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-pill);
+  background: rgb(255 254 251 / 0.85);
+  color: var(--text-body);
+  font: inherit;
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-medium);
+  cursor: pointer;
+  transition:
+    background var(--dur-fast) var(--ease-out),
+    border-color var(--dur-fast) var(--ease-out),
+    color var(--dur-fast) var(--ease-out);
+}
+
+.chip:hover {
+  border-color: var(--accent);
+  color: var(--accent-ink);
+}
+
+.chip:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+.chip[aria-pressed='true'] {
+  border-color: var(--accent-ink);
+  background: var(--accent-ink);
+  color: #fff;
+}
+
+/* The tour's timer: when this bar finishes, the next market is shown. */
+.progress {
   position: absolute;
-  inset: 0;
+  left: 0;
+  bottom: 0;
   width: 100%;
-  height: 100%;
+  height: 3px;
+  background: rgb(255 255 255 / 0.75);
+  transform-origin: left;
+  transform: scaleX(0);
 }
 
-.poster {
-  object-fit: contain;
-  transition: opacity 700ms var(--ease-out);
-}
-
-/* Lightweight motion for the static poster (phones, tablets, no-WebGL). */
 @media (prefers-reduced-motion: no-preference) {
-  .poster {
-    animation: float 7s var(--ease-in-out) infinite;
+  .progress {
+    animation: tour 6.5s linear forwards;
   }
 }
 
-@keyframes float {
-  0%,
-  100% {
-    transform: translateY(0);
+.paused {
+  animation-play-state: paused;
+}
+
+@keyframes tour {
+  to {
+    transform: scaleX(1);
   }
-  50% {
-    transform: translateY(-8px);
-  }
-}
-
-.canvas {
-  opacity: 0;
-  transition: opacity 700ms var(--ease-out);
-}
-
-.shown {
-  opacity: 1;
-}
-
-.hidden {
-  opacity: 0;
 }

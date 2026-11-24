@@ -121,6 +121,30 @@
   --z-skip: 100;
 }
 
+/*
+ * Phones: a tighter vertical rhythm and type scale, so pages need far less scrolling.
+ * Tablets, laptops and desktops are unaffected.
+ */
+@media (max-width: 639px) {
+  :root {
+    --fs-md: 1.0625rem;
+    --fs-lg: 1.1875rem;
+    --fs-xl: 1.5rem;
+    --fs-2xl: 2rem;
+    --fs-display: 2.5rem;
+    --lh-body: 1.6;
+
+    --space-6: 1.5rem;
+    --space-7: 2rem;
+    --space-8: 2.5rem;
+    --space-9: 3rem;
+    --space-10: 4rem;
+    --section-y: 3rem;
+
+    --header-h: 64px;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   :root {
     --dur-fast: 0ms;

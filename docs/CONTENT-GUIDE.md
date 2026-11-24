@@ -46,13 +46,15 @@ Edit `src/content/catalogue/categories.json` and `products.json` (empty until th
 
 - `slug`: lowercase-with-hyphens; becomes the URL `/products/<slug>`. Don't change it after launch (it breaks links/SEO).
 - Up to 3 products with `"featured": true` appear on the homepage.
-- **Hero product finder:** each market tab (Textile / Construction / Industrial) lists the products
-  named in that market's `productSlugs` in `src/content/industries.ts` (up to 4, then "+N more").
-  Add a product's slug there to show it in the hero.
+- **Hero market chips:** one chip per market in `src/content/industries.ts`, labelled with the
+  first word of its `name` ("Textile processing" → "Textile"). Each market's molecule is set in
+  `src/components/hero/molecules.ts`.
+- **Pre-filled quote links** (`/request-a-quote?product=…&market=…`) use each market's
+  `productSlugs`, `needs` and `buyerPhrase` to write the requirement, e.g. "I'm buying for a
+  textile processing unit and need …".
 - **Principal brand:** set `"principal": "Pidilite Industries"` to show the brand badge.
 - **Product photo (optional):** add `"image": { "src": "/images/products/<file>.webp", "alt": "…" }`
-  and put the file in `public/images/products/`. Without a photo, a drum / carboy / pail / bag
-  drawing is chosen from the `packaging` text.
+  and put the file in `public/images/products/` (reserved for product listings).
 - When the real catalogue is entered, delete `src/content/demo/catalogue-*.json` entries (or leave them — release builds never include them).
 - Put PDFs in `public/resources/` and reference them as `/resources/<file>.pdf`.
 - Run `npm run content:check` — it validates every field and cross-reference.

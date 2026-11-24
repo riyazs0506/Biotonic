@@ -131,7 +131,7 @@ export function ProductDetailPage() {
           eyebrow="Related products"
           title={`More in ${category?.name ?? 'this category'}`}
         >
-          <ul className={styles.related}>
+          <ul className={`${styles.related} swipe-row`}>
             {related.map((p) => (
               <li key={p.slug}>
                 <ProductCard product={p} />

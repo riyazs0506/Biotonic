@@ -6,6 +6,7 @@ import { Container } from '../components/ui/Layout';
 import { Confirm } from '../components/ui/Pending';
 import { geography } from '../content/industries';
 import { site } from '../content/site';
+import { parseRequirement } from '../lib/requirement';
 import { whatsappHref } from '../lib/whatsapp';
 import { paths } from '../lib/routes';
 import { getPageMeta } from '../lib/seo';
@@ -151,6 +152,8 @@ export function RequestQuotePage() {
   const hydrated = useHydrated();
   const [params] = useSearchParams();
   const product = hydrated ? (params.get('product') ?? undefined) : undefined;
+  // A requirement composed in the hero sentence (option keys only — see lib/requirement).
+  const composed = hydrated ? parseRequirement(params) : {};
 
   return (
     <>
@@ -179,6 +182,8 @@ export function RequestQuotePage() {
                 key={hydrated ? 'client' : 'server'}
                 kind="quote"
                 defaultProduct={product}
+                defaultMessage={composed.message}
+                defaultQuantity={composed.quantity}
               />
             </section>
             <aside className={styles.sidebar} aria-label="Quotation guidance">

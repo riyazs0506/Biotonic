@@ -93,7 +93,10 @@ test.describe('navigation', () => {
   test('primary navigation and CTAs reach their destinations', async ({ page, isMobile }) => {
     await page.goto('/');
     await hydrated(page);
-    await page.getByRole('link', { name: 'Explore Products' }).click();
+    await page
+      .getByRole('region', { name: /Chemistry You Can/ })
+      .getByRole('link', { name: 'Explore products' })
+      .click();
     await expect(page).toHaveURL('/products');
     await expect(page).toHaveTitle(/Chemical Product Catalogue/);
 
@@ -224,44 +227,127 @@ test.describe('security', () => {
   });
 });
 
-test.describe('3D hero model', () => {
-  test('loads over the poster and becomes ready', async ({ page, isMobile }) => {
-    test.skip(isMobile, 'covered on desktop');
-    await page.goto('/');
-    await expect(page.locator('img[src="/images/hero/products-poster.webp"]')).toBeVisible();
-    await expect(page.locator('[data-scene-ready="true"] canvas')).toBeVisible({ timeout: 30_000 });
-  });
-
-  test('is not downloaded for reduced-motion visitors, who see the poster', async ({ page }) => {
-    await page.emulateMedia({ reducedMotion: 'reduce' });
-    const sceneRequests: string[] = [];
-    page.on('request', (r) => {
-      if (r.url().includes('ProductScene')) sceneRequests.push(r.url());
-    });
-    await page.goto('/');
-    await hydrated(page);
-    await page.waitForTimeout(2500);
-    await expect(page.locator('img[src="/images/hero/products-poster.webp"]')).toBeVisible();
-    await expect(page.locator('canvas')).toHaveCount(0);
-    expect(sceneRequests).toEqual([]);
-  });
-});
-
 test.describe('motion', () => {
-  async function panelAnimationAfterTabSwitch(page: import('@playwright/test').Page) {
-    await page.goto('/');
-    await hydrated(page);
-    await page.getByRole('tab', { name: /Construction/ }).click();
-    return page.getByRole('tabpanel').evaluate((el) => getComputedStyle(el).animationName);
-  }
+  const orbitAnimation = (page: import('@playwright/test').Page) =>
+    page.locator('[data-orbit]').evaluate((el) => getComputedStyle(el).animationName);
 
   test('hero animation stops for reduced-motion users', async ({ page }) => {
     await page.emulateMedia({ reducedMotion: 'reduce' });
-    expect(await panelAnimationAfterTabSwitch(page)).toBe('none');
+    await page.goto('/');
+    expect(await orbitAnimation(page)).toBe('none');
   });
 
   test('hero animates by default', async ({ page }) => {
     await page.emulateMedia({ reducedMotion: 'no-preference' });
-    expect(await panelAnimationAfterTabSwitch(page)).not.toBe('none');
+    await page.goto('/');
+    expect(await orbitAnimation(page)).not.toBe('none');
+  });
+});
+
+test.describe('phone layout', () => {
+  test('card rows swipe sideways on phones and form a grid on laptops', async ({
+    page,
+    isMobile,
+  }) => {
+    await page.goto('/');
+    const rows = page.locator('ul.swipe-row');
+    await expect(rows).toHaveCount(2);
+    for (const row of await rows.all()) {
+      const [scroll, client] = await row.evaluate((el) => [el.scrollWidth, el.clientWidth]);
+      if (isMobile) expect(scroll).toBeGreaterThan(client);
+      else expect(scroll).toBeLessThanOrEqual(client);
+    }
+  });
+});
+
+test.describe('hero molecule viewer', () => {
+  const caption = (page: import('@playwright/test').Page) =>
+    page.getByText('Chemistry at work').locator('..');
+  const viewer = (page: import('@playwright/test').Page) => page.locator('section figure');
+
+  /** A fingerprint of what the molecule canvas currently shows (0 = blank). */
+  const pixels = (page: import('@playwright/test').Page) =>
+    page.locator('figure canvas').evaluate((el) => {
+      const canvas = el as HTMLCanvasElement;
+      const ctx = canvas.getContext('2d');
+      if (!ctx || !canvas.width) return 0;
+      const { data } = ctx.getImageData(0, 0, canvas.width, canvas.height);
+      let sum = 0;
+      for (let i = 0; i < data.length; i += 4) sum += ((data[i] ?? 0) * (i % 97)) % 9973;
+      return sum;
+    });
+
+  test('is the only visual: no 3D engine or product images are loaded', async ({ page }) => {
+    const heavy: string[] = [];
+    page.on('request', (r) => {
+      if (/three|ProductScene|poster/i.test(r.url())) heavy.push(r.url());
+    });
+    await page.goto('/');
+    await hydrated(page);
+    await expect(page.locator('canvas')).toHaveCount(1);
+    expect(heavy).toEqual([]);
+  });
+
+  test("re-forms into the chosen market's chemistry, with live readouts", async ({ page }) => {
+    await page.goto('/');
+    await hydrated(page);
+    await expect(caption(page)).toContainText('Acetic acid');
+    await expect(viewer(page)).toContainText('60.05 g/mol');
+    const chips = page.getByRole('group', { name: /chemistry of a market/ });
+    await chips.getByRole('button', { name: 'Construction' }).click();
+    await expect(caption(page)).toContainText('Methyltrimethoxysilane');
+    await expect(viewer(page)).toContainText('136.22 g/mol');
+    await expect(viewer(page)).toContainText('20 atoms · 19 bonds');
+    await chips.getByRole('button', { name: 'Industrial' }).click();
+    await expect(caption(page)).toContainText('Ethylene glycol');
+    await expect.poll(() => pixels(page)).toBeGreaterThan(0);
+  });
+
+  /** The tour's timer: the progress bar inside the active chip. */
+  const tourTimer = (page: import('@playwright/test').Page) =>
+    page.locator('button[aria-pressed="true"] > span[aria-hidden="true"]');
+
+  test('tours the markets on its own until the visitor picks one', async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: 'no-preference' });
+    await page.goto('/');
+    await hydrated(page);
+    await expect(tourTimer(page)).toHaveCount(1);
+    expect(await tourTimer(page).evaluate((el) => getComputedStyle(el).animationName)).not.toBe(
+      'none',
+    );
+    await page
+      .getByRole('group', { name: /chemistry of a market/ })
+      .getByRole('button', { name: 'Industrial' })
+      .click();
+    await expect(tourTimer(page)).toHaveCount(0);
+  });
+
+  test('never tours on its own under reduced motion', async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: 'reduce' });
+    await page.goto('/');
+    await hydrated(page);
+    expect(await tourTimer(page).evaluate((el) => getComputedStyle(el).animationName)).toBe('none');
+  });
+
+  test('reduced motion: a still molecule that can still be turned by dragging', async ({
+    page,
+    isMobile,
+  }) => {
+    test.skip(isMobile, 'mouse drag; touch uses the same pointer events');
+    await page.emulateMedia({ reducedMotion: 'reduce' });
+    await page.goto('/');
+    await hydrated(page);
+    await expect.poll(() => pixels(page)).toBeGreaterThan(0);
+    const still = await pixels(page);
+    await page.waitForTimeout(400);
+    expect(await pixels(page)).toBe(still);
+
+    const box = await page.locator('figure canvas').boundingBox();
+    if (!box) throw new Error('canvas not laid out');
+    await page.mouse.move(box.x + box.width * 0.35, box.y + box.height / 2);
+    await page.mouse.down();
+    await page.mouse.move(box.x + box.width * 0.65, box.y + box.height / 2, { steps: 6 });
+    await page.mouse.up();
+    expect(await pixels(page)).not.toBe(still);
   });
 });

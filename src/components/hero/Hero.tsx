@@ -3,7 +3,10 @@ import { ButtonLink } from '../ui/Button';
 import { HeroVisual } from './HeroVisual';
 import styles from './Hero.module.css';
 
-/** B2B hero: who we are, a realistic 3D model of the packs we supply, and the routes to a quote. */
+/**
+ * B2B hero: the promise, two clear next steps (quote or catalogue) and the molecule viewer,
+ * which tours the chemistry of each market Biotonic serves.
+ */
 export function Hero() {
   return (
     <section className={styles.hero} aria-labelledby="hero-title">
@@ -18,15 +21,14 @@ export function Hero() {
           </h1>
           <p className={styles.lead}>
             Genuine textile, construction and industrial chemicals from Zydex, Pidilite and India
-            Glycols — with the advice to use them right, and supply you can plan on.
+            Glycols — with the advice to use them right.
           </p>
-
-          <div className={styles.ctas}>
-            <ButtonLink to={paths.products} size="lg" icon="arrowRight">
-              Explore Products
+          <div className={styles.actions}>
+            <ButtonLink to={paths.quote} icon="arrowRight">
+              Request a quote
             </ButtonLink>
-            <ButtonLink to={paths.quote} size="lg" variant="secondary">
-              Discuss Your Requirements
+            <ButtonLink to={paths.products} variant="secondary">
+              Explore products
             </ButtonLink>
           </div>
 

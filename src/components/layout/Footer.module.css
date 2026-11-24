@@ -152,3 +152,24 @@ a.contactLink:hover {
   gap: var(--space-5);
   list-style: none;
 }
+
+/* ---------- Phones: link columns side by side ---------- */
+@media (max-width: 639px) {
+  .top {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-6) var(--space-4);
+  }
+
+  .brandCol {
+    grid-column: 1 / -1;
+    gap: var(--space-4);
+  }
+
+  .col {
+    gap: var(--space-3);
+  }
+
+  .links {
+    gap: 0;
+  }
+}

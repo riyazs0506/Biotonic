@@ -326,41 +326,55 @@
   margin-top: var(--space-2);
 }
 
-/* ---------- Product finder ---------- */
-.finder {
-  display: grid;
-  gap: var(--space-7);
-  align-items: center;
-}
-
-@media (min-width: 900px) {
-  .finder {
-    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
-    gap: var(--space-9);
+/* ---------- Phones: tighter cards and type ---------- */
+@media (max-width: 639px) {
+  .introTitle {
+    font-size: 2.375rem;
   }
-}
 
-.finderPoints {
-  display: grid;
-  gap: var(--space-5);
-  list-style: none;
-}
+  .introBody {
+    gap: var(--space-4);
+  }
 
-.finderPoints li {
-  display: grid;
-  grid-template-columns: 28px 1fr;
-  gap: var(--space-3);
-  padding-top: var(--space-5);
-  border-top: 1px solid var(--line);
-  color: var(--text-muted);
-  font-size: var(--fs-sm);
-}
+  .introInner {
+    padding-bottom: var(--space-6);
+  }
 
-.finderPoints strong {
-  display: block;
-  margin-bottom: var(--space-1);
-  color: var(--text-strong);
-  font-family: var(--font-display);
-  font-size: var(--fs-lg);
-  font-weight: var(--fw-medium);
+  .glance {
+    margin-top: var(--space-6);
+  }
+
+  .principalRow {
+    margin-top: var(--space-5);
+    padding-top: var(--space-5);
+  }
+
+  .usps li,
+  .markets li {
+    gap: var(--space-2);
+    padding: var(--space-4) var(--space-5);
+  }
+
+  .usps h3,
+  .markets h3 {
+    font-size: 1.375rem;
+  }
+
+  .priceNote {
+    margin-top: var(--space-4);
+    padding: var(--space-4);
+  }
+
+  .founderInner {
+    gap: var(--space-6);
+  }
+
+  .founderLead,
+  .founderProof {
+    gap: var(--space-4);
+  }
+
+  .founderQuote {
+    font-size: 1.375rem;
+  }
 }

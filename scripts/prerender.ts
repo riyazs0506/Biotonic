@@ -78,6 +78,8 @@ async function main() {
   const fontPreloads = [
     /^inter-latin-wght-normal-.*\.woff2$/,
     /^cormorant-garamond-latin-500-normal-.*\.woff2$/,
+    // The hero sentence's blanks are italic: preload it too, or it swaps in late (layout shift).
+    /^cormorant-garamond-latin-500-italic-.*\.woff2$/,
   ]
     .map((pattern) => assets.find((f) => pattern.test(f)))
     .filter((f): f is string => Boolean(f))

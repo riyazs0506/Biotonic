@@ -31,6 +31,10 @@ interface EnquiryFormProps {
   defaultProduct?: string;
   /** Enquirer role to preselect, e.g. from /contact?role=dealer. */
   defaultRole?: string;
+  /** Pre-filled message, e.g. the sentence composed in the hero. */
+  defaultMessage?: string;
+  /** Pre-filled quantity text, e.g. "100–500 kg". */
+  defaultQuantity?: string;
 }
 
 const FIELD_ORDER = [
@@ -46,7 +50,13 @@ const FIELD_ORDER = [
   'consent',
 ] as const;
 
-export function EnquiryForm({ kind, defaultProduct, defaultRole }: EnquiryFormProps) {
+export function EnquiryForm({
+  kind,
+  defaultProduct,
+  defaultRole,
+  defaultMessage,
+  defaultQuantity,
+}: EnquiryFormProps) {
   const formRef = useRef<HTMLFormElement>(null);
   const successRef = useRef<HTMLHeadingElement>(null);
   const startedAt = useRef(0);
@@ -54,7 +64,7 @@ export function EnquiryForm({ kind, defaultProduct, defaultRole }: EnquiryFormPr
   const lastPayload = useRef<Record<string, unknown> | null>(null);
   const [status, setStatus] = useState<Status>({ state: 'idle' });
   const [errors, setErrors] = useState<FieldErrors>({});
-  const [messageLength, setMessageLength] = useState(0);
+  const [messageLength, setMessageLength] = useState(defaultMessage?.length ?? 0);
 
   useEffect(() => {
     startedAt.current = Date.now();
@@ -306,6 +316,7 @@ export function EnquiryForm({ kind, defaultProduct, defaultRole }: EnquiryFormPr
             <TextField
               label="Quantity"
               name="quantity"
+              defaultValue={defaultQuantity}
               inputMode="decimal"
               maxLength={LIMITS.quantity}
               hint="Per order or per month"
@@ -325,6 +336,7 @@ export function EnquiryForm({ kind, defaultProduct, defaultRole }: EnquiryFormPr
         <TextArea
           label={isQuote ? 'Requirements' : 'Message'}
           name="message"
+          defaultValue={defaultMessage}
           required
           rows={6}
           maxLength={LIMITS.message}

@@ -138,3 +138,28 @@ textarea {
 .fatal-error p {
   margin-top: var(--space-4);
 }
+
+/*
+ * Phones: rows of cards become a horizontal swipe, with the next card peeking in so it is clear
+ * there is more. Only used on lists whose cards contain links (so the row is keyboard-reachable).
+ */
+@media (max-width: 639px) {
+  .swipe-row {
+    display: grid;
+    grid-auto-columns: 86%;
+    grid-auto-flow: column;
+    grid-template-columns: none;
+    gap: var(--space-3);
+    margin-inline: calc(-1 * var(--gutter));
+    padding: 2px var(--gutter) var(--space-3);
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-padding-inline: var(--gutter);
+    scroll-snap-type: x mandatory;
+    scrollbar-width: thin;
+  }
+
+  .swipe-row > * {
+    scroll-snap-align: start;
+  }
+}
