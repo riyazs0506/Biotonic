@@ -28,6 +28,13 @@ export const productSchema = z.object({
   /** Principal brand / manufacturer, e.g. "Pidilite Industries". Optional. */
   principal: z.string().min(2).max(60).optional(),
   summary: z.string().min(10).max(220),
+  /** Optional product photo under /public (e.g. "/images/products/meg.webp"), shown in listings. */
+  image: z
+    .object({
+      src: z.string().regex(/^\/[\w./-]+\.(webp|png|jpe?g|avif)$/, 'Use a site path to an image'),
+      alt: z.string().min(3).max(140),
+    })
+    .optional(),
   description: z.array(z.string().min(10).max(1200)).min(1),
   applications: z.array(z.string().min(2).max(120)),
   specifications: z.array(

@@ -55,6 +55,19 @@ const paths = {
   ),
   refresh: <path d="M20 11a8 8 0 1 0-2.3 5.7M20 5v6h-6" />,
   chat: <path d="M4 5h16v11H9l-5 4V5Z" />,
+  spool: (
+    <>
+      <path d="M6 4h12M6 20h12M8 4v16M16 4v16" />
+      <path d="M8 8.5l8 2M8 12.5l8 2M8 16.5l8 2" />
+    </>
+  ),
+  bricks: (
+    <>
+      <rect x="3" y="5" width="18" height="15" rx="1" />
+      <path d="M3 10h18M3 15h18M9 5v5M15 5v5M6 10v5M12 10v5M18 10v5M9 15v5M15 15v5" />
+    </>
+  ),
+  factory: <path d="M3 20V10.5l5 3V10.5l5 3V10.5l5 3V4h3v16H3ZM7 17h2M12 17h2M17 17h2" />,
 } as const;
 
 export type IconName = keyof typeof paths;

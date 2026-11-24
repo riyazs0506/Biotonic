@@ -1,4 +1,3 @@
-
 import { pending, type Confirmable } from './pending';
 
 /**
@@ -108,8 +107,7 @@ export const founder: LeaderProfile = {
     {
       period: '2017',
       title: 'Joins TMR and Co',
-      detail:
-        'As godown staff, then marketing assistant, executive and manager',
+      detail: 'As godown staff, then marketing assistant, executive and manager',
     },
 
     {
@@ -127,8 +125,7 @@ export const founder: LeaderProfile = {
     {
       period: '2024',
       title: 'Founds Biotonic',
-      detail:
-        'To raise awareness about chemicals and supply good products',
+      detail: 'To raise awareness about chemicals and supply good products',
     },
   ],
 
@@ -136,8 +133,7 @@ export const founder: LeaderProfile = {
     {
       title: 'Industrial expert',
 
-      body:
-        'Knows chemicals from the godown floor to the boardroom: products, applications, supply chains and markets.',
+      body: 'Knows chemicals from the godown floor to the boardroom: products, applications, supply chains and markets.',
 
       proof: [
         'Hands-on in every role at TMR and Co',
@@ -149,8 +145,7 @@ export const founder: LeaderProfile = {
     {
       title: 'Deal maker',
 
-      body:
-        'Brings principals, distributors and buyers to the table and makes the numbers work for all three.',
+      body: 'Brings principals, distributors and buyers to the table and makes the numbers work for all three.',
 
       proof: [
         'Top sales awards from Zydex and Pidilite',
@@ -178,8 +173,7 @@ export const founder: LeaderProfile = {
 
     {
       title: '20+ years',
-      from:
-        'Trusted channel partner to Zydex, Pidilite and India Glycols',
+      from: 'Trusted channel partner to Zydex, Pidilite and India Glycols',
     },
   ],
 

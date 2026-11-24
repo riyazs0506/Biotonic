@@ -26,21 +26,22 @@ npm run start:local    # http://localhost:8787 (capture mail transport)
 
 ## Scripts
 
-| Command                                       | What it does                                                                  |
-| --------------------------------------------- | ----------------------------------------------------------------------------- |
-| `npm run build`                               | Draft build (placeholders visible, `noindex`).                                |
-| `npm run build:release`                       | Public build. Fails while launch-blocking content is unresolved.              |
-| `npm run deploy`                              | Build and deploy to Cloudflare Workers (`wrangler deploy`).                   |
-| `npm run dev:worker`                          | Build and run locally in the Cloudflare Workers runtime.                      |
-| `npm start`                                   | Run the production server (`dist/server/index.js`).                           |
-| `npm run content:check`                       | Validate the catalogue and list every `[CLIENT TO CONFIRM]` item.             |
-| `npm run typecheck` / `lint` / `format:check` | Strict TypeScript, ESLint (incl. jsx-a11y strict), Prettier.                  |
-| `npm test`                                    | Vitest: unit, component (Testing Library) and server/API tests.               |
-| `npm run test:e2e`                            | Playwright on desktop + mobile against the production build (incl. axe a11y). |
-| `npm run check:links`                         | Every internal link/asset in the prerendered HTML resolves.                   |
-| `npm run check:release-render`                | Builds in release mode and fails if any placeholder would be public.          |
-| `npm run scan:secrets` / `audit:deps`         | Secret scan of the source tree; `npm audit` of runtime deps.                  |
-| `npm run verify`                              | Everything above in sequence (CI entry point).                                |
+| Command                                       | What it does                                                                       |
+| --------------------------------------------- | ---------------------------------------------------------------------------------- |
+| `npm run build`                               | Draft build (placeholders visible, `noindex`).                                     |
+| `npm run build:release`                       | Public build. Fails while launch-blocking content is unresolved.                   |
+| `npm run deploy`                              | Build and deploy to Cloudflare Workers (`wrangler deploy`).                        |
+| `npm run dev:worker`                          | Build and run locally in the Cloudflare Workers runtime.                           |
+| `npm start`                                   | Run the production server (`dist/server/index.js`).                                |
+| `npm run content:check`                       | Validate the catalogue and list every `[CLIENT TO CONFIRM]` item.                  |
+| `npm run typecheck` / `lint` / `format:check` | Strict TypeScript, ESLint (incl. jsx-a11y strict), Prettier.                       |
+| `npm test`                                    | Vitest: unit, component (Testing Library) and server/API tests.                    |
+| `npm run test:e2e`                            | Playwright on desktop + mobile against the production build (incl. axe a11y).      |
+| `npm run check:links`                         | Every internal link/asset in the prerendered HTML resolves.                        |
+| `npm run check:release-render`                | Builds in release mode and fails if any placeholder would be public.               |
+| `npm run hero:poster` / `og:image`            | Regenerate the hero poster (needs `start:local` running) / the social share image. |
+| `npm run scan:secrets` / `audit:deps`         | Secret scan of the source tree; `npm audit` of runtime deps.                       |
+| `npm run verify`                              | Everything above in sequence (CI entry point).                                     |
 
 ## Project structure
 

@@ -167,7 +167,7 @@ export const company = {
     },
   ] satisfies JourneyStep[],
 
-  /** The idea behind the logo (from the approved logo presentation). */
+  /** The idea behind the wordmark (updated logo, November 2026). */
   nameStory:
-    'In the Biotonic logo the letter I is a test tube and three bubbles rise from it: a living reaction. The green ON inside TONIC stands for always on — consistent supply, every order.',
+    'The Biotonic wordmark is built from wide, rounded-square letterforms that read stable, precise and industrial. The green ON inside TONIC stands for always on — consistent supply, every order.',
 };

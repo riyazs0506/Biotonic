@@ -1,0 +1,60 @@
+.root {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+  aspect-ratio: 1120 / 960;
+  margin-inline: auto;
+}
+
+.glow {
+  position: absolute;
+  inset: 6% 4% 12%;
+  border-radius: 50%;
+  background:
+    radial-gradient(closest-side at 50% 58%, rgb(33 191 117 / 0.2), transparent 72%),
+    radial-gradient(closest-side at 52% 40%, rgb(255 255 255 / 0.95), transparent 80%);
+  filter: blur(12px);
+}
+
+.poster,
+.canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.poster {
+  object-fit: contain;
+  transition: opacity 700ms var(--ease-out);
+}
+
+/* Lightweight motion for the static poster (phones, tablets, no-WebGL). */
+@media (prefers-reduced-motion: no-preference) {
+  .poster {
+    animation: float 7s var(--ease-in-out) infinite;
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.canvas {
+  opacity: 0;
+  transition: opacity 700ms var(--ease-out);
+}
+
+.shown {
+  opacity: 1;
+}
+
+.hidden {
+  opacity: 0;
+}

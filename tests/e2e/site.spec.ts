@@ -224,24 +224,44 @@ test.describe('security', () => {
   });
 });
 
+test.describe('3D hero model', () => {
+  test('loads over the poster and becomes ready', async ({ page, isMobile }) => {
+    test.skip(isMobile, 'covered on desktop');
+    await page.goto('/');
+    await expect(page.locator('img[src="/images/hero/products-poster.webp"]')).toBeVisible();
+    await expect(page.locator('[data-scene-ready="true"] canvas')).toBeVisible({ timeout: 30_000 });
+  });
+
+  test('is not downloaded for reduced-motion visitors, who see the poster', async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: 'reduce' });
+    const sceneRequests: string[] = [];
+    page.on('request', (r) => {
+      if (r.url().includes('ProductScene')) sceneRequests.push(r.url());
+    });
+    await page.goto('/');
+    await hydrated(page);
+    await page.waitForTimeout(2500);
+    await expect(page.locator('img[src="/images/hero/products-poster.webp"]')).toBeVisible();
+    await expect(page.locator('canvas')).toHaveCount(0);
+    expect(sceneRequests).toEqual([]);
+  });
+});
+
 test.describe('motion', () => {
+  async function panelAnimationAfterTabSwitch(page: import('@playwright/test').Page) {
+    await page.goto('/');
+    await hydrated(page);
+    await page.getByRole('tab', { name: /Construction/ }).click();
+    return page.getByRole('tabpanel').evaluate((el) => getComputedStyle(el).animationName);
+  }
+
   test('hero animation stops for reduced-motion users', async ({ page }) => {
     await page.emulateMedia({ reducedMotion: 'reduce' });
-    await page.goto('/');
-    const animation = await page
-      .locator('svg path[class*="wave"]')
-      .first()
-      .evaluate((el) => getComputedStyle(el).animationName);
-    expect(animation).toBe('none');
+    expect(await panelAnimationAfterTabSwitch(page)).toBe('none');
   });
 
   test('hero animates by default', async ({ page }) => {
     await page.emulateMedia({ reducedMotion: 'no-preference' });
-    await page.goto('/');
-    const animation = await page
-      .locator('svg path[class*="wave"]')
-      .first()
-      .evaluate((el) => getComputedStyle(el).animationName);
-    expect(animation).not.toBe('none');
+    expect(await panelAnimationAfterTabSwitch(page)).not.toBe('none');
   });
 });

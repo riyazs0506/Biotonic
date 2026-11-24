@@ -18,7 +18,7 @@ export function Footer() {
         <div className={styles.top}>
           <div className={styles.brandCol}>
             <Link to={paths.home} className={styles.logoLink} aria-label="Biotonic — home">
-              <Logo variant="reversed" height={30} alt="" />
+              <Logo variant="reversed" height={26} alt="" />
             </Link>
             <p className={`display ${styles.tagline}`}>
               Chemistry you can trust, <em>at first glance.</em>

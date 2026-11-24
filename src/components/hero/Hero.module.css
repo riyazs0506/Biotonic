@@ -61,7 +61,7 @@
 }
 
 .title {
-  font-size: var(--fs-display);
+  font-size: clamp(3rem, 1.9rem + 4vw, 5.5rem);
   max-width: 11ch;
 }
 
@@ -104,15 +104,14 @@
 
 .visual {
   position: relative;
-  max-width: 340px;
-  width: 78%;
-  justify-self: center;
+  display: flex;
+  justify-content: center;
+  width: 100%;
 }
 
 @media (min-width: 900px) {
   .visual {
-    width: 100%;
-    max-width: 520px;
+    justify-content: flex-end;
   }
 }
 

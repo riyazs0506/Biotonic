@@ -33,10 +33,12 @@ Every result below comes from a command that was actually executed; re-run with 
 
 ## Performance (Lighthouse 12.6.1, local production server with compression)
 
-|                                                 | Performance | Accessibility | Best practices | SEO | FCP   | LCP   | CLS | TBT  |
-| ----------------------------------------------- | ----------- | ------------- | -------------- | --- | ----- | ----- | --- | ---- |
-| Mobile (simulated slow 4G, release build, home) | 97          | 100           | 100            | 100 | 1.7 s | 2.4 s | 0   | 0 ms |
-| Desktop (release build, home)                   | 99          | 100           | 100            | 100 | 0.7 s | 0.8 s | 0   | 0 ms |
+Measured 2026-11-18 after adding the 3D hero. SEO in draft builds is 69 by design (`noindex`); release builds score 100.
+
+|                                                    | Performance | Accessibility | Best practices | SEO | FCP   | LCP   | CLS | TBT   |
+| -------------------------------------------------- | ----------- | ------------- | -------------- | --- | ----- | ----- | --- | ----- |
+| Mobile (simulated slow 4G, home, 3D hero → poster) | 95          | 100           | 100            | 100 | 1.8 s | 2.7 s | 0   | 0 ms  |
+| Desktop (home, live 3D hero)                       | 100         | 100           | 100            | 100 | 0.4 s | 0.6 s | 0   | 10 ms |
 
 Fixed during measurement: the server was not compressing responses (mobile score was 77);
 gzip/brotli compression was added. Real-world numbers depend on the final host/CDN — measure

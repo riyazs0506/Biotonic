@@ -1,7 +1,7 @@
 {
   "name": "biotonic-website",
   "version": "1.0.0",
-  "description": "Biotonic corporate website \u2014 React + Vite + TypeScript with a Node enquiry service",
+  "description": "Biotonic corporate website — React + Vite + TypeScript with a Node enquiry service",
   "scripts": {
     "dev": "vite",
     "dev:server": "tsx watch server/dev.ts",
@@ -27,18 +27,23 @@
     "start:local": "NODE_ENV=development MAIL_TRANSPORT=capture SITE_URL=http://localhost:8787 node dist/server/index.js",
     "check:release-render": "VITE_CONTENT_MODE=release VITE_SITE_URL=https://release-check.example npm run build:client && VITE_CONTENT_MODE=release VITE_SITE_URL=https://release-check.example npm run build:ssr && VITE_CONTENT_MODE=release npm run prerender",
     "deploy": "npm run build && wrangler deploy",
-    "dev:worker": "npm run build && wrangler dev"
+    "dev:worker": "npm run build && wrangler dev",
+    "hero:poster": "tsx scripts/generate-hero-poster.ts",
+    "og:image": "tsx scripts/generate-og.ts"
   },
   "type": "module",
   "dependencies": {
     "@fontsource-variable/inter": "^5.3.0",
     "@fontsource/cormorant-garamond": "^5.3.0",
     "@hono/node-server": "^2.1.5",
+    "@react-three/drei": "^10.7.9",
+    "@react-three/fiber": "^9.8.2",
     "hono": "^4.13.13",
     "nodemailer": "^10.2.0",
     "react": "^19.3.1",
     "react-dom": "^19.3.1",
     "react-router": "^8.5.0",
+    "three": "^0.187.0",
     "zod": "^4.6.7"
   },
   "devDependencies": {
@@ -53,6 +58,7 @@
     "@types/nodemailer": "^8.0.2",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
+    "@types/three": "^0.187.0",
     "@vitejs/plugin-react": "^6.1.2",
     "esbuild": "^0.28.2",
     "eslint": "^9.39.5",

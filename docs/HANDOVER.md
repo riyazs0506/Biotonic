@@ -6,7 +6,9 @@
 - All 13 routes: Home, Products, Product detail, About, Leadership, Quality, Industries,
   Resources, Contact, Request a Quote, Privacy Policy, Terms, branded 404.
 - Design system (tokens in `src/styles/tokens.css`, reusable components in `src/components/ui`).
-- "The Living Reaction" hero (SVG + CSS, reduced-motion and off-screen pausing).
+- B2B hero with a **realistic animated 3D model** of the packs Biotonic supplies (steel drum,
+  HDPE jerrycan, pail, each labelled with the real logo), plus a **product finder** section below
+  it (tabs for the three markets listing catalogue products, brand, pack sizes, quote links).
 - Secure enquiry/quotation service with email delivery (`server/`).
 - Prerendering, sitemap, robots, structured data, security headers, real 404s.
 - Automated tests (unit, component, API, end-to-end, accessibility) and CI-ready `npm run verify`.
@@ -22,10 +24,21 @@
   and adopted for large editorial headlines only — it gives the "royal, editorial" register while
   the wide geometric logo remains the only extended-caps element. Remove it by deleting the two
   `@fontsource/cormorant-garamond` imports in `src/main.tsx` and changing `--font-display`.
-- **Logo:** the real artwork is used everywhere (never re-typed). Header uses Lockup B
-  (continuous), footer uses the reversed continuous version. Minimum 120 px width respected.
-- **Hero:** CSS/SVG rather than WebGL. Measured result: zero total blocking time, CLS 0;
-  WebGL/Three.js would add ~150 KB+ JS for little visual gain.
+- **Logo (updated November 2026):** the client-supplied wordmark is used everywhere (never
+  re-typed). Master: `brand-source/logo-2026-11-master.png`; full-colour (header), reversed
+  (footer, with Reaction Green "ON") and mono-white variants in `public/brand/`. The favicon and
+  app icons use the green "ON" cut from the wordmark. The previous test-tube logo is archived in
+  `brand-source/previous-logo-2026-10/`. Note: the supplied artwork's green (~#08A337) and black
+  differ slightly from the brand-guide palette (#109255 / #0E1016) — confirm which is current, and
+  request vector (SVG) masters and an official icon.
+- **Hero 3D model:** three.js / React Three Fiber, procedural geometry (no model downloads) and
+  canvas-drawn labels. It is code-split and loaded only after hydration on desktop-class devices
+  with WebGL, motion allowed, no data saver and ≥ 4 GB memory; everyone else sees the poster
+  (`public/images/hero/products-poster.webp`, a frame of the same scene, 29 KB) with a CSS float.
+  Rendering pauses off-screen. Measured: desktop Lighthouse 100 (TBT 10 ms), mobile 95 (TBT 0 ms).
+  Loading the 3D chunk on phones dropped mobile to 75, which is why phones get the poster.
+  Regenerate the poster after changing the scene: `npm run build && npm run start:local`, then
+  `npm run hero:poster`.
 
 ## Demo content
 

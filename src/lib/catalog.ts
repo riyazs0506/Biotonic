@@ -86,3 +86,14 @@ export function categoryCounts(source: Catalogue = catalogue): Map<string, numbe
   for (const p of source.products) counts.set(p.category, (counts.get(p.category) ?? 0) + 1);
   return counts;
 }
+
+export type PackType = 'drum' | 'can' | 'pail' | 'bag';
+
+/** The pack a product ships in, inferred from its packaging list (for listing thumbnails). */
+export function packType(product: Product): PackType {
+  const text = product.packaging.join(' ').toLowerCase();
+  if (/\bbags?\b|sack/.test(text)) return 'bag';
+  if (/pail|bucket|\bpacks?\b/.test(text)) return 'pail';
+  if (/carboy|jerry|\bcans?\b|\bl\b|litre/.test(text)) return 'can';
+  return 'drum';
+}

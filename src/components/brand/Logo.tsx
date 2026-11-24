@@ -1,17 +1,15 @@
 /**
- * Official Biotonic logo artwork, extracted at full resolution from the approved
- * "Biotonic – Logo Presentation". The wordmark is never re-typed or redrawn.
- * Brand rules: keep clear space equal to the "O" height; minimum width 120px on screen.
+ * Official Biotonic wordmark (updated November 2026), generated from the client-supplied
+ * artwork (master: brand-source/logo-2026-11-master.png). The wordmark is never re-typed or
+ * redrawn. Brand rules: keep clear space equal to the "O" height; minimum width 120px on screen.
  */
 const variants = {
-  /** Lockup B · continuous, full colour on light. */
-  continuous: { file: 'logo-continuous', width: 640, height: 99 },
-  /** Lockup A · spaced, full colour on light. */
-  spaced: { file: 'logo-spaced', width: 960, height: 136 },
-  /** Continuous, reversed for dark backgrounds. */
-  reversed: { file: 'logo-continuous-reversed', width: 640, height: 98 },
+  /** Full colour on light: black letters, green "ON". */
+  continuous: { file: 'logo-continuous', width: 720, height: 81 },
+  /** Reversed for dark backgrounds: Lab White letters, Reaction Green "ON". */
+  reversed: { file: 'logo-continuous-reversed', width: 720, height: 81 },
   /** Mono white, for use on Biotonic Green. */
-  'mono-white': { file: 'logo-mono-white', width: 640, height: 99 },
+  'mono-white': { file: 'logo-mono-white', width: 720, height: 81 },
 } as const;
 
 export type LogoVariant = keyof typeof variants;

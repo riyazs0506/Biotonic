@@ -1,6 +1,6 @@
-import { Link } from 'react-router';
 import { Monogram } from '../components/brand/Monogram';
 import { Hero } from '../components/hero/Hero';
+import { ProductShowcase } from '../components/hero/ProductShowcase';
 import { QuoteCta } from '../components/layout/QuoteCta';
 import { ProductCard } from '../components/products/ProductCard';
 import {
@@ -10,18 +10,16 @@ import {
   StatGrid,
 } from '../components/sections/StrategyBlocks';
 import { ButtonLink } from '../components/ui/Button';
-import { Icon } from '../components/ui/Icon';
 import { Section } from '../components/ui/Layout';
 import { company } from '../content/company';
 import { industries } from '../content/industries';
 import { founder } from '../content/leadership';
-import { catalogue, categoryCounts, featuredProducts } from '../lib/catalog';
+import { featuredProducts } from '../lib/catalog';
 import { isPublished } from '../lib/publication';
 import { paths } from '../lib/routes';
 import styles from './HomePage.module.css';
 
 export function HomePage() {
-  const counts = categoryCounts();
   const featured = featuredProducts();
 
   return (
@@ -29,8 +27,8 @@ export function HomePage() {
       <Hero />
 
       <Section
-        id="categories"
-        eyebrow="Product discovery"
+        id="product-finder"
+        eyebrow="Product finder"
         title={
           <>
             Find the right <em>chemistry</em> for your operation.
@@ -43,35 +41,19 @@ export function HomePage() {
           </ButtonLink>
         }
       >
-        {catalogue.categories.length > 0 ? (
-          <ul className={styles.categories}>
-            {catalogue.categories.map((category, index) => (
-              <li key={category.slug}>
-                <Link
-                  to={`${paths.products}?category=${category.slug}`}
-                  className={styles.category}
-                >
-                  <span className={styles.categoryIndex}>{String(index + 1).padStart(2, '0')}</span>
-                  <span className={styles.categoryName}>{category.name}</span>
-                  <span className={styles.categoryDesc}>{category.description}</span>
-                  <span className={styles.categoryFoot}>
-                    <span>
-                      {counts.get(category.slug) ?? 0}{' '}
-                      {counts.get(category.slug) === 1 ? 'product' : 'products'}
-                    </span>
-                    <Icon name="arrowUpRight" size={18} />
-                  </span>
-                </Link>
+        <div className={styles.finder}>
+          <ProductShowcase />
+          <ul className={styles.finderPoints}>
+            {company.usps.slice(0, 3).map((usp, i) => (
+              <li key={usp.title}>
+                <span className={styles.principleIndex}>{String(i + 1).padStart(2, '0')}</span>
+                <span>
+                  <strong>{usp.title}</strong> {usp.body}
+                </span>
               </li>
             ))}
           </ul>
-        ) : (
-          <p className={styles.notice}>
-            Our online catalogue is being prepared.{' '}
-            <Link to={paths.quote}>Tell us what you need</Link> and we will respond with product
-            information and a quotation.
-          </p>
-        )}
+        </div>
       </Section>
 
       {featured.length > 0 && (

@@ -71,7 +71,7 @@ export function Header() {
     >
       <div className={styles.inner}>
         <Link to={paths.home} className={styles.brand} aria-label="Biotonic — home">
-          <Logo variant="continuous" height={26} alt="" priority />
+          <Logo variant="continuous" height={22} alt="" priority />
         </Link>
 
         <nav aria-label="Primary" className={styles.desktopNav}>

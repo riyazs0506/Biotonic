@@ -1,4 +1,3 @@
-
 import { Monogram } from '../components/brand/Monogram';
 import { PageHeader } from '../components/layout/PageHeader';
 import { QuoteCta } from '../components/layout/QuoteCta';
@@ -44,7 +43,6 @@ export function AboutPage() {
 
       <div className={styles.body}>
         <Container>
-
           {/* =========================================
               02. FOUNDER PROFILE
               Founder comes first in company profile
@@ -67,23 +65,15 @@ export function AboutPage() {
                         loading="eager"
                       />
                     ) : (
-                      <Monogram
-                        name={founder.name}
-                        size="lg"
-                      />
+                      <Monogram name={founder.name} size="lg" />
                     )}
                   </div>
                 </div>
 
                 <div className={styles.prose}>
-                  <p className={styles.statementLabel}>
-                    Founder &amp; Leadership
-                  </p>
+                  <p className={styles.statementLabel}>Founder &amp; Leadership</p>
 
-                  <h2
-                    id="founder-profile"
-                    className={`display ${styles.profileName}`}
-                  >
+                  <h2 id="founder-profile" className={`display ${styles.profileName}`}>
                     {founder.name}
                   </h2>
 
@@ -92,13 +82,9 @@ export function AboutPage() {
                   </p>
 
                   <blockquote className={styles.statement}>
-                    <p className={styles.statementLabel}>
-                      In one line
-                    </p>
+                    <p className={styles.statementLabel}>In one line</p>
 
-                    <p className={styles.statementText}>
-                      {founder.statement}
-                    </p>
+                    <p className={styles.statementText}>{founder.statement}</p>
                   </blockquote>
 
                   <p>{founder.storyAngle}</p>
@@ -124,7 +110,6 @@ export function AboutPage() {
                 </div>
               </section>
 
-
               {/* =========================================
                   03. FOUNDER BIOGRAPHY
               ========================================= */}
@@ -133,49 +118,32 @@ export function AboutPage() {
                 className={`${styles.block} ${styles.split}`}
                 aria-labelledby="founder-story"
               >
-                <h2
-                  id="founder-story"
-                  className={`display ${styles.splitTitle}`}
-                >
+                <h2 id="founder-story" className={`display ${styles.splitTitle}`}>
                   The story behind the founder
                 </h2>
 
                 <div className={styles.prose}>
                   {founder.biography.map((paragraph) => (
-                    <p key={paragraph}>
-                      {paragraph}
-                    </p>
+                    <p key={paragraph}>{paragraph}</p>
                   ))}
 
                   <div className={styles.statement}>
-                    <p className={styles.statementLabel}>
-                      Education
-                    </p>
+                    <p className={styles.statementLabel}>Education</p>
 
-                    <p className={styles.statementText}>
-                      {founder.education.degree}
-                    </p>
+                    <p className={styles.statementText}>{founder.education.degree}</p>
 
-                    <p>
-                      {founder.education.college}
-                    </p>
+                    <p>{founder.education.college}</p>
 
-                    <p>
-                      {founder.education.school}
-                    </p>
+                    <p>{founder.education.school}</p>
                   </div>
                 </div>
               </section>
-
 
               {/* =========================================
                   04. FOUNDER JOURNEY
               ========================================= */}
 
-              <section
-                className={styles.block}
-                aria-labelledby="founder-journey"
-              >
+              <section className={styles.block} aria-labelledby="founder-journey">
                 <h2
                   id="founder-journey"
                   className={`display ${styles.splitTitle} ${styles.formTitle}`}
@@ -183,20 +151,14 @@ export function AboutPage() {
                   The founder journey
                 </h2>
 
-                <FounderTimeline
-                  steps={founder.timeline}
-                />
+                <FounderTimeline steps={founder.timeline} />
               </section>
-
 
               {/* =========================================
                   05. INDUSTRIAL EXPERT & DEAL MAKER
               ========================================= */}
 
-              <section
-                className={styles.block}
-                aria-labelledby="expert-deal-maker"
-              >
+              <section className={styles.block} aria-labelledby="expert-deal-maker">
                 <h2
                   id="expert-deal-maker"
                   className={`display ${styles.splitTitle} ${styles.formTitle}`}
@@ -206,26 +168,16 @@ export function AboutPage() {
 
                 <ul className={styles.twoCol}>
                   {founder.roles.map((role, index) => (
-                    <li
-                      key={role.title}
-                      className={styles.card}
-                    >
-                      <span className={styles.cardIndex}>
-                        {String(index + 1).padStart(2, '0')}
-                      </span>
+                    <li key={role.title} className={styles.card}>
+                      <span className={styles.cardIndex}>{String(index + 1).padStart(2, '0')}</span>
 
                       <h3>{role.title}</h3>
 
                       <p>{role.body}</p>
 
-                      <ul
-                        className={styles.proofList}
-                        aria-label={`Proof: ${role.title}`}
-                      >
+                      <ul className={styles.proofList} aria-label={`Proof: ${role.title}`}>
                         {role.proof.map((proof) => (
-                          <li key={proof}>
-                            {proof}
-                          </li>
+                          <li key={proof}>{proof}</li>
                         ))}
                       </ul>
                     </li>
@@ -233,27 +185,17 @@ export function AboutPage() {
                 </ul>
               </section>
 
-
               {/* =========================================
                   06. AWARDS & RECOGNITION
               ========================================= */}
 
-              <section
-                className={styles.block}
-                aria-labelledby="recognition"
-              >
-                <h2
-                  id="recognition"
-                  className={`display ${styles.splitTitle} ${styles.formTitle}`}
-                >
+              <section className={styles.block} aria-labelledby="recognition">
+                <h2 id="recognition" className={`display ${styles.splitTitle} ${styles.formTitle}`}>
                   Awards &amp; recognition
                 </h2>
 
-                <AwardList
-                  awards={founder.awards}
-                />
+                <AwardList awards={founder.awards} />
               </section>
-
 
               {/* =========================================
                   07. FOUNDER'S VISION
@@ -263,150 +205,95 @@ export function AboutPage() {
                 className={`${styles.block} ${styles.split}`}
                 aria-labelledby="founder-vision"
               >
-                <h2
-                  id="founder-vision"
-                  className={`display ${styles.splitTitle}`}
-                >
+                <h2 id="founder-vision" className={`display ${styles.splitTitle}`}>
                   Vision for Biotonic
                 </h2>
 
                 <div className={styles.prose}>
-                  <p className={styles.statementText}>
-                    {founder.vision}
-                  </p>
+                  <p className={styles.statementText}>{founder.vision}</p>
                 </div>
               </section>
             </>
           )}
 
-
           {/* =========================================
               08. COMPANY POSITIONING & STATISTICS
           ========================================= */}
 
-          <section
-            className={styles.block}
-            aria-labelledby="positioning"
-          >
-            <h2
-              id="positioning"
-              className="visually-hidden"
-            >
+          <section className={styles.block} aria-labelledby="positioning">
+            <h2 id="positioning" className="visually-hidden">
               Our positioning
             </h2>
 
-            <p className={`display ${styles.positioning}`}>
-              {company.positioning}
-            </p>
+            <p className={`display ${styles.positioning}`}>{company.positioning}</p>
 
             <div className={styles.glance}>
-              <StatGrid
-                stats={company.atAGlance}
-              />
+              <StatGrid stats={company.atAGlance} />
             </div>
           </section>
-
 
           {/* =========================================
               09. OUR COMPANY STORY
           ========================================= */}
 
-          <section
-            className={`${styles.block} ${styles.split}`}
-            aria-labelledby="company-story"
-          >
-            <h2
-              id="company-story"
-              className={`display ${styles.splitTitle}`}
-            >
+          <section className={`${styles.block} ${styles.split}`} aria-labelledby="company-story">
+            <h2 id="company-story" className={`display ${styles.splitTitle}`}>
               Our story
             </h2>
 
             <div className={styles.prose}>
               {company.history.map((paragraph) => (
-                <p key={paragraph}>
-                  {paragraph}
-                </p>
+                <p key={paragraph}>{paragraph}</p>
               ))}
 
               <PrincipalStrip />
             </div>
           </section>
 
-
           {/* =========================================
               10. COMPANY MISSION & VISION
           ========================================= */}
 
-          <section
-            className={`${styles.block} ${styles.split}`}
-            aria-labelledby="purpose"
-          >
-            <h2
-              id="purpose"
-              className={`display ${styles.splitTitle}`}
-            >
+          <section className={`${styles.block} ${styles.split}`} aria-labelledby="purpose">
+            <h2 id="purpose" className={`display ${styles.splitTitle}`}>
               Mission &amp; vision
             </h2>
 
             <div className={styles.prose}>
               <div className={styles.statement}>
-                <p className={styles.statementLabel}>
-                  Mission
-                </p>
+                <p className={styles.statementLabel}>Mission</p>
 
-                <p className={styles.statementText}>
-                  {company.mission}
-                </p>
+                <p className={styles.statementText}>{company.mission}</p>
               </div>
 
               <div className={styles.statement}>
-                <p className={styles.statementLabel}>
-                  Vision
-                </p>
+                <p className={styles.statementLabel}>Vision</p>
 
-                <p className={styles.statementText}>
-                  {company.vision}
-                </p>
+                <p className={styles.statementText}>{company.vision}</p>
               </div>
             </div>
           </section>
-
 
           {/* =========================================
               11. COMPANY VALUES
           ========================================= */}
 
-          <section
-            className={styles.block}
-            aria-labelledby="values"
-          >
+          <section className={styles.block} aria-labelledby="values">
             <div className={styles.split}>
-              <h2
-                id="values"
-                className={`display ${styles.splitTitle}`}
-              >
+              <h2 id="values" className={`display ${styles.splitTitle}`}>
                 Expert · Dependable · Decisive
               </h2>
 
               <p className={styles.prose}>
-                How we want every buyer, dealer and principal
-                to know us: the chemistry partner with answers,
-                and the people who get the deal done.
+                How we want every buyer, dealer and principal to know us: the chemistry partner with
+                answers, and the people who get the deal done.
               </p>
             </div>
 
-            <ul
-              className={`${styles.cards} ${styles.cards3} ${styles.cardsSpaced}`}
-            >
+            <ul className={`${styles.cards} ${styles.cards3} ${styles.cardsSpaced}`}>
               {company.values.map((value, index) => (
-                <li
-                  key={value.title}
-                  className={styles.card}
-                >
-                  <span className={styles.cardIndex}>
-                    {String(index + 1).padStart(2, '0')}
-                  </span>
+                <li key={value.title} className={styles.card}>
+                  <span className={styles.cardIndex}>{String(index + 1).padStart(2, '0')}</span>
 
                   <h3>{value.title}</h3>
 
@@ -416,68 +303,45 @@ export function AboutPage() {
             </ul>
           </section>
 
-
           {/* =========================================
               12. WORKING WITH BIOTONIC
           ========================================= */}
 
-          <section
-            className={styles.block}
-            aria-labelledby="working-with-us"
-          >
+          <section className={styles.block} aria-labelledby="working-with-us">
             <div className={styles.split}>
-              <h2
-                id="working-with-us"
-                className={`display ${styles.splitTitle}`}
-              >
+              <h2 id="working-with-us" className={`display ${styles.splitTitle}`}>
                 Working with Biotonic
               </h2>
 
               <div className={styles.prose}>
                 <p>
-                  <strong>
-                    {company.pricePositioning.title}.
-                  </strong>{' '}
-                  {company.pricePositioning.body}
+                  <strong>{company.pricePositioning.title}.</strong> {company.pricePositioning.body}
                 </p>
               </div>
             </div>
 
             <div className={styles.cardsSpaced}>
-              <JourneySteps
-                steps={company.journey}
-              />
+              <JourneySteps steps={company.journey} />
             </div>
           </section>
-
 
           {/* =========================================
               13. THE IDEA BEHIND THE NAME
           ========================================= */}
 
-          <section
-            className={`${styles.block} ${styles.split}`}
-            aria-labelledby="the-name"
-          >
-            <h2
-              id="the-name"
-              className={`display ${styles.splitTitle}`}
-            >
+          <section className={`${styles.block} ${styles.split}`} aria-labelledby="the-name">
+            <h2 id="the-name" className={`display ${styles.splitTitle}`}>
               The idea behind the name
             </h2>
 
             <div className={styles.prose}>
               <p>{company.nameStory}</p>
 
-              <p className={styles.brandIdea}>
-                {company.brandIdea}
-              </p>
+              <p className={styles.brandIdea}>{company.brandIdea}</p>
             </div>
           </section>
-
         </Container>
       </div>
-
 
       {/* =========================================
           14. FINAL QUOTE CTA

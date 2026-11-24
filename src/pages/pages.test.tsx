@@ -188,6 +188,36 @@ describe('header navigation', () => {
       );
     });
 
+    it("hero product finder shows each market's products with quote links", async () => {
+      const user = userEvent.setup();
+      renderAt('/');
+      const tablist = screen.getByRole('tablist', { name: 'Genuine brands for your process' });
+      const tabs = within(tablist).getAllByRole('tab');
+      expect(tabs.map((t) => t.textContent)).toEqual([
+        expect.stringContaining('Textile processing'),
+        expect.stringContaining('Construction'),
+        expect.stringContaining('Industrial chemicals'),
+      ]);
+      expect(tabs[0]).toHaveAttribute('aria-selected', 'true');
+      const panel = screen.getByRole('tabpanel');
+      expect(
+        within(panel).getByRole('link', { name: 'Pigment Printing Emulsion' }),
+      ).toHaveAttribute('href', '/products/pigment-printing-emulsion');
+
+      await user.click(tabs[2]!);
+      expect(tabs[2]).toHaveAttribute('aria-selected', 'true');
+      expect(
+        within(screen.getByRole('tabpanel')).getByRole('link', {
+          name: 'Get a quote for Monoethylene Glycol (MEG)',
+        }),
+      ).toHaveAttribute('href', '/request-a-quote?product=monoethylene-glycol');
+
+      // Keyboard: arrow keys move between tabs (WAI-ARIA tabs pattern).
+      await user.keyboard('{ArrowRight}');
+      expect(tabs[0]).toHaveFocus();
+      expect(tabs[0]).toHaveAttribute('aria-selected', 'true');
+    });
+
     it('presents the founder and the principal brands on the homepage', () => {
       renderAt('/');
       expect(screen.getByRole('heading', { name: 'Keerthi Vasan' })).toBeInTheDocument();

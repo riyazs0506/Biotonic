@@ -325,3 +325,42 @@
 .founderCta {
   margin-top: var(--space-2);
 }
+
+/* ---------- Product finder ---------- */
+.finder {
+  display: grid;
+  gap: var(--space-7);
+  align-items: center;
+}
+
+@media (min-width: 900px) {
+  .finder {
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+    gap: var(--space-9);
+  }
+}
+
+.finderPoints {
+  display: grid;
+  gap: var(--space-5);
+  list-style: none;
+}
+
+.finderPoints li {
+  display: grid;
+  grid-template-columns: 28px 1fr;
+  gap: var(--space-3);
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--line);
+  color: var(--text-muted);
+  font-size: var(--fs-sm);
+}
+
+.finderPoints strong {
+  display: block;
+  margin-bottom: var(--space-1);
+  color: var(--text-strong);
+  font-family: var(--font-display);
+  font-size: var(--fs-lg);
+  font-weight: var(--fw-medium);
+}
