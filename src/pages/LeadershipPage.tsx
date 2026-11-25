@@ -1,5 +1,6 @@
 import { Monogram } from '../components/brand/Monogram';
 import { PageHeader } from '../components/layout/PageHeader';
+import { imagery } from '../content/imagery';
 import { QuoteCta } from '../components/layout/QuoteCta';
 import { AwardList, FounderTimeline } from '../components/sections/StrategyBlocks';
 import { Container } from '../components/ui/Layout';
@@ -29,6 +30,7 @@ export function LeadershipPage() {
         }
         lead={founder.storyAngle}
         breadcrumbs={meta.breadcrumbs}
+        image={imagery.leadership}
       />
 
       <div className={styles.body}>

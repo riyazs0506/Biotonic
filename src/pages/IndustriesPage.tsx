@@ -1,5 +1,6 @@
 import { Link } from 'react-router';
 import { PageHeader } from '../components/layout/PageHeader';
+import { imagery, marketImagery } from '../content/imagery';
 import { QuoteCta } from '../components/layout/QuoteCta';
 import { AudienceCards, StatGrid } from '../components/sections/StrategyBlocks';
 import { Container } from '../components/ui/Layout';
@@ -25,6 +26,7 @@ export function IndustriesPage() {
         }
         lead={`Textile, construction and industrial chemicals for businesses across the ${geography.current} — expanding across ${geography.next}.`}
         breadcrumbs={meta.breadcrumbs}
+        image={imagery.industries}
       />
 
       <div className={styles.body}>
@@ -38,8 +40,20 @@ export function IndustriesPage() {
                 const products = industry.productSlugs
                   .map((slug) => getProduct(slug))
                   .filter((p) => p !== undefined);
+                const photo = marketImagery[industry.slug];
                 return (
                   <li key={industry.slug} id={industry.slug} className={styles.card}>
+                    {photo && (
+                      <img
+                        className={styles.cardPhoto}
+                        src={photo.src}
+                        alt={photo.alt}
+                        width={900}
+                        height={600}
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    )}
                     <span className={styles.cardIndex}>{String(i + 1).padStart(2, '0')}</span>
                     <h3 className={styles.cardTitle}>{industry.name}</h3>
                     <p className={styles.meta}>{industry.buyers}</p>

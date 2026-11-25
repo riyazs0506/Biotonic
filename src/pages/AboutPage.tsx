@@ -1,5 +1,6 @@
 import { Monogram } from '../components/brand/Monogram';
 import { PageHeader } from '../components/layout/PageHeader';
+import { imagery } from '../content/imagery';
 import { QuoteCta } from '../components/layout/QuoteCta';
 import {
   AwardList,
@@ -39,6 +40,7 @@ export function AboutPage() {
         }
         lead={company.introduction}
         breadcrumbs={meta.breadcrumbs}
+        image={imagery.about}
       />
 
       <div className={styles.body}>

@@ -1,6 +1,7 @@
 import { useDeferredValue, useMemo } from 'react';
 import { Link, useSearchParams } from 'react-router';
 import { PageHeader } from '../components/layout/PageHeader';
+import { imagery } from '../content/imagery';
 import { QuoteCta } from '../components/layout/QuoteCta';
 import { ProductCard } from '../components/products/ProductCard';
 import { ProductFilters } from '../components/products/ProductFilters';
@@ -52,6 +53,7 @@ export function ProductsPage() {
         }
         lead="Search the catalogue, filter by category and open any product for its specifications. Every product can be quoted for your required quantity."
         breadcrumbs={meta.breadcrumbs}
+        image={imagery.products}
       />
 
       <section className={styles.catalogue} aria-label="Product catalogue">

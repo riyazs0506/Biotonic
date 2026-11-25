@@ -4,36 +4,49 @@ import { Breadcrumbs } from '../ui/Breadcrumbs';
 import { Eyebrow } from '../ui/Layout';
 import styles from './PageHeader.module.css';
 
-/** Opening block for inner pages: breadcrumbs, eyebrow, display title and lead. */
+export interface HeaderImage {
+  src: string;
+  alt: string;
+}
+
+/** Opening block for inner pages: breadcrumbs, eyebrow, display title, lead and an optional photo. */
 export function PageHeader({
   eyebrow,
   title,
   lead,
   breadcrumbs,
+  image,
   children,
 }: {
   eyebrow?: string;
   title: ReactNode;
   lead?: ReactNode;
   breadcrumbs?: Crumb[];
+  image?: HeaderImage;
   children?: ReactNode;
 }) {
   return (
-    <div className={styles.header}>
-      <div className={styles.art} aria-hidden="true">
-        <svg viewBox="0 0 120 260">
-          <circle cx="66" cy="14" r="5" />
-          <circle cx="50" cy="34" r="3.5" />
-          <circle cx="64" cy="50" r="8" />
-          <path d="M28 76h64M38 76v138a22 22 0 0 0 44 0V76" />
-        </svg>
-      </div>
+    <div className={`${styles.header} ${image ? styles.withImage : ''}`}>
       <div className={styles.inner}>
-        {breadcrumbs && <Breadcrumbs items={breadcrumbs} />}
-        {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
-        <h1 className={`display ${styles.title}`}>{title}</h1>
-        {lead && <div className={styles.lead}>{lead}</div>}
-        {children}
+        <div className={styles.text}>
+          {breadcrumbs && <Breadcrumbs items={breadcrumbs} />}
+          {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
+          <h1 className={`display ${styles.title}`}>{title}</h1>
+          {lead && <div className={styles.lead}>{lead}</div>}
+          {children}
+        </div>
+        {image && (
+          <figure className={styles.photo}>
+            <img
+              src={image.src}
+              alt={image.alt}
+              width={1400}
+              height={1050}
+              loading="eager"
+              decoding="async"
+            />
+          </figure>
+        )}
       </div>
     </div>
   );

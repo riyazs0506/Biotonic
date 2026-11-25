@@ -1,5 +1,6 @@
 import { useParams } from 'react-router';
 import { PageHeader } from '../components/layout/PageHeader';
+import { imagery } from '../content/imagery';
 import { ProductCard } from '../components/products/ProductCard';
 import { ButtonLink } from '../components/ui/Button';
 import { EmptyState } from '../components/ui/Feedback';
@@ -28,6 +29,7 @@ export function ProductDetailPage() {
         title={product.name}
         lead={product.summary}
         breadcrumbs={meta.breadcrumbs}
+        image={product.image ?? imagery.product}
       >
         <div className={styles.headerActions}>
           <ButtonLink to={quoteHref} size="lg" icon="arrowRight">

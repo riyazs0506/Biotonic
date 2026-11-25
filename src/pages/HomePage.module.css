@@ -161,8 +161,38 @@
   color: var(--text-body);
 }
 
+.introPhoto {
+  margin: var(--space-8) 0 0;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  aspect-ratio: 16 / 9;
+  background: var(--surface-sunken);
+}
+
+@media (min-width: 900px) {
+  .introPhoto {
+    aspect-ratio: 21 / 8;
+  }
+}
+
+.introPhoto img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 .glance {
   margin-top: var(--space-8);
+}
+
+.marketPhoto {
+  display: block;
+  width: calc(100% + 2 * var(--space-6));
+  max-width: none;
+  margin: calc(-1 * var(--space-6)) calc(-1 * var(--space-6)) var(--space-3);
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
 }
 
 .principalRow {
@@ -298,6 +328,17 @@
   display: flex;
   align-items: center;
   gap: var(--space-5);
+}
+
+.founderPhoto {
+  flex: none;
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow:
+    0 0 0 3px var(--surface-ink),
+    0 0 0 5px var(--accent-bright);
 }
 
 .founderName {

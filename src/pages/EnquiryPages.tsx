@@ -1,6 +1,7 @@
 import { useSearchParams } from 'react-router';
 import { EnquiryForm } from '../components/enquiry/EnquiryForm';
 import { PageHeader } from '../components/layout/PageHeader';
+import { imagery } from '../content/imagery';
 import { Icon } from '../components/ui/Icon';
 import { Container } from '../components/ui/Layout';
 import { Confirm } from '../components/ui/Pending';
@@ -121,6 +122,7 @@ export function ContactPage() {
         }
         lead="A product question, a quote, or a dealer or principal partnership? Send us a message or WhatsApp us — a decision-maker will reply."
         breadcrumbs={meta.breadcrumbs}
+        image={imagery.contact}
       />
       <div className={styles.body}>
         <Container>
@@ -166,6 +168,7 @@ export function RequestQuotePage() {
         }
         lead="Share the product, quantity and delivery details your business needs. The more specific you are, the more precise our quotation can be."
         breadcrumbs={meta.breadcrumbs}
+        image={imagery.quote}
       />
       <div className={styles.body}>
         <Container>

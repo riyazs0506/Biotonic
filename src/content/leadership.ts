@@ -62,10 +62,10 @@ export const founder: LeaderProfile = {
 
   // Professional founder portrait
   portrait: {
-    src: '/image/founder/biotonic-founder.png',
+    src: '/image/founder/biotonic-founder.webp',
     alt: 'Keerthi Vasan - Founder of Biotonic',
-    width: 1024,
-    height: 1536,
+    width: 800,
+    height: 1200,
   },
 
   statement:

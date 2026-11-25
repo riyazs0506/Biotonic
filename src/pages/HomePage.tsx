@@ -1,4 +1,3 @@
-import { Monogram } from '../components/brand/Monogram';
 import { Hero } from '../components/hero/Hero';
 import { QuoteCta } from '../components/layout/QuoteCta';
 import { ProductCard } from '../components/products/ProductCard';
@@ -12,6 +11,7 @@ import { ButtonLink } from '../components/ui/Button';
 import { Section } from '../components/ui/Layout';
 import { company } from '../content/company';
 import { industries } from '../content/industries';
+import { founderHeadshot, imagery, marketImagery } from '../content/imagery';
 import { founder } from '../content/leadership';
 import { featuredProducts } from '../lib/catalog';
 import { isPublished } from '../lib/publication';
@@ -59,6 +59,16 @@ export function HomePage() {
             </ButtonLink>
           </div>
         </div>
+        <figure className={styles.introPhoto}>
+          <img
+            src={imagery.homeIntro.src}
+            alt={imagery.homeIntro.alt}
+            width={1400}
+            height={1050}
+            loading="lazy"
+            decoding="async"
+          />
+        </figure>
         <div className={styles.glance}>
           <StatGrid stats={company.atAGlance} />
         </div>
@@ -110,7 +120,15 @@ export function HomePage() {
           <div className={styles.founderLead}>
             <p className={styles.founderEyebrow}>Founder</p>
             <div className={styles.founderCard}>
-              <Monogram name={founder.name} />
+              <img
+                className={styles.founderPhoto}
+                src={founderHeadshot.src}
+                alt={founderHeadshot.alt}
+                width={320}
+                height={320}
+                loading="lazy"
+                decoding="async"
+              />
               <div>
                 <h2 id="founder-title" className={`display ${styles.founderName}`}>
                   {founder.name}
@@ -155,14 +173,28 @@ export function HomePage() {
         }
       >
         <ul className={styles.markets}>
-          {industries.map((industry, i) => (
-            <li key={industry.slug}>
-              <span className={styles.principleIndex}>{String(i + 1).padStart(2, '0')}</span>
-              <h3>{industry.name}</h3>
-              <p className={styles.marketBuyers}>{industry.buyers}</p>
-              <p>{industry.summary}</p>
-            </li>
-          ))}
+          {industries.map((industry, i) => {
+            const photo = marketImagery[industry.slug];
+            return (
+              <li key={industry.slug}>
+                {photo && (
+                  <img
+                    className={styles.marketPhoto}
+                    src={photo.src}
+                    alt={photo.alt}
+                    width={900}
+                    height={600}
+                    loading="lazy"
+                    decoding="async"
+                  />
+                )}
+                <span className={styles.principleIndex}>{String(i + 1).padStart(2, '0')}</span>
+                <h3>{industry.name}</h3>
+                <p className={styles.marketBuyers}>{industry.buyers}</p>
+                <p>{industry.summary}</p>
+              </li>
+            );
+          })}
         </ul>
       </Section>
 

@@ -74,6 +74,20 @@
   font-size: var(--fs-md);
 }
 
+.cardPhoto {
+  display: block;
+  width: calc(100% + 2 * var(--space-6));
+  max-width: none;
+  margin: calc(-1 * var(--space-6)) calc(-1 * var(--space-6)) var(--space-3);
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+}
+
+.card:has(.cardPhoto) {
+  overflow: hidden;
+}
+
 .cardIndex {
   color: var(--accent-ink);
   font-size: var(--fs-xs);

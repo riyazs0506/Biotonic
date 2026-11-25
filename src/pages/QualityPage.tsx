@@ -1,5 +1,6 @@
 import { Link } from 'react-router';
 import { PageHeader } from '../components/layout/PageHeader';
+import { imagery } from '../content/imagery';
 import { QuoteCta } from '../components/layout/QuoteCta';
 import { PrincipalStrip } from '../components/sections/StrategyBlocks';
 import { Container } from '../components/ui/Layout';
@@ -32,6 +33,7 @@ export function QualityPage() {
         }
         lead={quality.overview}
         breadcrumbs={meta.breadcrumbs}
+        image={imagery.quality}
       />
 
       <div className={styles.body}>

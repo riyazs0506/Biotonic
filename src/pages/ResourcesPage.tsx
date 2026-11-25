@@ -1,5 +1,6 @@
 import { Link } from 'react-router';
 import { PageHeader } from '../components/layout/PageHeader';
+import { imagery } from '../content/imagery';
 import { QuoteCta } from '../components/layout/QuoteCta';
 import { Icon } from '../components/ui/Icon';
 import { Container } from '../components/ui/Layout';
@@ -27,6 +28,7 @@ export function ResourcesPage() {
         }
         lead="Biotonic was founded to spread real awareness about chemicals. Request technical documents and product information for the products you use."
         breadcrumbs={meta.breadcrumbs}
+        image={imagery.resources}
       />
 
       <div className={styles.body}>
