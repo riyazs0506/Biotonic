@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react';
+import { imagery } from '../../content/imagery';
 import { paths } from '../../lib/routes';
 import { whatsappHref } from '../../lib/whatsapp';
 import { ButtonLink } from '../ui/Button';
@@ -19,13 +20,15 @@ export function QuoteCta({
   return (
     <section className={styles.cta} aria-labelledby="quote-cta-title">
       <div className={styles.glow} aria-hidden="true" />
-      <svg className={styles.art} viewBox="0 0 120 300" aria-hidden="true">
-        <circle cx="68" cy="14" r="6" />
-        <circle cx="50" cy="38" r="4" />
-        <circle cx="66" cy="58" r="10" />
-        <path d="M24 92h72M36 92v150a24 24 0 0 0 48 0V92" />
-        <path className={styles.liquid} d="M36 180h48v62a24 24 0 0 1-48 0z" />
-      </svg>
+      <img
+        className={styles.photo}
+        src={imagery.quoteCta.src}
+        alt=""
+        width={1200}
+        height={1100}
+        loading="lazy"
+        decoding="async"
+      />
       <div className={styles.inner}>
         <p className={styles.eyebrow}>Request a quotation</p>
         <h2 id="quote-cta-title" className={`display ${styles.title}`}>

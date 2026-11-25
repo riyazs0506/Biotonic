@@ -112,8 +112,9 @@ export function ContactPage() {
   const [params] = useSearchParams();
   const role = hydrated ? (params.get('role') ?? undefined) : undefined;
   return (
-    <>
+    <div className={styles.compact}>
       <PageHeader
+        compact
         eyebrow="Contact"
         title={
           <>
@@ -145,7 +146,7 @@ export function ContactPage() {
           </div>
         </Container>
       </div>
-    </>
+    </div>
   );
 }
 

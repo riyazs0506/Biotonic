@@ -15,32 +15,21 @@
   background: radial-gradient(closest-side, rgb(33 191 117 / 0.28), transparent);
 }
 
-.art {
+.photo {
   position: absolute;
-  right: max(var(--gutter), calc((100vw - var(--container-max)) / 2 + 40px));
-  top: 50%;
+  inset: 0 0 0 auto;
+  z-index: -2;
   display: none;
-  width: 130px;
-  transform: translateY(-50%);
-  fill: none;
-  stroke: rgb(251 250 247 / 0.5);
-  stroke-width: 2.5;
-  stroke-linecap: round;
-}
-
-.art circle {
-  fill: var(--accent-bright);
-  stroke: none;
-}
-
-.art .liquid {
-  fill: var(--accent-bright);
-  stroke: none;
-  opacity: 0.9;
+  width: 48%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.7;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 45%);
+  mask-image: linear-gradient(90deg, transparent, #000 45%);
 }
 
 @media (min-width: 900px) {
-  .art {
+  .photo {
     display: block;
   }
 }

@@ -83,3 +83,38 @@
     aspect-ratio: 4 / 3;
   }
 }
+
+/* Compact variant: utility pages (Contact) get a shorter, tighter header. */
+.compact .inner {
+  padding-block: var(--space-6) var(--space-7);
+}
+
+.compact .title {
+  font-size: clamp(2rem, 1.6rem + 1.6vw, 2.75rem);
+}
+
+.compact .lead {
+  margin-top: var(--space-4);
+  font-size: var(--fs-base);
+}
+
+@media (min-width: 900px) {
+  .compact.withImage .inner {
+    grid-template-columns: minmax(0, 1.3fr) minmax(0, 0.7fr);
+    gap: var(--space-8);
+  }
+
+  .compact .title {
+    font-size: clamp(2.25rem, 1.5rem + 1.6vw, 3.25rem);
+  }
+
+  .compact .photo {
+    aspect-ratio: 16 / 10;
+  }
+}
+
+@media (max-width: 899px) {
+  .compact .photo {
+    aspect-ratio: 21 / 9;
+  }
+}

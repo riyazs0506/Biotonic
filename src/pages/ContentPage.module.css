@@ -421,3 +421,44 @@
     margin-top: var(--space-7);
   }
 }
+
+/* ---------- Compact page (Contact): a tighter spacing and type scale ---------- */
+.compact {
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-7: 2rem;
+  --space-8: 2.5rem;
+  --space-9: 3.5rem;
+  --section-y: clamp(2.5rem, 1.75rem + 2.5vw, 4rem);
+  --fs-md: 1rem;
+  --fs-xl: clamp(1.5rem, 1.3rem + 0.6vw, 1.875rem);
+  --control-h: 44px;
+  --textarea-h: 120px;
+}
+
+.compact .contactGrid {
+  max-width: 1080px;
+  margin-inline: auto;
+}
+
+.compact .formPanel {
+  padding: var(--space-6);
+}
+
+.compact .formTitle {
+  margin-bottom: var(--space-4);
+}
+
+.compact .sideBlock {
+  gap: var(--space-2);
+  padding-bottom: var(--space-4);
+  font-size: var(--fs-sm);
+}
+
+.compact .sidebar {
+  gap: var(--space-4);
+}
+
+.compact .steps {
+  gap: var(--space-3);
+}

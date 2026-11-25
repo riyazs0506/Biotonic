@@ -21,7 +21,7 @@
 
 .control {
   width: 100%;
-  min-height: 50px;
+  min-height: var(--control-h, 50px);
   padding: var(--space-3) var(--space-4);
   border: 1px solid var(--line);
   border-radius: var(--radius-md);
@@ -49,7 +49,7 @@
 }
 
 .textarea {
-  min-height: 160px;
+  min-height: var(--textarea-h, 160px);
   resize: vertical;
 }
 

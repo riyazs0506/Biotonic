@@ -16,6 +16,7 @@ export function PageHeader({
   lead,
   breadcrumbs,
   image,
+  compact,
   children,
 }: {
   eyebrow?: string;
@@ -23,10 +24,14 @@ export function PageHeader({
   lead?: ReactNode;
   breadcrumbs?: Crumb[];
   image?: HeaderImage;
+  /** Smaller title, photo and padding for utility pages such as Contact. */
+  compact?: boolean;
   children?: ReactNode;
 }) {
   return (
-    <div className={`${styles.header} ${image ? styles.withImage : ''}`}>
+    <div
+      className={`${styles.header} ${image ? styles.withImage : ''} ${compact ? styles.compact : ''}`}
+    >
       <div className={styles.inner}>
         <div className={styles.text}>
           {breadcrumbs && <Breadcrumbs items={breadcrumbs} />}

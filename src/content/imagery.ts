@@ -39,6 +39,10 @@ export const imagery = {
     src: '/images/stock/quote-barrels.webp',
     alt: 'Rows of orange and blue chemical barrels ready for dispatch',
   },
+  quoteCta: {
+    src: '/images/stock/cta-bulk-bags.webp',
+    alt: '',
+  },
   homeIntro: {
     src: '/images/stock/home-drums.webp',
     alt: 'Stacked red and cream chemical drums in a storage yard',

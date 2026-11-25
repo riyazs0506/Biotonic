@@ -15,6 +15,7 @@ Files are resized/cropped to WebP in `public/images/stock/`. Wiring lives in `sr
 | `resources-plant.webp`         | Resources header                 | `photo-1736820712641-56badd26f83b` |
 | `contact-truck.webp`           | Contact header                   | `photo-1791216514247-8b2c908ffb23` |
 | `quote-barrels.webp`           | Request a quote header           | `photo-1558617867-659c667b6809`    |
+| `cta-bulk-bags.webp`           | "Request a quotation" band       | `photo-1777432048471-d6fae85832f9` |
 | `home-drums.webp`              | Home "About Biotonic" band       | `photo-1777304610456-e9d6206b19a2` |
 | `market-textile.webp`          | Home + Industries market card    | `photo-1770572274716-1bae682c48f7` |
 | `market-construction.webp`     | Home + Industries market card    | `photo-1644221150167-fb4fafa7f411` |
